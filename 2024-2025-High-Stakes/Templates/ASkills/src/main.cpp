@@ -258,14 +258,14 @@ void triggerMogoMech() {
 }
 
 void usercontrol(void) {
-    controller(primary).ButtonL1.pressed(spinIntakeForward); 
-    controller(primary).ButtonL1.released(stopIntake); 
-
-    controller(primary).ButtonL2.pressed(spinIntakeReverse);
+    controller(primary).ButtonL2.pressed(spinIntakeForward); 
     controller(primary).ButtonL2.released(stopIntake); 
 
-    controller(primary).ButtonR1.pressed(toggleClawPos);
-    controller(primary).ButtonR2.pressed(triggerMogoMech);
+    controller(primary).ButtonL1.pressed(spinIntakeReverse);
+    controller(primary).ButtonL1.released(stopIntake); 
+
+    controller(primary).ButtonR2.pressed(toggleClawPos);
+    controller(primary).ButtonR1.pressed(triggerMogoMech);
 /*
     controller(primary).ButtonB.pressed(doMatchloads);
     controller(primary).ButtonX.pressed(stopMatchloads);
