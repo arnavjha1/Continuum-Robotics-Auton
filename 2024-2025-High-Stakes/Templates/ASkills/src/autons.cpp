@@ -29,7 +29,6 @@ void regular(){
   //Place preload ring code goes here
   chassis.drive_distance(13.75*b, 0, s, 0);
   chassis.turn_right(90, 90*e);
-  //monkey
   chassis.drive_distance(-24*b, 0, s, 0);
   MogoPneu.set(true);
 }
