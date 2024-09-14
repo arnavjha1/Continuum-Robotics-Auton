@@ -20,7 +20,7 @@ void odom_constants(){
 void regular(){
   //Pre-auton
   int d = matchloadangle;
-  
+  //Edward is a monkey
   //Auton goes here
   chassis.set_heading_constants(6, .18, 0, 1, 0);
   chassis.set_drive_exit_conditions(2, 300, 1000);
