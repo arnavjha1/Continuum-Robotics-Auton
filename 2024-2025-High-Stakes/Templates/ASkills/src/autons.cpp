@@ -21,7 +21,7 @@ void regular(){
   //Pre-auton; 13 = 12 inches
   int d = matchloadangle;
   chassis.drive_distance(-20, d);
-  MogoPneu.set(true);
+  MogoPneu.set(false);
   chassis.right_swing_to_angle(140+d);
   Intake.spin(forward);
   chassis.drive_distance(35, 90+d);
