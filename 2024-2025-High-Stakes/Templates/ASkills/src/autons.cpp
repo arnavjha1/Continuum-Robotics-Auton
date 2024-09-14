@@ -1,5 +1,5 @@
 #include "vex.h"
-int matchloadangle = 0;
+int matchloadangle = -30;
 
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -20,7 +20,14 @@ void odom_constants(){
 void regular(){
   //Pre-auton; 13 = 12 inches
   int d = matchloadangle;
-  
+  chassis.drive_distance(-20, d);
+  MogoPneu.set(true);
+  chassis.right_swing_to_angle(140+d);
+  Intake.spin(forward);
+  chassis.drive_distance(35, 90+d);
+  chassis.drive_distance(-35, 140+d);
+  chassis.right_swing_to_angle(90+d);
+  chassis.drive_distance(24, 90+d);
 }
 
 void mirrored(){
