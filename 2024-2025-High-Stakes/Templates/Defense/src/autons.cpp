@@ -20,11 +20,11 @@ void odom_constants(){
 void regular(){
   //Pre-auton
   int d = matchloadangle;
-  //Edward is a monkey
+  
   //Auton goes here
   chassis.set_heading_constants(6, .18, 0, 1, 0);
   chassis.set_drive_exit_conditions(2, 300, 1000);
-  chassis.drive_distance(-43.5, -30);
+  chassis.drive_distance(-42.9, -30);
 
   MogoPneu.set(false);
   wait(0.3, seconds);
