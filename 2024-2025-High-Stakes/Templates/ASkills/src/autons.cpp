@@ -19,18 +19,8 @@ void odom_constants(){
 
 void regular(){
   //Pre-auton; 13 = 12 inches
-  float s = 5;
-  float b = 1.07803401;
-  float e = 0.00903233333333;
-  Inertial13.setRotation(0, degrees);
-  Inertial13.setHeading(0, degrees);
   int d = matchloadangle;
   
-  //Place preload ring code goes here
-  chassis.drive_distance(13.75*b, 0, s, 0);
-  chassis.turn_right(90, 90*e);
-  chassis.drive_distance(-24*b, 0, s, 0);
-  MogoPneu.set(true);
 }
 
 void mirrored(){
