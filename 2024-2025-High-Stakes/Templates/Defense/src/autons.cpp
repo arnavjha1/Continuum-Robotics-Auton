@@ -42,8 +42,13 @@ void regular(){
   MogoPneu.set(false);
 
   wait(0.3, seconds);
-  chassis.turn_to_angle(50);
+  chassis.turn_to_angle(47);
   Intake.spin(forward);
+  chassis.drive_distance(30, 47);
+
+  chassis.drive_distance(-5, 47);
+  MogoPneu.set(true);
+
 }
 
 void mirrored(){
