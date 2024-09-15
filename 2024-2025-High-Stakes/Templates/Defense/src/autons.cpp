@@ -26,7 +26,7 @@ void regular(){
   chassis.set_drive_exit_conditions(2, 300, 1000);
   chassis.drive_distance(-43.5, -30);
 
-  MogoPneu.set(false);
+  MogoPneu.set(true);
   wait(0.3, seconds);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
   chassis.set_drive_exit_conditions(1.5, 300, 800);
@@ -34,12 +34,12 @@ void regular(){
   Intake.spin(forward);
   chassis.turn_to_angle(30);
   chassis.drive_distance(16.75);
-  MogoPneu.set(true);
+  MogoPneu.set(false);
 
   Intake.stop();
   chassis.turn_to_angle(-90);
   chassis.drive_distance(-15.75);
-  MogoPneu.set(false);
+  MogoPneu.set(true);
 
   wait(0.3, seconds);
   chassis.turn_to_angle(47);
@@ -47,7 +47,7 @@ void regular(){
   chassis.drive_distance(30, 47);
 
   chassis.drive_distance(-5, 47);
-  MogoPneu.set(true);
+  MogoPneu.set(false);
 
 }
 

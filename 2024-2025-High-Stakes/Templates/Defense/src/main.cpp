@@ -126,7 +126,6 @@ void pre_auton(void) {
   default_constants();
 
   Drivetrain.setStopping(coast);
-  MogoPneu.set(true);
   Inertial13.calibrate();
 
   Intake.setStopping(brake);
