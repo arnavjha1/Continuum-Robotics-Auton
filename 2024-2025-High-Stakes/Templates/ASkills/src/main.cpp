@@ -129,7 +129,6 @@ void pre_auton(void) {
   Inertial13.calibrate();
 
   Intake.setStopping(brake);
-  MogoPneu.set(true);
   Intake.setMaxTorque(100, percent);
   Intake.setVelocity(100, percent);
 
