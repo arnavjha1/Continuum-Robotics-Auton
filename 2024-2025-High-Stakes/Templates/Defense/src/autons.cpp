@@ -24,7 +24,7 @@ void regular(){
   //Auton goes here
   chassis.set_heading_constants(6, .215, 0, 1, 0);
   chassis.set_drive_exit_conditions(2, 300, 1000);
-  chassis.drive_distance(-43.5, -30);
+  chassis.drive_distance(-43.3, -30);
 
   MogoPneu.set(true);
   wait(0.3, seconds);
@@ -32,12 +32,12 @@ void regular(){
   chassis.set_drive_exit_conditions(1.5, 300, 800);
 
   Intake.spin(forward);
-  chassis.turn_to_angle(30);
-  chassis.drive_distance(16.75);
+  chassis.turn_to_angle(26.5);
+  chassis.drive_distance(16.35);
   MogoPneu.set(false);
 
-  Intake.stop();
   chassis.turn_to_angle(-90);
+  Intake.stop();
   chassis.drive_distance(-15.75);
   MogoPneu.set(true);
 
