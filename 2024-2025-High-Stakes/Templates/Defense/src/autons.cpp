@@ -22,7 +22,7 @@ void regular(){
   int d = matchloadangle;
   
   //Auton goes here
-  chassis.set_heading_constants(6, .18, 0, 1, 0);
+  chassis.set_heading_constants(6, .215, 0, 1, 0);
   chassis.set_drive_exit_conditions(2, 300, 1000);
   chassis.drive_distance(-43.5, -30);
 
@@ -43,9 +43,10 @@ void regular(){
 
   wait(0.3, seconds);
   chassis.turn_to_angle(47);
+  Claw.set(true);
   Intake.spin(forward);
-  chassis.drive_distance(30, 47);
 
+  chassis.drive_distance(40, 47);
   chassis.drive_distance(-5, 47);
   MogoPneu.set(false);
 
