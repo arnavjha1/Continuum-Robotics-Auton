@@ -22,9 +22,9 @@ void regular(){
   int d = matchloadangle;
   
   //Auton goes here
-  chassis.set_heading_constants(6, .215, 0, 1, 0);
+  chassis.set_heading_constants(6, .21, 0, 1, 0);
   chassis.set_drive_exit_conditions(2, 300, 1000);
-  chassis.drive_distance(-43.3, -30);
+  chassis.drive_distance(-44, -30);
 
   MogoPneu.set(true);
   wait(0.3, seconds);
@@ -49,7 +49,7 @@ void regular(){
   chassis.drive_distance(40, 47);
   chassis.drive_distance(-5, 47);
   MogoPneu.set(false);
-
+  /**/
 }
 
 void mirrored(){
