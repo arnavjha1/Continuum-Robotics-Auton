@@ -1,5 +1,5 @@
 #include "vex.h"
-int matchloadangle = 0;
+int matchloadangle = 23.5;
 
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -22,7 +22,36 @@ void regular(){
   int d = matchloadangle;
   
   //Auton goes here
-  chassis.set_heading_constants(6, .21, 0, 1, 0);
+  chassis.set_drive_constants(11, 0.7, 0, 10, 0);  
+  chassis.drive_distance(-28, 0);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0); 
+  MogoPneu.set(true);
+
+  wait(0.3, seconds);
+  Intake.spin(forward);
+  chassis.left_swing_to_angle(-85+d);
+  chassis.drive_distance(24);
+
+  chassis.turn_to_angle(67.5+d);
+  Claw.set(true);
+  chassis.set_drive_exit_conditions(1.5, 300, 817);
+  chassis.drive_distance(74);
+  MogoPneu.set(false);
+
+  d += 5;
+  chassis.turn_to_angle(180+d);
+  chassis.set_drive_constants(11, 0.7, 0, 10, 0);  
+  chassis.drive_distance(-17);
+}
+
+void mirrored(){
+  //Pre-auton
+  int d = matchloadangle;
+  
+  //Auton goes here
+
+
+  /*chassis.set_heading_constants(6, .21, 0, 1, 0);
   chassis.set_drive_exit_conditions(2, 300, 1000);
   chassis.drive_distance(-44, -30);
 
@@ -49,15 +78,7 @@ void regular(){
   chassis.drive_distance(40, 47);
   chassis.drive_distance(-5, 47);
   MogoPneu.set(false);
-  /**/
-}
-
-void mirrored(){
-  //Pre-auton
-  int d = matchloadangle;
-  
-  //Auton goes here
-   
+  */ 
 }
 
 
