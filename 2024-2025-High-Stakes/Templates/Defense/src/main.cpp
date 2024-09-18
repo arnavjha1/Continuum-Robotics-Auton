@@ -174,11 +174,15 @@ void pre_auton(void) {
         Brain.Screen.printAt(50, 50, "Holonomic Odom Test");
         break;*/
     }
-    if(Brain.Screen.pressing()){
-      while(Brain.Screen.pressing()) {}
-      current_auton_selection ++;
-    } else if (current_auton_selection == 8){
-      current_auton_selection = 0;
+    if(LimitSwitchC.pressing()){
+      while(LimitSwitchC.pressing()){}
+      current_auton_selection = 1-current_auton_selection;
+      if(current_auton_selection == 1){
+        Intake.spinFor(forward, 50, degrees);
+      }
+      else{
+        Intake.spinFor(reverse, 50, degrees);
+      }
     }
     task::sleep(10);
   }

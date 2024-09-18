@@ -14,6 +14,7 @@ extern digital_out MogoPneu;
 extern digital_out Claw;
 extern motor Arm;
 extern motor Intake;
+extern limit LimitSwitchC;
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  * 
