@@ -1,5 +1,5 @@
 #include "vex.h"
-int matchloadangle = 23.5;
+int matchloadangle = 0;
 
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -22,14 +22,16 @@ void regular(){
   int d = matchloadangle;
   
   //Auton goes here
-  chassis.set_drive_constants(11, 0.7, 0, 10, 0);  
-  chassis.drive_distance(-28, 0);
+  chassis.drive_distance(-9.5, 0+d);
+  chassis.set_drive_constants(11, 0.7, 0, 10, 0);
+  chassis.turn_to_angle(-30+d);  
+  chassis.drive_distance(-15, -30+d);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0); 
   MogoPneu.set(true);
 
   wait(0.3, seconds);
   Intake.spin(forward);
-  chassis.left_swing_to_angle(-85+d);
+  chassis.left_swing_to_angle(-92.5+d);
   chassis.drive_distance(24);
 
   chassis.turn_to_angle(67.5+d);
@@ -38,7 +40,6 @@ void regular(){
   chassis.drive_distance(74);
   MogoPneu.set(false);
 
-  d += 5;
   chassis.turn_to_angle(180+d);
   chassis.set_drive_constants(11, 0.7, 0, 10, 0);  
   chassis.drive_distance(-17);
