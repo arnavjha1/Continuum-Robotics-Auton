@@ -13,7 +13,7 @@ motor leftMotorC = motor(PORT20, ratio6_1, true);
 motor_group leftDriveSmart = motor_group(leftMotorA, leftMotorB, leftMotorC);
 motor rightMotorA = motor(PORT15, ratio6_1, false);
 motor rightMotorB = motor(PORT16, ratio6_1, false);
-motor rightMotorC = motor(PORT16, ratio6_1, false);
+motor rightMotorC = motor(PORT18, ratio6_1, false);
 motor_group rightDriveSmart = motor_group(rightMotorA, rightMotorB, rightMotorC);
 drivetrain Drivetrain = drivetrain(leftDriveSmart, rightDriveSmart, 299.24, 295, 40, mm, 0.6666666666666666);
 

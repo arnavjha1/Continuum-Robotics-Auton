@@ -6,25 +6,25 @@ using namespace vex;
 #pragma region FindDist
 
 int dist(int start, int end) {
-    start %= 360; end %= 360;
-    int rightDist = 0;
-    int leftDist = 0;
-    if (end < start) {
-        rightDist = 360-start+end;
-    }
-    else {
-        rightDist = end-start;
-    }
-    if (start < end) {
-        leftDist = 360-end+start;
-    }
-    else {
-        leftDist = start-end;
-    }
-    if (leftDist < rightDist) {
-        return -1*leftDist;
-    }
-    return rightDist;
+  start %= 360; end %= 360;
+  int rightDist = 0;
+  int leftDist = 0;
+  if (end < start) {
+      rightDist = 360-start+end;
+  }
+  else {
+      rightDist = end-start;
+  }
+  if (start < end) {
+      leftDist = 360-end+start;
+  }
+  else {
+      leftDist = start-end;
+  }
+  if (leftDist < rightDist) {
+      return -1*leftDist;
+  }
+  return rightDist;
 }
 
 #pragma endregion FindDist
