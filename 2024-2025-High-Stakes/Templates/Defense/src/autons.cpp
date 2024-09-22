@@ -6,7 +6,7 @@ void default_constants(){
   chassis.set_heading_constants(6, .4, 0, 1, 0);
   chassis.set_turn_constants(12, .4, .03, 3, 15);
   chassis.set_swing_constants(12, .3, .001, 2, 15);
-  chassis.set_drive_exit_conditions(1.5, 300, 800);
+  chassis.set_drive_exit_conditions(0.3, 300, 1000);
   chassis.set_turn_exit_conditions(1, 300, 1800);
   chassis.set_swing_exit_conditions(1, 300, 1000);
 }
@@ -22,27 +22,37 @@ void regular(){
   int d = matchloadangle;
   
   //Auton goes here
-  chassis.drive_distance(-9.5, 0+d);
+  
+  chassis.drive_distance(-27.5);
+  chassis.turn_to_angle(-75);
+  chassis.drive_distance(-5.75);
+  MogoPneu.set(true);
+
+  chassis.turn_to_angle(-165);
+  Intake.spin(forward);
+  chassis.drive_distance(16.25);
+  /*chassis.drive_distance(-8, 0+d);
   chassis.set_drive_constants(11, 0.7, 0, 10, 0);
   chassis.turn_to_angle(-30+d);  
-  chassis.drive_distance(-15, -30+d);
+  chassis.drive_distance(-16.5, 3-30+d);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0); 
   MogoPneu.set(true);
 
   wait(0.3, seconds);
   Intake.spin(forward);
-  chassis.left_swing_to_angle(-92.5+d);
+  chassis.left_swing_to_angle(-93.5+d);
   chassis.drive_distance(24);
 
   chassis.turn_to_angle(67.5+d);
   Claw.set(true);
   chassis.set_drive_exit_conditions(1.5, 300, 817);
-  chassis.drive_distance(74);
+  chassis.drive_distance(61.8);
+  wait(0.3, seconds);
   MogoPneu.set(false);
 
   chassis.turn_to_angle(180+d);
   chassis.set_drive_constants(11, 0.7, 0, 10, 0);  
-  chassis.drive_distance(-17);
+  chassis.drive_distance(-22);/**/
 }
 
 void mirrored(){
