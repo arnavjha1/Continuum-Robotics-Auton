@@ -147,13 +147,15 @@ void pre_auton(void) {
   Right6th.setVelocity(100, percent);
   Intake.setVelocity(100.0, percent);
   while(auto_started == false){            //Changing the names below will only change their names on the
-    Brain.Screen.clearScreen();            //brain screen for auton selection.
+    Brain.Screen.clearScreen();  //brain screen for auton selection.
     switch(current_auton_selection){       //Tap the brain screen to cycle through autons.
       case 0:      
-        Brain.Screen.printAt(50, 50, "Defensive");
+        Brain.Screen.printAt(50, 50, "Red ");
+        controller(primary).Screen.print("Red ");
         break;
       case 1:
-        Brain.Screen.printAt(50, 50, "Mirrored");
+        Brain.Screen.printAt(50, 50, "Blue");
+        controller(primary).Screen.print("Blue");
         break;
      /* case 2:
         Brain.Screen.printAt(50, 50, "Turn Test");
