@@ -146,6 +146,7 @@ void pre_auton(void) {
   RightBack.setVelocity(100, percent);
   Right6th.setVelocity(100, percent);
   Intake.setVelocity(100.0, percent);
+  ColorDiskPlacer.setVelocity(100.0, percent);
   while(auto_started == false){            //Changing the names below will only change their names on the
     Brain.Screen.clearScreen();            //brain screen for auton selection.
     switch(current_auton_selection){       //Tap the brain screen to cycle through autons.
@@ -234,6 +235,15 @@ void spinIntakeReverse() {
 void stopIntake() {
   Intake.stop();
 }
+
+void moveTheClaw() {
+  ColorDiskPlacer.spinFor(forward, 100, degrees);
+}
+
+void moveTheClawDown() {
+  ColorDiskPlacer.spinFor(reverse, 100, degrees);
+}
+
 void toggleClawPos() {
   if (clawPneu) {
     Claw.set(false);
@@ -266,6 +276,9 @@ void usercontrol(void) {
 
     controller(primary).ButtonR2.pressed(toggleClawPos);
     controller(primary).ButtonR1.pressed(triggerMogoMech);
+
+    controller(primary).ButtonUp.pressed(moveTheClaw);
+    controller(primary).ButtonDown.pressed(moveTheClawDown);
 /*
     controller(primary).ButtonB.pressed(doMatchloads);
     controller(primary).ButtonX.pressed(stopMatchloads);
