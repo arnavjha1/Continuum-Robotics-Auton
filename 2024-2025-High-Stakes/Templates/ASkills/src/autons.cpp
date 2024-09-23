@@ -20,16 +20,16 @@ void odom_constants(){
 void regular(){
   //Pre-auton; 13 = 12 inches
   int d = matchloadangle;
-  chassis.drive_distance(-22.5, 30+d);
+  chassis.drive_distance(-19, 30+d);
   wait(0.1, seconds);
   MogoPneu.set(true);
   wait(0.3, seconds);
   chassis.right_swing_to_angle(135+d);
   Intake.spin(forward);
-  chassis.drive_distance(25, 135+d);
+  chassis.drive_distance(27, 135+d);
   chassis.right_swing_to_angle(87+d);
   chassis.drive_distance(10, 87+d);
-  chassis.drive_distance(-15, 87+d);
+  chassis.drive_distance(-13, 87+d);
   Intake.stop();
   chassis.right_swing_to_angle(180+d);
   chassis.left_swing_to_angle(87+d);
