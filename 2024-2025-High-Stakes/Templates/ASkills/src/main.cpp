@@ -234,6 +234,8 @@ void spinIntakeReverse() {
 void stopIntake() {
   Intake.stop();
 }
+
+
 void toggleClawPos() {
   if (clawPneu) {
     Claw.set(false);
@@ -296,7 +298,9 @@ void usercontrol(void) {
 //
 int main() {
   // Set up callbacks for autonomous and driver control periods.
+  KnockOut.set(false);
   Competition.autonomous(autonomous);
+  //toggleClawPos();
   Competition.drivercontrol(usercontrol);
 
   // Run the pre-autonomous function.

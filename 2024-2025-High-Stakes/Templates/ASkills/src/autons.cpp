@@ -18,23 +18,23 @@ void odom_constants(){
 }
 
 void regular(){
-  //Pre-auton; 13 = 12 inches
   int d = matchloadangle;
-  chassis.drive_distance(-22.5, 30+d);
+  chassis.drive_distance(-20, 30+d);
   wait(0.1, seconds);
   MogoPneu.set(true);
-  wait(0.3, seconds);
-  chassis.right_swing_to_angle(135+d);
+  wait(0.2, seconds);
   Intake.spin(forward);
-  chassis.drive_distance(25, 135+d);
+  wait(0.6, seconds);
+  chassis.right_swing_to_angle(140+d);
+  chassis.drive_distance(26.5, 140+d);
   chassis.right_swing_to_angle(87+d);
-  chassis.drive_distance(10, 87+d);
-  chassis.drive_distance(-15, 87+d);
+  chassis.drive_distance(12, 87+d);
+  chassis.drive_distance(-12, 87+d);
   Intake.stop();
   chassis.right_swing_to_angle(180+d);
-  chassis.left_swing_to_angle(87+d);
+  chassis.left_swing_to_angle(80+d);
   Intake.spin(forward);
-  chassis.drive_distance(30, 87+d);
+  chassis.drive_distance(23, 83+d);
 }
 
 void mirrored(){
