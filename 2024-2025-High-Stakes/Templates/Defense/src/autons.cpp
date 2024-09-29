@@ -1,5 +1,6 @@
 #include "vex.h"
 int matchloadangle = 0;
+int m = 1;
 
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -20,18 +21,33 @@ void odom_constants(){
 void regular(){
   //Pre-auton
   int d = matchloadangle;
+  int firstRingAngle = -162;
+  int secondRingBite = 45;
   
   //Auton goes here
   
-  chassis.drive_distance(-26.5);
-  chassis.turn_to_angle(-75);
+  /*Add arm placement of preload here*/
+  chassis.drive_distance(-25.5);
+  chassis.turn_to_angle(-75*m);
   chassis.drive_distance(-6.75);
   MogoPneu.set(true);
 
   wait(0.2, seconds);
-  chassis.turn_to_angle(-160);
+  chassis.turn_to_angle(firstRingAngle*m);
   Intake.spin(forward);
   chassis.drive_distance(16.25);
+
+  wait(2, seconds);
+  chassis.turn_to_angle((firstRingAngle+180)*m);
+  Claw.set(true);
+  chassis.drive_distance(secondRingBite);
+
+  wait(1, seconds);
+  chassis.drive_distance(-secondRingBite + 12.5);
+  chassis.turn_to_angle(90*m);
+  chassis.drive_distance(24);
+  //Touch bar here
+
   /*chassis.drive_distance(-8, 0+d);
   chassis.set_drive_constants(11, 0.7, 0, 10, 0);
   chassis.turn_to_angle(-30+d);  
@@ -61,7 +77,8 @@ void mirrored(){
   int d = matchloadangle;
   
   //Auton goes here
-  
+  m = -1;
+  regular();
 
   /*chassis.set_heading_constants(6, .21, 0, 1, 0);
   chassis.set_drive_exit_conditions(2, 300, 1000);
