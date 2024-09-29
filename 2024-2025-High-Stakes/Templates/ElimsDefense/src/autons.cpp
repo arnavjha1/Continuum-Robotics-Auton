@@ -19,33 +19,26 @@ void odom_constants(){
 }
 
 void regular(){
-  //Pre-auton
-  int d = matchloadangle;
-  int firstRingAngle = -162;
-  int secondRingBite = 45;
+  //Variables
   
   //Auton goes here
-  
-  /*Add arm placement of preload here*/
-  chassis.drive_distance(-25.5);
-  chassis.turn_to_angle(-75*m);
-  chassis.drive_distance(-6.75);
+  chassis.drive_distance(-8);
+  chassis.turn_to_angle(-30*m);
+  chassis.drive_distance(-12);
   MogoPneu.set(true);
 
   wait(0.2, seconds);
-  chassis.turn_to_angle(firstRingAngle*m);
+  chassis.turn_to_angle(-45);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  chassis.drive_distance(49);
+  chassis.set_drive_constants(11, 0.85, 0, 10, 0);
+
+  chassis.drive_distance(-20);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   Intake.spin(forward);
-  chassis.drive_distance(16.25);
-
-  wait(2, seconds);
-  chassis.turn_to_angle((firstRingAngle+180)*m);
-  Claw.set(true);
-  chassis.drive_distance(secondRingBite);
-
-  wait(1, seconds);
-  chassis.drive_distance(-secondRingBite + 12.5);
-  chassis.turn_to_angle(90*m);
-  chassis.drive_distance(24);
+  chassis.drive_distance(16);
+  
+  /*Add arm placement of preload here*/
   //Touch bar here
 
   /*chassis.drive_distance(-8, 0+d);
