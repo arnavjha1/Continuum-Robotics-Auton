@@ -22,21 +22,21 @@ void regular(){
   //Variables
   
   //Auton goes here
-  chassis.drive_distance(-8);
+  chassis.drive_distance(-10);
   chassis.turn_to_angle(-30*m);
-  chassis.drive_distance(-12);
+  chassis.drive_distance(-14.5);
   MogoPneu.set(true);
-
+  
   wait(0.2, seconds);
-  chassis.turn_to_angle(-45);
-  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  chassis.drive_distance(49);
-  chassis.set_drive_constants(11, 0.85, 0, 10, 0);
+  chassis.turn_to_angle(-48*m);
+  Intake.spin(forward);
+  //chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  /**/chassis.drive_distance(35.75+11.5);
 
+  chassis.set_drive_constants(11, 0.7, 0, 10, 0);
   chassis.drive_distance(-20);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  Intake.spin(forward);
-  chassis.drive_distance(16);
+  chassis.drive_distance(14);
   
   /*Add arm placement of preload here*/
   //Touch bar here

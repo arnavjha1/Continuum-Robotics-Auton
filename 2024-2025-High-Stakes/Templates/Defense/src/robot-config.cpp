@@ -17,7 +17,7 @@ motor Right6th = motor(PORT18, ratio6_1, false);
 inertial Inertial13 = inertial(PORT13);
 digital_out MogoPneu = digital_out(Brain.ThreeWirePort.B);
 digital_out Claw = digital_out(Brain.ThreeWirePort.A);
-motor Arm = motor(PORT9, ratio36_1, true);
+motor Arm = motor(PORT3, ratio18_1, true);
 motor Intake = motor(PORT6, ratio6_1, false);
 limit LimitSwitchC = limit(Brain.ThreeWirePort.C);
 

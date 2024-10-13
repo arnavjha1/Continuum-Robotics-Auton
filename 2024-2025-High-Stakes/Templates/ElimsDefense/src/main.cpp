@@ -127,6 +127,8 @@ void pre_auton(void) {
 
   Drivetrain.setStopping(coast);
   Inertial13.calibrate();
+  Arm.setVelocity(50, percent);
+  Arm.setStopping(hold);
 
   Intake.setStopping(brake);
   Intake.setMaxTorque(100, percent);

@@ -127,6 +127,10 @@ void pre_auton(void) {
 
   Drivetrain.setStopping(coast);
   Inertial13.calibrate();
+  
+  Arm.setStopping(hold);
+  Arm.setMaxTorque(100, percent);
+  Arm.setVelocity(50, percent);
 
   Intake.setStopping(brake);
   Intake.setMaxTorque(100, percent);
@@ -258,6 +262,8 @@ void triggerMogoMech() {
 }
 
 void usercontrol(void) {
+    Arm.setStopping(brake);
+
     controller(primary).ButtonL2.pressed(spinIntakeForward); 
     controller(primary).ButtonL2.released(stopIntake); 
 
