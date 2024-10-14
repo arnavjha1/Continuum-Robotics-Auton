@@ -27,6 +27,8 @@ void regular(){
   //Auton goes here
   
   /*Add arm placement of preload here*/
+  Arm.spinFor(forward, 100, degrees);
+
   chassis.drive_distance(-25.5);
   chassis.turn_to_angle(-75*m);
   chassis.drive_distance(-6.75);
@@ -48,6 +50,7 @@ void regular(){
   chassis.drive_distance(24);
   //Touch bar here
 
+  Arm.spinFor(forward, 300, degrees);
   /*chassis.drive_distance(-8, 0+d);
   chassis.set_drive_constants(11, 0.7, 0, 10, 0);
   chassis.turn_to_angle(-30+d);  
