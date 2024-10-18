@@ -299,10 +299,11 @@ void usercontrol(void) {
 int main() {
   // Set up callbacks for autonomous and driver control periods.
   KnockOut.set(false);
+
   Competition.autonomous(autonomous);
   //toggleClawPos();
   Competition.drivercontrol(usercontrol);
-
+  Arm.setBrake(brake);
   // Run the pre-autonomous function.
   pre_auton();
 

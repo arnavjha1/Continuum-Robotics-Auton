@@ -19,7 +19,7 @@ inertial Inertial13 = inertial(PORT7);
 digital_out MogoPneu = digital_out(Brain.ThreeWirePort.B);
 digital_out Claw = digital_out(Brain.ThreeWirePort.A);
 digital_out KnockOut = digital_out(Brain.ThreeWirePort.D);
-motor Arm = motor(PORT9, ratio36_1, true);
+motor Arm = motor(PORT4, ratio36_1, true);
 motor Intake = motor(PORT6, ratio6_1, false);
 
 void vexcodeInit( void ) {

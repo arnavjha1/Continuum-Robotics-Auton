@@ -19,22 +19,31 @@ void odom_constants(){
 
 void regular(){
   int d = matchloadangle;
-  chassis.drive_distance(-20, 30+d);
+  chassis.drive_distance(-18, 30+d);
+  chassis.set_drive_constants(11, 1, 0, 10, 0);
+  chassis.drive_distance(-2.5, 30+d);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   wait(0.1, seconds);
   MogoPneu.set(true);
   wait(0.2, seconds);
   Intake.spin(forward);
   wait(0.6, seconds);
-  chassis.right_swing_to_angle(140+d);
-  chassis.drive_distance(26.5, 140+d);
-  chassis.right_swing_to_angle(87+d);
-  chassis.drive_distance(12, 87+d);
-  chassis.drive_distance(-12, 87+d);
-  Intake.stop();
+  chassis.right_swing_to_angle(139+d);
+  chassis.drive_distance(26.3, 139+d);
+  chassis.right_swing_to_angle(89+d);
+  chassis.set_drive_constants(11, 1, 0, 10, 0);
+  chassis.drive_distance(14, 89+d);
+  wait(0.7, seconds);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  chassis.drive_distance(-8.5, 89+d);
+  //Intake.stop();
   chassis.right_swing_to_angle(180+d);
-  chassis.left_swing_to_angle(80+d);
-  Intake.spin(forward);
-  chassis.drive_distance(23, 83+d);
+  chassis.left_swing_to_angle(70+d);
+  //Intake.spin(forward);
+  chassis.drive_distance(19, 70+d);
+  wait(1.5, seconds);
+  chassis.set_drive_constants(11, 1, 0, 10, 0);
+  chassis.drive_distance(-42, 70+d);
 }
 
 void mirrored(){
