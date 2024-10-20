@@ -44,8 +44,8 @@ void regular(){
   wait(1, seconds);
   //chassis.set_drive_constants(11, 1, 0, 10, 0);
   //chassis.drive_distance(-42, 70+d);
-  chassis.left_swing_to_angle(45+d);
-  chassis.drive_distance(45, 45+d);
+  chassis.left_swing_to_angle(30+d);
+  chassis.drive_distance(40, 30+d);
   chassis.right_swing_to_angle(0+d);
 
 }
