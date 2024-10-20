@@ -148,6 +148,7 @@ void pre_auton(void) {
   Intake.setVelocity(100.0, percent);
   Arm.setVelocity(50, percent);
   Arm.setStopping(hold);
+  Arm.setBrake(hold);
   while(auto_started == false){            //Changing the names below will only change their names on the
     Brain.Screen.clearScreen();            //brain screen for auton selection.
     switch(current_auton_selection){       //Tap the brain screen to cycle through autons.
@@ -278,13 +279,13 @@ void usercontrol(void) {
     controller(primary).ButtonL2.released(stopIntake); 
 
     controller(primary).ButtonX.pressed(toggleClawPos);
-    controller(primary).ButtonUp.pressed(triggerMogoMech);
+    controller(primary).ButtonR1.pressed(triggerMogoMech);
 
-    controller(primary).ButtonR1.pressed(ArmUp);
-    controller(primary).ButtonR1.released(StopArm);
+    controller(primary).ButtonUp.pressed(ArmUp);
+    controller(primary).ButtonUp.released(StopArm);
 
-    controller(primary).ButtonR2.pressed(ArmDown);
-    controller(primary).ButtonR2.released(StopArm);
+    controller(primary).ButtonDown.pressed(ArmDown);
+    controller(primary).ButtonDown.released(StopArm);
 /*
     controller(primary).ButtonB.pressed(doMatchloads);
     controller(primary).ButtonX.pressed(stopMatchloads);

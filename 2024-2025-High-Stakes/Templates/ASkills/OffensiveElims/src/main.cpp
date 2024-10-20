@@ -278,13 +278,13 @@ void usercontrol(void) {
     controller(primary).ButtonL2.released(stopIntake); 
 
     controller(primary).ButtonX.pressed(toggleClawPos);
-    controller(primary).ButtonUp.pressed(triggerMogoMech);
+    controller(primary).ButtonR1.pressed(triggerMogoMech);
 
-    controller(primary).ButtonR1.pressed(ArmUp);
-    controller(primary).ButtonR1.released(StopArm);
+    controller(primary).ButtonUp.pressed(ArmUp);
+    controller(primary).ButtonUp.released(StopArm);
 
-    controller(primary).ButtonR2.pressed(ArmDown);
-    controller(primary).ButtonR2.released(StopArm);
+    controller(primary).ButtonDown.pressed(ArmDown);
+    controller(primary).ButtonDown.released(StopArm);
 /*
     controller(primary).ButtonB.pressed(doMatchloads);
     controller(primary).ButtonX.pressed(stopMatchloads);
