@@ -1,5 +1,5 @@
 #include "vex.h"
-int matchloadangle = 0;
+int matchloadangle = 45;
 int m = 1;
 
 void default_constants(){
@@ -18,39 +18,69 @@ void odom_constants(){
   chassis.drive_settle_error = 3;
 }
 
+void ArmPickup(){
+  Intake.setVelocity(100, percent);
+  Intake.spin(forward);
+  wait(0.7, seconds);
+  Intake.setVelocity(45, percent);
+  if(m == 1){
+    waitUntil(DiscSensor.hue() < 28 || DiscSensor.hue() > 330);
+  }
+  else{
+    waitUntil(DiscSensor.hue() > 180 || DiscSensor.hue() < 250);
+  }
+  wait(0.188, seconds);
+  Intake.setVelocity(100, percent);
+  Intake.spin(reverse);
+  wait(1, seconds);
+  Intake.stop();
+}
+
+void ArmUp(){
+  Arm.spinFor(forward, 400, degrees);
+}
 void regular(){
   //Pre-auton
   int d = matchloadangle;
   int firstRingAngle = -162;
-  int secondRingBite = 45;
+  double secondRingBite = 33.5;
   
-  //Auton goes here
+  /*Auton goes here
+  ArmPickup();
   
   /*Add arm placement of preload here*/
-  Arm.spinFor(forward, 100, degrees);
-
-  chassis.drive_distance(-25.5);
-  chassis.turn_to_angle(-75*m);
-  chassis.drive_distance(-6.75);
+  chassis.drive_distance(-11);
+  chassis.turn_to_angle(-30*m);
+  chassis.drive_distance(-13.5);
   MogoPneu.set(true);
+  /*Intake.spin(forward);*/
+  
 
   wait(0.2, seconds);
-  chassis.turn_to_angle(firstRingAngle*m);
+  chassis.turn_to_angle((firstRingAngle+d)*m);
   Intake.spin(forward);
   chassis.drive_distance(16.25);
 
-  wait(2, seconds);
-  chassis.turn_to_angle((firstRingAngle+180)*m);
-  Claw.set(true);
+  chassis.drive_distance(-16.25);
+  wait(1.3, seconds);
+  chassis.turn_to_angle((firstRingAngle+180+d)*m);
+  //Claw.set(true);
+
   chassis.drive_distance(secondRingBite);
-
   wait(1, seconds);
-  chassis.drive_distance(-secondRingBite + 12.5);
-  chassis.turn_to_angle(90*m);
-  chassis.drive_distance(24);
-  //Touch bar here
+  chassis.turn_to_angle(0);
+  thread(ArmUp).detach();
 
-  Arm.spinFor(forward, 300, degrees);
+  chassis.drive_distance(17.5);
+  Arm.spinFor(reverse, 300, degrees);
+  chassis.drive_distance(-17.5);
+  chassis.turn_to_angle(45);
+
+  chassis.drive_distance(-secondRingBite + 12.5);
+  chassis.turn_to_angle((90+d)*m);
+  chassis.drive_distance(24);
+  ArmUp();
+
   /*chassis.drive_distance(-8, 0+d);
   chassis.set_drive_constants(11, 0.7, 0, 10, 0);
   chassis.turn_to_angle(-30+d);  

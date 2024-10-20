@@ -155,7 +155,9 @@ void pre_auton(void) {
     switch(current_auton_selection){       //Tap the brain screen to cycle through autons.
       case 0:      
         Brain.Screen.printAt(50, 50, "Red ");
-        controller(primary).Screen.print("Red ");
+        controller(primary).Screen.print("Red ");/*
+        Brain.Screen.printAt(50, 50, "Red ");
+        controller(primary).Screen.print("Red ");*/
         break;
       case 1:
         Brain.Screen.printAt(50, 50, "Blue");

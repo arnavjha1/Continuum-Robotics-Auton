@@ -15,6 +15,7 @@ extern digital_out Claw;
 extern motor Arm;
 extern motor Intake;
 extern limit LimitSwitchC;
+extern optical DiscSensor;
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  * 

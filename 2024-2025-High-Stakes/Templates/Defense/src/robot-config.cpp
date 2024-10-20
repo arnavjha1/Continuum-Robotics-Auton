@@ -20,6 +20,7 @@ digital_out Claw = digital_out(Brain.ThreeWirePort.A);
 motor Arm = motor(PORT4, ratio18_1, false);
 motor Intake = motor(PORT6, ratio6_1, false);
 limit LimitSwitchC = limit(Brain.ThreeWirePort.C);
+optical DiscSensor = optical(PORT11);
 
 void vexcodeInit( void ) {
   
