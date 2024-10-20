@@ -148,6 +148,7 @@ void pre_auton(void) {
   Intake.setVelocity(100.0, percent);
   Arm.setVelocity(50, percent);
   Arm.setStopping(hold);
+  Arm.setBrake(hold);
   while(auto_started == false){            //Changing the names below will only change their names on the
     Brain.Screen.clearScreen();            //brain screen for auton selection.
     switch(current_auton_selection){       //Tap the brain screen to cycle through autons.
