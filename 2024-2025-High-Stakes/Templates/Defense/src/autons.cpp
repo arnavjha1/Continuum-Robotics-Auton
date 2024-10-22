@@ -64,11 +64,16 @@ void regular(){
   chassis.drive_distance(-16.25);
   wait(1.3, seconds);
   chassis.turn_to_angle((firstRingAngle+180+d)*m);
-  //Claw.set(true);
+  Claw.set(true);
 
-  chassis.drive_distance(secondRingBite);
+  chassis.drive_distance(secondRingBite - 5);
   wait(1, seconds);
+  Claw.set(false);
+  Intake.spin(reverse);
+
+  chassis.drive_distance(5);
   chassis.turn_to_angle(0);
+  Intake.spin(forward);
   thread(ArmUp).detach();
 
   chassis.drive_distance(17.5);
