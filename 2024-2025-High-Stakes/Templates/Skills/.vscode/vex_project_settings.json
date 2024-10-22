@@ -1,8 +1,8 @@
 {
 	"project": {
-		"name": "SkillsAuton",
-		"slot": 8,
-		"description": "Skills Auton V5 C++ Project",
+		"name": "Skills",
+		"slot": 1,
+		"description": "Skills V5 C++ Project",
 		"platform": "V5",
 		"creationDate": "Sun, 20 Oct 2024 22:37:53 GMT",
 		"language": "cpp",

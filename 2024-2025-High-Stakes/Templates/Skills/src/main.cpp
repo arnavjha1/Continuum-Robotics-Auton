@@ -261,21 +261,35 @@ void triggerMogoMech() {
 
 }
 
+void moveArmUp() {
+  Arm.spin(reverse);
+}
+
+void moveArmDown() {
+  Arm.spin(forward);
+}
+
+void stopArm() {
+  Arm.stop();
+}
+
 void usercontrol(void) {
     Arm.setStopping(brake);
 
-    controller(primary).ButtonL2.pressed(spinIntakeForward); 
+    controller(primary).ButtonL2.pressed(spinIntakeReverse); 
     controller(primary).ButtonL2.released(stopIntake); 
 
-    controller(primary).ButtonL1.pressed(spinIntakeReverse);
+    controller(primary).ButtonL1.pressed(spinIntakeForward);
     controller(primary).ButtonL1.released(stopIntake); 
 
-    controller(primary).ButtonR2.pressed(toggleClawPos);
-    controller(primary).ButtonR1.pressed(triggerMogoMech);
-/*
-    controller(primary).ButtonB.pressed(doMatchloads);
-    controller(primary).ButtonX.pressed(stopMatchloads);
-    controller(primary).ButtonX.released(stopMatchloads);*/
+    controller(primary).ButtonX.pressed(triggerMogoMech);
+
+    controller(primary).ButtonR1.pressed(moveArmUp);
+    controller(primary).ButtonR1.released(stopArm);
+    controller(primary).ButtonR2.pressed(moveArmDown);
+    controller(primary).ButtonR2.released(stopArm);
+
+    //controller(primary).pressed(triggerIntakePneu);
 
   // User control code here, inside the loop
   while (1) {
