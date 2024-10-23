@@ -132,6 +132,10 @@ void pre_auton(void) {
   Arm.setMaxTorque(100, percent);
   Arm.setVelocity(50, percent);
 
+  IntakePneu.set(false);
+  MogoPneu.set(true);
+  HangPneu.set(true);
+
   Intake.setStopping(brake);
   Intake.setMaxTorque(100, percent);
   Intake.setVelocity(100, percent);
@@ -228,7 +232,7 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
-bool clawPneu = false;
+bool intakePneu = false;
 void spinIntakeForward() {
   Intake.spin(forward);
 }
@@ -238,14 +242,14 @@ void spinIntakeReverse() {
 void stopIntake() {
   Intake.stop();
 }
-void toggleClawPos() {
-  if (clawPneu) {
-    Claw.set(false);
-    clawPneu = false;
+void toggleIntakePneuPos() {
+  if (intakePneu) {
+    IntakePneu.set(false);
+    intakePneu = false;
   }
   else {
-    Claw.set(true);
-    clawPneu = true;
+    IntakePneu.set(true);
+    intakePneu = true;
   }  
 }
 
@@ -258,7 +262,13 @@ void triggerMogoMech() {
     MogoPneu.set(true);
     mobilePneu = true;
   }
+}
 
+bool hangPneuPos = false;
+
+void triggerHangMech() {
+  hangPneuPos = !hangPneuPos;
+  HangPneu.set(hangPneuPos);
 }
 
 void moveArmUp() {
@@ -283,6 +293,7 @@ void usercontrol(void) {
     controller(primary).ButtonL1.released(stopIntake); 
 
     controller(primary).ButtonX.pressed(triggerMogoMech);
+    controller(primary).ButtonB.pressed(triggerHangMech);
 
     controller(primary).ButtonR1.pressed(moveArmUp);
     controller(primary).ButtonR1.released(stopArm);
