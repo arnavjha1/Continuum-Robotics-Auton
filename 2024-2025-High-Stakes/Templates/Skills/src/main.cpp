@@ -292,13 +292,13 @@ void usercontrol(void) {
     controller(primary).ButtonL1.pressed(spinIntakeForward);
     controller(primary).ButtonL1.released(stopIntake); 
 
-    controller(primary).ButtonX.pressed(triggerMogoMech);
-    controller(primary).ButtonB.pressed(triggerHangMech);
+    controller(primary).ButtonR1.pressed(triggerMogoMech);
+    controller(primary).ButtonR2.pressed(triggerHangMech);
 
-    controller(primary).ButtonR1.pressed(moveArmUp);
-    controller(primary).ButtonR1.released(stopArm);
-    controller(primary).ButtonR2.pressed(moveArmDown);
-    controller(primary).ButtonR2.released(stopArm);
+    controller(primary).ButtonY.pressed(moveArmUp);
+    controller(primary).ButtonY.released(stopArm);
+    controller(primary).ButtonRight.pressed(moveArmDown);
+    controller(primary).ButtonRight.released(stopArm);
 
     //controller(primary).pressed(triggerIntakePneu);
 
