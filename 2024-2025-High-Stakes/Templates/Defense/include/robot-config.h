@@ -10,12 +10,12 @@ extern motor RightBack;
 extern motor Left6th;
 extern motor Right6th;
 extern inertial Inertial13;
+extern digital_out IntakePneu;
 extern digital_out MogoPneu;
-extern digital_out Claw;
-extern digital_out KnockOut;
+extern digital_out HangPneu;
 extern motor Arm;
-// extern motor ColorDiskPlacer;
 extern motor Intake;
+extern limit LimitSwitchC;
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  * 
