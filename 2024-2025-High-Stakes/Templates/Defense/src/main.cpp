@@ -132,6 +132,10 @@ void pre_auton(void) {
   Arm.setMaxTorque(100, percent);
   Arm.setVelocity(50, percent);
 
+  IntakePneu.set(false);
+  MogoPneu.set(true);
+  HangPneu.set(true);
+
   Intake.setStopping(brake);
   Intake.setMaxTorque(100, percent);
   Intake.setVelocity(100, percent);
@@ -228,7 +232,7 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
-bool clawPneu = false;
+bool intakePneu = false;
 void spinIntakeForward() {
   Intake.spin(forward);
 }
@@ -238,14 +242,14 @@ void spinIntakeReverse() {
 void stopIntake() {
   Intake.stop();
 }
-void toggleClawPos() {
-  if (clawPneu) {
-    Claw.set(false);
-    clawPneu = false;
+void toggleIntakePneuPos() {
+  if (intakePneu) {
+    IntakePneu.set(false);
+    intakePneu = false;
   }
   else {
-    Claw.set(true);
-    clawPneu = true;
+    IntakePneu.set(true);
+    intakePneu = true;
   }  
 }
 
@@ -258,24 +262,45 @@ void triggerMogoMech() {
     MogoPneu.set(true);
     mobilePneu = true;
   }
+}
 
+bool hangPneuPos = false;
+
+void triggerHangMech() {
+  hangPneuPos = !hangPneuPos;
+  HangPneu.set(hangPneuPos);
+}
+
+void moveArmUp() {
+  Arm.spin(reverse);
+}
+
+void moveArmDown() {
+  Arm.spin(forward);
+}
+
+void stopArm() {
+  Arm.stop();
 }
 
 void usercontrol(void) {
     Arm.setStopping(brake);
 
-    controller(primary).ButtonL2.pressed(spinIntakeForward); 
+    controller(primary).ButtonL2.pressed(spinIntakeReverse); 
     controller(primary).ButtonL2.released(stopIntake); 
 
-    controller(primary).ButtonL1.pressed(spinIntakeReverse);
+    controller(primary).ButtonL1.pressed(spinIntakeForward);
     controller(primary).ButtonL1.released(stopIntake); 
 
-    controller(primary).ButtonR2.pressed(toggleClawPos);
     controller(primary).ButtonR1.pressed(triggerMogoMech);
-/*
-    controller(primary).ButtonB.pressed(doMatchloads);
-    controller(primary).ButtonX.pressed(stopMatchloads);
-    controller(primary).ButtonX.released(stopMatchloads);*/
+    controller(primary).ButtonR2.pressed(triggerHangMech);
+
+    controller(primary).ButtonY.pressed(moveArmUp);
+    controller(primary).ButtonY.released(stopArm);
+    controller(primary).ButtonRight.pressed(moveArmDown);
+    controller(primary).ButtonRight.released(stopArm);
+
+    //controller(primary).pressed(triggerIntakePneu);
 
   // User control code here, inside the loop
   while (1) {
