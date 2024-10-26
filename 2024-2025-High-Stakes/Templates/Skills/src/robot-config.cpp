@@ -21,6 +21,7 @@ digital_out HangPneu = digital_out(Brain.ThreeWirePort.D);
 motor Arm = motor(PORT4, ratio18_1, false);
 motor Intake = motor(PORT6, ratio6_1, false);
 limit LimitSwitchC = limit(Brain.ThreeWirePort.C);
+distance DistSensor = distance(PORT11);
 
 void vexcodeInit( void ) {
   
