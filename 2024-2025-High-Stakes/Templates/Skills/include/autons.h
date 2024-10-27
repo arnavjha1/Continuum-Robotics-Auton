@@ -7,11 +7,10 @@ extern Drive chassis;
 
 void default_constants();
 
-void ArmPickup();
-void ArmUp();
-
 void regular();
 void mirrored();
+void macro();
+void subMacro();
 void swing_test();
 void full_test();
 void odom_test();
