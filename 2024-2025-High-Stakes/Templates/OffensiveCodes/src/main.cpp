@@ -1,5 +1,4 @@
 #include "vex.h"
-bool runningSkills = false;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -63,12 +62,12 @@ motor_group(RightFront, RightBack, Right6th),
 PORT13,
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
-3.25,
+4.125,
 
 //External ratio, must be in decimal, in the format of input teeth/output teeth.
 //If your motor has an 84-tooth gear and your wheel has a 60-tooth gear, this value will be 1.4.
 //If the motor drives the wheel directly, this value is 1:
-0.75,
+0.6,
 
 //Gyro scale, this is what your gyro reads when you spin the robot 360 degrees.
 //For most cases 360 will do fine here, but this scale factor can be very helpful when precision is necessary.
@@ -128,14 +127,6 @@ void pre_auton(void) {
 
   Drivetrain.setStopping(coast);
   Inertial13.calibrate();
-  
-  Arm.setStopping(hold);
-  Arm.setMaxTorque(100, percent);
-  Arm.setVelocity(50, percent);
-
-  IntakePneu.set(false);
-  MogoPneu.set(true);
-  HangPneu.set(true);
 
   Intake.setStopping(brake);
   Intake.setMaxTorque(100, percent);
@@ -155,16 +146,17 @@ void pre_auton(void) {
   RightBack.setVelocity(100, percent);
   Right6th.setVelocity(100, percent);
   Intake.setVelocity(100.0, percent);
+  Arm.setVelocity(50, percent);
+  Arm.setStopping(hold);
+  Arm.setBrake(hold);
   while(auto_started == false){            //Changing the names below will only change their names on the
-    Brain.Screen.clearScreen();  //brain screen for auton selection.
+    Brain.Screen.clearScreen();            //brain screen for auton selection.
     switch(current_auton_selection){       //Tap the brain screen to cycle through autons.
       case 0:      
-        Brain.Screen.printAt(50, 50, "Red ");
-        controller(primary).Screen.print("Red ");
+        Brain.Screen.printAt(50, 50, "Defensive");
         break;
       case 1:
-        Brain.Screen.printAt(50, 50, "Blue");
-        controller(primary).Screen.print("Blue");
+        Brain.Screen.printAt(50, 50, "Defensive Mirrored");
         break;
      /* case 2:
         Brain.Screen.printAt(50, 50, "Turn Test");
@@ -185,9 +177,11 @@ void pre_auton(void) {
         Brain.Screen.printAt(50, 50, "Holonomic Odom Test");
         break;*/
     }
-    if(LimitSwitchC.pressing()){
-      while(LimitSwitchC.pressing()){}
-      current_auton_selection = 1-current_auton_selection;
+    if(Brain.Screen.pressing()){
+      while(Brain.Screen.pressing()) {}
+      current_auton_selection ++;
+    } else if (current_auton_selection == 8){
+      current_auton_selection = 0;
     }
     task::sleep(10);
   }
@@ -233,43 +227,26 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
-bool intakePneu = false;
-
-void loadArm() {
-
-  while (true) {
-    if (DistSensor.objectDistance(inches) < 1) {
-      Intake.spinFor(reverse, 10, turns);
-      break;
-    }
-    else  {
-      Intake.spin(forward);
-    }
-
-    wait(0.02, seconds);
-  }
-}
-
+bool clawPneu = false;
 void spinIntakeForward() {
   Intake.spin(forward);
 }
-
 void spinIntakeReverse() {
   Intake.spin(reverse);
 }
-
 void stopIntake() {
   Intake.stop();
 }
 
-void toggleIntakePneuPos() {
-  if (intakePneu) {
-    IntakePneu.set(false);
-    intakePneu = false;
+
+void toggleClawPos() {
+  if (clawPneu) {
+    Claw.set(false);
+    clawPneu = false;
   }
   else {
-    IntakePneu.set(true);
-    intakePneu = true;
+    Claw.set(true);
+    clawPneu = true;
   }  
 }
 
@@ -282,46 +259,37 @@ void triggerMogoMech() {
     MogoPneu.set(true);
     mobilePneu = true;
   }
+
 }
-
-bool hangPneuPos = false;
-
-void triggerHangMech() {
-  hangPneuPos = !hangPneuPos;
-  HangPneu.set(hangPneuPos);
-}
-
-void moveArmUp() {
-  Arm.spin(reverse);
-}
-
-void moveArmDown() {
+void ArmUp(){
   Arm.spin(forward);
 }
-
-void stopArm() {
+void ArmDown(){
+  Arm.spin(reverse);
+}
+void StopArm(){
   Arm.stop();
 }
 
 void usercontrol(void) {
-    Arm.setStopping(brake);
-
-    controller(primary).ButtonL2.pressed(spinIntakeReverse); 
-    controller(primary).ButtonL2.released(stopIntake); 
-
-    controller(primary).ButtonL1.pressed(spinIntakeForward);
+    controller(primary).ButtonL1.pressed(spinIntakeForward); 
     controller(primary).ButtonL1.released(stopIntake); 
 
+    controller(primary).ButtonL2.pressed(spinIntakeReverse);
+    controller(primary).ButtonL2.released(stopIntake); 
+
+    controller(primary).ButtonX.pressed(toggleClawPos);
     controller(primary).ButtonR1.pressed(triggerMogoMech);
-    controller(primary).ButtonR2.pressed(triggerHangMech);
 
-    controller(primary).ButtonY.pressed(moveArmUp);
-    controller(primary).ButtonY.released(stopArm);
-    controller(primary).ButtonRight.pressed(moveArmDown);
-    controller(primary).ButtonRight.released(stopArm);
+    controller(primary).ButtonUp.pressed(ArmUp);
+    controller(primary).ButtonUp.released(StopArm);
 
-    controller(primary).ButtonB.pressed(loadArm);
-    controller(primary).ButtonB.released(stopIntake);
+    controller(primary).ButtonDown.pressed(ArmDown);
+    controller(primary).ButtonDown.released(StopArm);
+/*
+    controller(primary).ButtonB.pressed(doMatchloads);
+    controller(primary).ButtonX.pressed(stopMatchloads);
+    controller(primary).ButtonX.released(stopMatchloads);*/
 
   // User control code here, inside the loop
   while (1) {
@@ -348,9 +316,11 @@ void usercontrol(void) {
 //
 int main() {
   // Set up callbacks for autonomous and driver control periods.
-  Competition.autonomous(autonomous);
-  Competition.drivercontrol(usercontrol);
+  KnockOut.set(false);
 
+  Competition.autonomous(autonomous);
+  //toggleClawPos();
+  Competition.drivercontrol(usercontrol);
   // Run the pre-autonomous function.
   pre_auton();
 
