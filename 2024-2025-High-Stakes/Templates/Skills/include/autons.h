@@ -9,6 +9,8 @@ void default_constants();
 
 void regular();
 void mirrored();
+void macro();
+void subMacro();
 void swing_test();
 void full_test();
 void odom_test();

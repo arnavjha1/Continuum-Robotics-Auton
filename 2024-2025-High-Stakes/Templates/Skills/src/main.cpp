@@ -1,4 +1,5 @@
 #include "vex.h"
+bool runningSkills = true;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -284,6 +285,9 @@ void stopArm() {
 }
 
 void usercontrol(void) {
+    if(runningSkills){
+      macro();
+    }
     Arm.setStopping(brake);
 
     controller(primary).ButtonL2.pressed(spinIntakeReverse); 

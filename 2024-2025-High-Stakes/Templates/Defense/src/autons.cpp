@@ -22,13 +22,13 @@ void ArmPickup(){
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
   wait(0.7, seconds);
-  Intake.setVelocity(45, percent);
+  Intake.setVelocity(45, percent);/*
   if(m == 1){
     waitUntil(DiscSensor.hue() < 28 || DiscSensor.hue() > 330);
   }
   else{
     waitUntil(DiscSensor.hue() > 180 || DiscSensor.hue() < 250);
-  }
+  }*/
   wait(0.188, seconds);
   Intake.setVelocity(100, percent);
   Intake.spin(reverse);
@@ -64,11 +64,11 @@ void regular(){
   chassis.drive_distance(-16.25);
   wait(1.3, seconds);
   chassis.turn_to_angle((firstRingAngle+180+d)*m);
-  Claw.set(true);
+  IntakePneu.set(true);
 
   chassis.drive_distance(secondRingBite - 5);
   wait(1, seconds);
-  Claw.set(false);
+  IntakePneu.set(false);
   Intake.spin(reverse);
 
   chassis.drive_distance(5);

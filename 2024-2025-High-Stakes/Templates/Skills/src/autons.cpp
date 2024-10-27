@@ -120,6 +120,21 @@ void mirrored(){
   */ 
 }
 
+double armBite = 5.0;
+void macro(){
+  Arm.spinFor(reverse, 300, degrees);
+  chassis.drive_distance(armBite);
+  Arm.spinFor(forward, 300, degrees);
+  thread(subMacro).detach();
+}
+void subMacro(){
+  wait(1, seconds);
+  
+  chassis.drive_distance(-7-armBite);
+  chassis.turn_to_angle(90);
+  chassis.drive_distance(-18.5);
+  MogoPneu.set(true);
+}
 
 //The following codes are test codes, avoid editing!
 void swing_test(){
