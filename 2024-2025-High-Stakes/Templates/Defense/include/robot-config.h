@@ -16,6 +16,7 @@ extern digital_out HangPneu;
 extern motor Arm;
 extern motor Intake;
 extern limit LimitSwitchC;
+extern distance DistSensor;
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  * 
