@@ -1,5 +1,6 @@
 # Code repository for C++: 1258V
-![screen gif showing the header of the glitch-in-bio remix being updated to say "hello, world!"](https://thumbs.gfycat.com/KindDistortedIrrawaddydolphin-size_restricted.gif)
+All statements here are both an official and 100% accurate representation of the contributions to the 1258V, Continuum Robotics team rooted in Redmond, WA, qualifying for the state competition during freshman year (2023-2024)...
+
 ## High Stakes
 
 
