@@ -51,7 +51,7 @@ void regular(){
   /*Add arm placement of preload here*/
   chassis.drive_distance(-11);
   chassis.turn_to_angle(-30*m);
-  chassis.drive_distance(-13.5);
+  chassis.drive_distance(-13);
   MogoPneu.set(true);
   /*Intake.spin(forward);*/
   
@@ -67,7 +67,7 @@ void regular(){
   IntakePneu.set(true);
 
   chassis.drive_distance(secondRingBite - 5);
-  wait(1, seconds);
+  wait(1, seconds);/*
   IntakePneu.set(false);
   Intake.spin(reverse);
 

@@ -1,4 +1,5 @@
 #include "vex.h"
+bool runningSkills = false;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -233,15 +234,34 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
 bool intakePneu = false;
+
+void loadArm() {
+
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      Intake.spinFor(reverse, 10, turns);
+      break;
+    }
+    else  {
+      Intake.spin(forward);
+    }
+
+    wait(0.02, seconds);
+  }
+}
+
 void spinIntakeForward() {
   Intake.spin(forward);
 }
+
 void spinIntakeReverse() {
   Intake.spin(reverse);
 }
+
 void stopIntake() {
   Intake.stop();
 }
+
 void toggleIntakePneuPos() {
   if (intakePneu) {
     IntakePneu.set(false);
@@ -300,7 +320,8 @@ void usercontrol(void) {
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
-    //controller(primary).pressed(triggerIntakePneu);
+    controller(primary).ButtonB.pressed(loadArm);
+    controller(primary).ButtonB.released(stopIntake);
 
   // User control code here, inside the loop
   while (1) {

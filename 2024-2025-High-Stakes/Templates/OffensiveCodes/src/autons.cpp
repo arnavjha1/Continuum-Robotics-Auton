@@ -27,23 +27,29 @@ void regular(){
   MogoPneu.set(true);
   wait(0.2, seconds);
   Intake.spin(forward);
-  wait(0.6, seconds);
-  chassis.right_swing_to_angle(139+d);
-  chassis.drive_distance(26.3, 139+d);
+  wait(0.4, seconds);
+  chassis.right_swing_to_angle(150+d);
+  chassis.drive_distance(20, 150+d);
+  chassis.right_swing_to_angle(115+d);
+  chassis.set_drive_constants(11, 15, 0, 10, 0);
+  chassis.drive_distance(5, 115+d);
   chassis.right_swing_to_angle(89+d);
-  chassis.set_drive_constants(11, 1, 0, 10, 0);
-  chassis.drive_distance(14, 89+d);
-  wait(0.7, seconds);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  chassis.drive_distance(-8.5, 89+d);
+  chassis.drive_distance(15, 89+d);
+  wait(0.7, seconds);
   //Intake.stop();
-  chassis.right_swing_to_angle(180+d);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  chassis.drive_distance(-8, 89+d);
+  chassis.right_swing_to_angle(110+d);
+  chassis.drive_distance(-12, 110+d);
+  //chassis.right_swing_to_angle(180+d);
+  chassis.set_drive_constants(11, 15, 0, 10, 0);
   chassis.left_swing_to_angle(70+d);
   //Intake.spin(forward);
-  chassis.drive_distance(19, 70+d);
-  wait(1.5, seconds);
-  chassis.set_drive_constants(11, 1, 0, 10, 0);
-  chassis.drive_distance(-42, 70+d);
+  chassis.drive_distance(17, 70+d);
+  wait(1, seconds);
+  chassis.set_drive_constants(11, 3, 0, 10, 0);
+  chassis.drive_distance(-30, 70+d);
 }
 
 void mirrored(){

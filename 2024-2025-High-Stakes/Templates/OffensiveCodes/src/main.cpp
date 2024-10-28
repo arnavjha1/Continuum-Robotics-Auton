@@ -130,7 +130,7 @@ void pre_auton(void) {
 
   Intake.setStopping(brake);
   Intake.setMaxTorque(100, percent);
-  Intake.setVelocity(100, percent);
+  Intake.setVelocity(60, percent);
 
   LeftFront.setMaxTorque(100, percent);
   LeftBack.setMaxTorque(100, percent);
