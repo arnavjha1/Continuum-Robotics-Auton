@@ -305,9 +305,10 @@ void stopArm() {
 
 void usercontrol(void) {
     if(runningSkills){
-      macro();
+      //macro();
     }
     Arm.setStopping(brake);
+    Drivetrain.setStopping(coast);
 
     controller(primary).ButtonL2.pressed(spinIntakeReverse); 
     controller(primary).ButtonL2.released(stopIntake); 

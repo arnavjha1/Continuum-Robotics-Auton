@@ -28,13 +28,22 @@ void regular(){
   
   /*Add arm placement of preload here*/
   //Arm.spinFor(forward, 100, degrees);
-
+  MogoPneu.set(false);
   chassis.drive_distance(14.5);
   chassis.turn_to_angle(-90);
   chassis.drive_distance(-17);
   MogoPneu.set(true);
-  wait(0.5, seconds);
+  wait(0.2, seconds);
   chassis.turn_to_angle(20);
+  Intake.spin(forward);
+  chassis.drive_distance(27);
+  wait(0.2, seconds);
+  chassis.turn_to_angle(90);
+  chassis.drive_distance(27);
+  chassis.turn_to_angle(180);
+  chassis.drive_distance(22);
+  wait(0.3, seconds);
+  chassis.drive_distance(10);
 
 
   /*
