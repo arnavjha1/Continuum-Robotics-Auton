@@ -239,7 +239,7 @@ void loadArm() {
 
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      Intake.spinFor(reverse, 10, turns);
+      Intake.spinFor(reverse, 15, turns);
       break;
     }
     else  {
