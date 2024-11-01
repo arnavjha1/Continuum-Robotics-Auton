@@ -3,7 +3,7 @@ int matchloadangle = 0;
 int m = 1;
 
 void default_constants(){
-  chassis.set_drive_constants(11, 1.5, 0, 15, 0);
+  chassis.set_drive_constants(5, 1.5, 0, 15, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
   chassis.set_turn_constants(12, .4, .03, 3, 15);
   chassis.set_swing_constants(12, .3, .001, 2, 15);
@@ -34,7 +34,7 @@ void regular(){
   MogoPneu.set(true);
   wait(0.3, seconds);
   Intake.spin(forward);
-  wait(0.3, seconds);
+  wait(0.5, seconds);
   chassis.turn_to_angle(20);
   wait(0.3, seconds);
   chassis.drive_distance(26);
@@ -45,17 +45,17 @@ void regular(){
   wait(0.2, seconds);
   chassis.turn_to_angle(180);
   wait(0.2, seconds);
-  chassis.drive_distance(22);
-  wait(0.3, seconds);
-  chassis.drive_distance(10);  
+  chassis.drive_distance(19);
+  wait(0.5, seconds);
+  chassis.drive_distance(13);  
   wait(0.2, seconds);
   chassis.drive_distance(-23);
   wait(0.2, seconds);
-  chassis.turn_to_angle(135);
+  chassis.turn_to_angle(140);
   wait(0.3, seconds);
   chassis.drive_distance(10);  
   wait(0.2, seconds);
-  chassis.turn_to_angle(-20);
+  chassis.turn_to_angle(-30);
   wait(0.2, seconds);
   chassis.drive_distance(-13);  
   wait(0.2, seconds);
