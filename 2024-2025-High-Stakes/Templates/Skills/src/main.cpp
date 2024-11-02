@@ -316,15 +316,15 @@ void usercontrol(void) {
     controller(primary).ButtonL1.released(stopIntake); 
 
     controller(primary).ButtonR1.pressed(triggerMogoMech);
-    controller(primary).ButtonR2.pressed(triggerHangMech);
+    controller(primary).ButtonR2.pressed(loadArm);
 
     controller(primary).ButtonY.pressed(moveArmUp);
     controller(primary).ButtonY.released(stopArm);
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
-    controller(primary).ButtonB.pressed(loadArm);
-    controller(primary).ButtonB.released(stopIntake);
+    //controller(primary).ButtonB.pressed(loadArm);
+    //controller(primary).ButtonB.released(stopIntake);
 
   // User control code here, inside the loop
   while (1) {
