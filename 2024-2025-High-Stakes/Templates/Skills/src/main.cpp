@@ -290,6 +290,13 @@ void triggerHangMech() {
   HangPneu.set(hangPneuPos);
 }
 
+bool intakePneuPos = false;
+
+void triggerIntakeMech() {
+  intakePneuPos = !intakePneuPos;
+  IntakePneu.set(intakePneuPos);
+}
+
 void moveArmUp() {
   Arm.spin(reverse);
 }
@@ -323,7 +330,7 @@ void usercontrol(void) {
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
-    //controller(primary).ButtonB.pressed(loadArm);
+    controller(primary).ButtonB.pressed(triggerIntakeMech);
     //controller(primary).ButtonB.released(stopIntake);
 
   // User control code here, inside the loop

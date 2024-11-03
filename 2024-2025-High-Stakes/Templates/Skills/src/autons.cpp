@@ -57,7 +57,8 @@ void regular(){
   wait(0.2, seconds);
   chassis.turn_to_angle(-30);
   wait(0.2, seconds);
-  chassis.drive_distance(-13);  
+  chassis.drive_distance(-13);
+  Intake.spinFor(reverse, 2, turns, false);
   wait(0.2, seconds);
   MogoPneu.set(false);
   wait(0.2, seconds);
