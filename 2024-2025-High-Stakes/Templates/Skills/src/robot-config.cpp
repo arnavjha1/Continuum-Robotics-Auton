@@ -19,7 +19,7 @@ digital_out IntakePneu = digital_out(Brain.ThreeWirePort.A);
 digital_out MogoPneu = digital_out(Brain.ThreeWirePort.B);
 digital_out HangPneu = digital_out(Brain.ThreeWirePort.D);
 motor Arm = motor(PORT4, ratio18_1, false);
-motor Intake = motor(PORT6, ratio6_1, false);
+motor Intake = motor(PORT6, ratio18_1, false);
 limit LimitSwitchC = limit(Brain.ThreeWirePort.C);
 distance DistSensor = distance(PORT11);
 

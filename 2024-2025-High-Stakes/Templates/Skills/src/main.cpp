@@ -129,7 +129,7 @@ void pre_auton(void) {
   Drivetrain.setStopping(coast);
   Inertial13.calibrate();
   
-  Arm.setStopping(hold);
+  Arm.setStopping(brake);
   Arm.setMaxTorque(100, percent);
   Arm.setVelocity(50, percent);
 
@@ -137,7 +137,7 @@ void pre_auton(void) {
   MogoPneu.set(false);
   HangPneu.set(false);
 
-  Intake.setStopping(brake);
+  Intake.setStopping(coast);
   Intake.setMaxTorque(100, percent);
   Intake.setVelocity(100, percent);
 
@@ -238,7 +238,7 @@ void loadArm() {
 
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      Intake.spinFor(reverse, 15, turns);
+      Intake.spinFor(reverse, 7, turns);
       break;
     }
     else  {
