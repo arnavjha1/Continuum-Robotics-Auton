@@ -276,6 +276,8 @@ void usercontrol(void) {
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
+    controller(primary).ButtonB.pressed(triggerIntakeMech);
+
     vex::task t(DisplayToController);
 
   // User control code here, inside the loop
