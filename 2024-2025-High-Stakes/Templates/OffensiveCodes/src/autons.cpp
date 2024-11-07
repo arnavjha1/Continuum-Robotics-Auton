@@ -21,7 +21,7 @@ void regular(){
   int d = matchloadangle;
   chassis.drive_distance(-18, 30+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
-  chassis.drive_distance(-2.5, 30+d);
+  chassis.drive_distance(-3.5, 30+d);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   wait(0.1, seconds);
   MogoPneu.set(true);
@@ -29,11 +29,11 @@ void regular(){
   Intake.spin(forward);
   wait(0.4, seconds);
   chassis.right_swing_to_angle(140+d);
-  chassis.drive_distance(23, 145+d);
+  chassis.drive_distance(23, 150+d);
   //chassis.right_swing_to_angle(120+d);
   //chassis.set_drive_constants(11, 15, 0, 10, 0);
   //chassis.drive_distance(5, 120+d);
-  chassis.right_swing_to_angle(96+d);
+  chassis.right_swing_to_angle(98+d);
   chassis.set_drive_constants(11, 20, 0, 10, 0);
   chassis.drive_distance(15, 93+d);
   wait(0.4, seconds);
