@@ -37,48 +37,48 @@ void ArmPickup(){
 }
 
 void ArmUp(){
-  Arm.spinFor(forward, 400, degrees);
+  Arm.spinFor(reverse, 400, degrees);
 }
 void regular(){
   //Pre-auton
   int d = matchloadangle;
-  int firstRingAngle = -162;
-  double secondRingBite = 33.5;
+  int firstRingAngle = -108;
+  double secondRingBite = 36+13.75;
+  double secondRingResist = 12;
+  double secondRingOverShoot = 18;
   
   /*Auton goes here
   ArmPickup();
   
   /*Add arm placement of preload here*/
-  chassis.drive_distance(-11);
+  chassis.drive_distance(-10);
   chassis.turn_to_angle(-30*m);
-  chassis.drive_distance(-13);
+  chassis.drive_distance(-14.5);
   MogoPneu.set(true);
-  /*Intake.spin(forward);*/
-  
 
-  wait(0.2, seconds);
-  chassis.turn_to_angle((firstRingAngle+d)*m);
   Intake.spin(forward);
+  wait(0.2, seconds);
+  chassis.turn_to_angle(firstRingAngle*m);
   chassis.drive_distance(16.25);
 
-  chassis.drive_distance(-16.25);
-  wait(1.3, seconds);
-  chassis.turn_to_angle((firstRingAngle+180+d)*m);
+  wait(1, seconds);
+  chassis.turn_to_angle(65*m);
   IntakePneu.set(true);
+  thread(macroArm).detach();
 
-  chassis.drive_distance(secondRingBite - 5);
-  wait(1, seconds);/*
-  IntakePneu.set(false);
-  Intake.spin(reverse);
-
-  chassis.drive_distance(5);
+  chassis.drive_distance(secondRingBite - secondRingResist);
+  wait(1, seconds);
+  chassis.drive_distance(secondRingResist + secondRingOverShoot);
+  chassis.drive_distance(-1*secondRingOverShoot-1.5);
   chassis.turn_to_angle(0);
+
   Intake.spin(forward);
   thread(ArmUp).detach();
+  wait(1, seconds);
+  chassis.drive_distance(15);
 
-  chassis.drive_distance(17.5);
-  Arm.spinFor(reverse, 300, degrees);
-  chassis.drive_distance(-17.5);
+  Arm.spinFor(forward, 400, degrees);
+  chassis.drive_distance(-17.5);  /*
   chassis.turn_to_angle(45);
 
   chassis.drive_distance(-secondRingBite + 12.5);
@@ -148,6 +148,19 @@ void mirrored(){
   */ 
 }
 
+void macroArm(){
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      Intake.spinFor(reverse, 10, turns);
+      break;
+    }
+    else  {
+      Intake.spin(forward);
+    }
+
+    wait(0.02, seconds);
+  }
+}
 
 //The following codes are test codes, avoid editing!
 void swing_test(){
