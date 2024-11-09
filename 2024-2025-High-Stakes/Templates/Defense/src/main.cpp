@@ -134,7 +134,6 @@ void pre_auton(void) {
   Arm.setVelocity(50, percent);
 
   IntakePneu.set(false);
-  MogoPneu.set(true);
   HangPneu.set(true);
 
   Intake.setStopping(brake);
@@ -239,7 +238,7 @@ void loadArm() {
 
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      Intake.spinFor(reverse, 10, turns);
+      Intake.spinFor(reverse, 20, turns);
       break;
     }
     else  {
