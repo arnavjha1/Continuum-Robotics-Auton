@@ -278,7 +278,7 @@ void usercontrol(void) {
 
     controller(primary).ButtonB.pressed(triggerIntakeMech);
 
-    vex::task t(DisplayToController);
+   // vex::task t(DisplayToController);
 
   // User control code here, inside the loop
   while (1) {
