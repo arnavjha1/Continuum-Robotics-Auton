@@ -1,4 +1,5 @@
 #include "vex.h"
+bool runningSkills = false;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -121,99 +122,43 @@ int current_auton_selection = 0;
 bool auto_started = false;
 
 void pre_auton(void) {
-  //DO NOT REMOVE THE FOLLOWING TWO FUNCTIONS! The entire code will break!
-  vexcodeInit();
-  default_constants();
+    //DO NOT REMOVE THE FOLLOWING TWO FUNCTIONS! The entire code will break!
+    vexcodeInit();
+    default_constants();
 
-  Drivetrain.setStopping(coast);
-  Inertial13.calibrate();
-  Arm.setVelocity(50, percent);
-  Arm.setStopping(hold);
+    Drivetrain.setStopping(coast);
+    Inertial13.calibrate();
+    
+    Arm.setStopping(brake);
+    Arm.setMaxTorque(100, percent);
+    Arm.setVelocity(50, percent);
 
-  Intake.setStopping(brake);
-  Intake.setMaxTorque(100, percent);
-  Intake.setVelocity(100, percent);
+    IntakePneu.set(false);
+    MogoPneu.set(false);
+    HangPneu.set(false);
 
-  LeftFront.setMaxTorque(100, percent);
-  LeftBack.setMaxTorque(100, percent);
-  Left6th.setMaxTorque(100, percent);
-  RightBack.setMaxTorque(100, percent);
-  RightFront.setMaxTorque(100, percent);
-  Right6th.setMaxTorque(100, percent);
+    Intake.setStopping(coast);
+    Intake.setMaxTorque(100, percent);
+    Intake.setVelocity(100, percent);
 
-  LeftFront.setVelocity(100, percent);
-  LeftBack.setVelocity(100, percent);
-  Left6th.setVelocity(100, percent);
-  RightFront.setVelocity(100, percent);
-  RightBack.setVelocity(100, percent);
-  Right6th.setVelocity(100, percent);
-  Intake.setVelocity(100.0, percent);
-  while(auto_started == false){            //Changing the names below will only change their names on the
-    Brain.Screen.clearScreen();  //brain screen for auton selection.
-    switch(current_auton_selection){       //Tap the brain screen to cycle through autons.
-      case 0:      
-        Brain.Screen.printAt(50, 50, "Red ");
-        controller(primary).Screen.print("Red ");
-        break;
-      case 1:
-        Brain.Screen.printAt(50, 50, "Blue");
-        controller(primary).Screen.print("Blue");
-        break;
-     /* case 2:
-        Brain.Screen.printAt(50, 50, "Turn Test");
-        break;
-      case 3:
-        Brain.Screen.printAt(50, 50, "Swing Test");
-        break;
-      case 4:
-        Brain.Screen.printAt(50, 50, "Full Test");
-        break;
-      case 5:
-        Brain.Screen.printAt(50, 50, "Odom Test");
-        break;
-      case 6:
-        Brain.Screen.printAt(50, 50, "Tank Odom Test");
-        break;
-      case 7:
-        Brain.Screen.printAt(50, 50, "Holonomic Odom Test");
-        break;*/
-    }
-    if(LimitSwitchC.pressing()){
-      while(LimitSwitchC.pressing()){}
-      current_auton_selection = 1-current_auton_selection;
-    }
-    task::sleep(10);
+    LeftFront.setMaxTorque(100, percent);
+    LeftBack.setMaxTorque(100, percent);
+    Left6th.setMaxTorque(100, percent);
+    RightBack.setMaxTorque(100, percent);
+    RightFront.setMaxTorque(100, percent);
+    Right6th.setMaxTorque(100, percent);
+
+    LeftFront.setVelocity(100, percent);
+    LeftBack.setVelocity(100, percent);
+    Left6th.setVelocity(100, percent);
+    RightFront.setVelocity(100, percent);
+    RightBack.setVelocity(100, percent);
+    Right6th.setVelocity(100, percent);
+    Intake.setVelocity(100.0, percent);
   }
-}
 
 void autonomous(void) {
-  auto_started = true;
-  switch(current_auton_selection){  
-    case 0:
-      regular(); //This is the default auton, if you don't select from the brain.
-      break;        //Change these to be your own auton functions in order to use the auton selector.
-    case 1:         //Tap the screen to cycle through autons.
-      mirrored();
-      break;
-    /*case 2:
-      turn_test();
-      break;
-    case 3:
-      swing_test();
-      break;
-    case 4:
-      full_test();
-      break;
-    case 5:
-      odom_test();
-      break;
-    case 6:
-      tank_odom_test();
-      break;
-    case 7:
-      holonomic_odom_test();
-      break;*/
- }
+  regular();  
 }
 
 /*---------------------------------------------------------------------------*/
@@ -226,24 +171,43 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
-bool clawPneu = false;
+bool intakePneu = false;
+
+void loadArm() {
+
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      Intake.spinFor(reverse, 12, turns);
+      break;
+    }
+    else  {
+      Intake.spin(forward);
+    }
+
+    wait(0.02, seconds);
+  }
+}
+
 void spinIntakeForward() {
   Intake.spin(forward);
 }
+
 void spinIntakeReverse() {
   Intake.spin(reverse);
 }
+
 void stopIntake() {
   Intake.stop();
 }
-void toggleClawPos() {
-  if (clawPneu) {
-    Claw.set(false);
-    clawPneu = false;
+
+void toggleIntakePneuPos() {
+  if (intakePneu) {
+    IntakePneu.set(false);
+    intakePneu = false;
   }
   else {
-    Claw.set(true);
-    clawPneu = true;
+    IntakePneu.set(true);
+    intakePneu = true;
   }  
 }
 
@@ -256,22 +220,65 @@ void triggerMogoMech() {
     MogoPneu.set(true);
     mobilePneu = true;
   }
+}
+
+bool hangPneuPos = false;
+
+void triggerHangMech() {
+  hangPneuPos = !hangPneuPos;
+  HangPneu.set(hangPneuPos);
+}
+
+bool intakePneuPos = false;
+
+void triggerIntakeMech() {
+  intakePneuPos = !intakePneuPos;
+  IntakePneu.set(intakePneuPos);
+}
+
+void moveArmUp() {
+  Arm.spin(reverse);
+}
+
+void moveArmDown() {
+  Arm.spin(forward);
+}
+
+void stopArm() {
+  Arm.stop();
+}
+
+int DisplayToController() {
+
+  while (true) {
+    controller(primary).Screen.print(Intake.velocity(rpm));
+    vex::this_thread::sleep_for(1000);
+  }
 
 }
 
 void usercontrol(void) {
-    controller(primary).ButtonL2.pressed(spinIntakeForward); 
+
+    Arm.setStopping(brake);
+    Drivetrain.setStopping(coast);
+
+    controller(primary).ButtonL2.pressed(spinIntakeReverse); 
     controller(primary).ButtonL2.released(stopIntake); 
 
-    controller(primary).ButtonL1.pressed(spinIntakeReverse);
+    controller(primary).ButtonL1.pressed(spinIntakeForward);
     controller(primary).ButtonL1.released(stopIntake); 
 
-    controller(primary).ButtonR2.pressed(toggleClawPos);
     controller(primary).ButtonR1.pressed(triggerMogoMech);
-/*
-    controller(primary).ButtonB.pressed(doMatchloads);
-    controller(primary).ButtonX.pressed(stopMatchloads);
-    controller(primary).ButtonX.released(stopMatchloads);*/
+    controller(primary).ButtonR2.pressed(loadArm);
+
+    controller(primary).ButtonY.pressed(moveArmUp);
+    controller(primary).ButtonY.released(stopArm);
+    controller(primary).ButtonRight.pressed(moveArmDown);
+    controller(primary).ButtonRight.released(stopArm);
+
+    controller(primary).ButtonB.pressed(triggerIntakeMech);
+
+    vex::task t(DisplayToController);
 
   // User control code here, inside the loop
   while (1) {
