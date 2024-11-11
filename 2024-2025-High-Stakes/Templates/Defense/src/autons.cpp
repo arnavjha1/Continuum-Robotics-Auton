@@ -35,48 +35,48 @@ void ArmPickup(){
   wait(1, seconds);
   Intake.stop();
 }
-
+void ArmDown(){
+  //wait(0.5, seconds);
+  Arm.spin(forward);
+}
 void ArmUp(){
-  Arm.spinFor(reverse, 400, degrees);
+  Arm.spinFor(reverse, 400, degrees);  
+  Intake.spin(forward);
 }
 void regular(){
   //Pre-auton
   int d = matchloadangle;
   int firstRingAngle = -108;
-  double secondRingBite = 36+13.75;
-  double secondRingResist = 12;
-  double secondRingOverShoot = 9;
-  
+  double secondRingBite = 36+13.75+1.25;
+  double secondRingResist = 7;
+
   /*Auton goes here
   ArmPickup();
   
   /*Add arm placement of preload here*/
+  thread(ArmUp).detach();
   chassis.drive_distance(-10);
   chassis.turn_to_angle(-30*m);
   chassis.drive_distance(-14.5);
-  MogoPneu.set(true);
 
-  Intake.spin(forward);
+  MogoPneu.set(true);
   wait(0.2, seconds);
   chassis.turn_to_angle(firstRingAngle*m);
   chassis.drive_distance(16.25);
 
   wait(1, seconds);
-  chassis.turn_to_angle(65*m);
+  chassis.turn_to_angle(63.5*m);
   IntakePneu.set(true);
   thread(macroArm).detach();
 
   chassis.drive_distance(secondRingBite - secondRingResist);
+  thread(ArmDown).detach();
   wait(1, seconds);
-  chassis.drive_distance(secondRingResist + secondRingOverShoot);
-  chassis.drive_distance(-1*secondRingOverShoot);
-  chassis.turn_to_angle(0);
+  chassis.right_swing_to_angle(0);
 
-  Intake.spin(forward);
   thread(ArmUp).detach();
   wait(1, seconds);
-  chassis.drive_distance(12);
-
+  chassis.drive_distance(3);
   Arm.spinFor(forward, 400, degrees);
   chassis.drive_distance(-17.5);  /*
   chassis.turn_to_angle(45);

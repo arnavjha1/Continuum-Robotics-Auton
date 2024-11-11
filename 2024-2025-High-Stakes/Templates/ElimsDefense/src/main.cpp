@@ -134,7 +134,6 @@ void pre_auton(void) {
     Arm.setVelocity(50, percent);
 
     IntakePneu.set(false);
-    MogoPneu.set(false);
     HangPneu.set(false);
 
     Intake.setStopping(coast);
@@ -278,7 +277,7 @@ void usercontrol(void) {
 
     controller(primary).ButtonB.pressed(triggerIntakeMech);
 
-    vex::task t(DisplayToController);
+   // vex::task t(DisplayToController);
 
   // User control code here, inside the loop
   while (1) {

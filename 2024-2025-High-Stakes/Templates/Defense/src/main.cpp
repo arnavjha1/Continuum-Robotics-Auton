@@ -134,7 +134,6 @@ void pre_auton(void) {
     Arm.setVelocity(50, percent);
 
     IntakePneu.set(false);
-    MogoPneu.set(false);
     HangPneu.set(false);
 
     Intake.setStopping(coast);
