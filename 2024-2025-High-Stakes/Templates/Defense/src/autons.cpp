@@ -45,7 +45,7 @@ void regular(){
   int firstRingAngle = -108;
   double secondRingBite = 36+13.75;
   double secondRingResist = 12;
-  double secondRingOverShoot = 18;
+  double secondRingOverShoot = 9;
   
   /*Auton goes here
   ArmPickup();
@@ -69,13 +69,13 @@ void regular(){
   chassis.drive_distance(secondRingBite - secondRingResist);
   wait(1, seconds);
   chassis.drive_distance(secondRingResist + secondRingOverShoot);
-  chassis.drive_distance(-1*secondRingOverShoot-1.5);
+  chassis.drive_distance(-1*secondRingOverShoot);
   chassis.turn_to_angle(0);
 
   Intake.spin(forward);
   thread(ArmUp).detach();
   wait(1, seconds);
-  chassis.drive_distance(15);
+  chassis.drive_distance(12);
 
   Arm.spinFor(forward, 400, degrees);
   chassis.drive_distance(-17.5);  /*

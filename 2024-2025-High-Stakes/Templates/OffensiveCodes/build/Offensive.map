@@ -88,6 +88,8 @@ Discarded input sections
  .ARM.exidx.text._Z15triggerHangMechv
                 0x00000000        0x8 build/src/main.o
  .group         0x00000000        0xc build/src/main.o
+ .bss.runningSkills
+                0x00000000        0x1 build/src/main.o
  .bss.current_auton_selection
                 0x00000000        0x4 build/src/main.o
  .bss.auto_started
