@@ -251,6 +251,7 @@ int DisplayToController() {
 
   while (true) {
     controller(primary).Screen.print(Intake.velocity(rpm));
+    //controller(primary).Screen.print(vex::inertial::heading());
     vex::this_thread::sleep_for(1000);
   }
 
@@ -277,7 +278,7 @@ void usercontrol(void) {
 
     controller(primary).ButtonB.pressed(triggerIntakeMech);
 
-   // vex::task t(DisplayToController);
+   vex::task t(DisplayToController);
 
   // User control code here, inside the loop
   while (1) {
