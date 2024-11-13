@@ -18,9 +18,14 @@ void odom_constants(){
   chassis.drive_settle_error = 3;
 }
 
+int LiftArm() {
+  Arm.spinFor(reverse, 0.2, turns);
+  return 0;
+}
+
 void regular(){
   //Pre-auton
-  
+  vex::task t(LiftArm);
   chassis.set_drive_constants(4, 1.5, 0, 15, 0);
   chassis.drive_distance(13);  
   chassis.turn_to_angle(-90);
@@ -67,16 +72,15 @@ void regular(){
   chassis.set_drive_constants(4, 1.5, 0, 15, 0);
   chassis.drive_distance(20);
   chassis.drive_distance(20);
-  chassis.drive_distance(25);
+  chassis.drive_distance(23);
   chassis.turn_to_angle(90);
   wait(0.2, seconds);
   chassis.set_drive_constants(2, 1.5, 0, 15, 0);
-  chassis.drive_distance(-36);
+  chassis.drive_distance(-37);
   wait(0.2, seconds);
   MogoPneu.set(true);
   wait(0.3, seconds);
   chassis.set_drive_constants(5, 1.5, 0, 15, 0);
-
 }
 
 //The following codes are test codes, avoid editing!
