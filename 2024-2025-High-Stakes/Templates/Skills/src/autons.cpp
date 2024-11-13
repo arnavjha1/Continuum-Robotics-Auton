@@ -24,7 +24,9 @@ void regular(){
   chassis.set_drive_constants(4, 1.5, 0, 15, 0);
   chassis.drive_distance(13);  
   chassis.turn_to_angle(-90);
-  chassis.drive_distance(-17);
+  chassis.drive_distance(-14);
+  chassis.set_drive_constants(2, 1.5, 0, 15, 0);
+  chassis.drive_distance(-12);
   MogoPneu.set(true);
   wait(0.3, seconds);
   Intake.spin(forward);
@@ -65,15 +67,16 @@ void regular(){
   chassis.set_drive_constants(4, 1.5, 0, 15, 0);
   chassis.drive_distance(20);
   chassis.drive_distance(20);
-  chassis.drive_distance(20);
+  chassis.drive_distance(25);
   chassis.turn_to_angle(90);
   wait(0.2, seconds);
   chassis.set_drive_constants(2, 1.5, 0, 15, 0);
-  chassis.drive_distance(-25);
+  chassis.drive_distance(-36);
   wait(0.2, seconds);
   MogoPneu.set(true);
   wait(0.3, seconds);
   chassis.set_drive_constants(5, 1.5, 0, 15, 0);
+
 }
 
 //The following codes are test codes, avoid editing!
