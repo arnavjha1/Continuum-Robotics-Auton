@@ -21,13 +21,15 @@ void odom_constants(){
 void regular(){
   //Pre-auton
   
-  chassis.drive_distance(13);
+  chassis.set_drive_constants(4, 1.5, 0, 15, 0);
+  chassis.drive_distance(13);  
   chassis.turn_to_angle(-90);
   chassis.drive_distance(-17);
   MogoPneu.set(true);
   wait(0.3, seconds);
   Intake.spin(forward);
   wait(0.3, seconds);
+  chassis.set_drive_constants(5, 1.5, 0, 15, 0);
   chassis.turn_to_angle(17);
   wait(0.2, seconds);
   chassis.drive_distance(30);
@@ -39,7 +41,7 @@ void regular(){
   chassis.turn_to_angle(180);
   wait(0.2, seconds);
   chassis.drive_distance(19);
-  wait(0.5, seconds);
+  //wait(0.5, seconds);
   chassis.drive_distance(13);  
   wait(0.2, seconds);
   chassis.drive_distance(-23);
@@ -60,11 +62,15 @@ void regular(){
   wait(0.2, seconds);
   chassis.turn_to_angle(90);
   wait(0.2, seconds);
-  chassis.set_drive_exit_conditions(0.3, 300, 10000);
-  chassis.drive_distance(-72);
+  chassis.set_drive_constants(4, 1.5, 0, 15, 0);
+  chassis.drive_distance(-20);
+  chassis.drive_distance(-20);
+  chassis.drive_distance(-20);
+  chassis.drive_distance(-12);
   wait(0.2, seconds);
   MogoPneu.set(true);
   wait(0.3, seconds);
+  chassis.set_drive_constants(5, 1.5, 0, 15, 0);
 }
 
 //The following codes are test codes, avoid editing!
