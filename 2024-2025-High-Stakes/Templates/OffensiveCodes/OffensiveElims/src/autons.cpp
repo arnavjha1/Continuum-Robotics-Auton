@@ -29,33 +29,72 @@ void regular(){
   Intake.spin(forward);
   wait(0.6, seconds);
   chassis.right_swing_to_angle(139+d);
-  chassis.drive_distance(26.3, 139+d);
-  chassis.right_swing_to_angle(89+d);
-  chassis.set_drive_constants(11, 1, 0, 10, 0);
-  chassis.drive_distance(14, 89+d);
-  wait(0.7, seconds);
-  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  chassis.drive_distance(-8.5, 89+d);
+  chassis.drive_distance(26, 139+d);
+  //chassis.right_swing_to_angle(120+d);
+  //chassis.set_drive_constants(11, 15, 0, 10, 0);
+  //chassis.drive_distance(5, 120+d);
+  //chassis.right_swing_to_angle(98+d);
+  wait(0.5, seconds);
+  //chassis.set_drive_constants(11, 20, 0, 10, 0);
+  chassis.drive_distance(-10, 139+d);
+  chassis.right_swing_to_angle(120+d);
+  chassis.drive_distance(14, 120+d);
+  wait(0.4, seconds);
   //Intake.stop();
-  chassis.right_swing_to_angle(180+d);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  chassis.drive_distance(-15.6, 120+d);
+  //chassis.right_swing_to_angle(115+d);
+  //chassis.drive_distance(-15, 115+d);
+  //chassis.right_swing_to_angle(180+d);
+  chassis.set_drive_constants(11, 15, 0, 10, 0);
   chassis.left_swing_to_angle(70+d);
   //Intake.spin(forward);
   chassis.drive_distance(19, 70+d);
   wait(1, seconds);
-  //chassis.set_drive_constants(11, 1, 0, 10, 0);
-  //chassis.drive_distance(-42, 70+d);
-  chassis.left_swing_to_angle(30+d);
-  chassis.drive_distance(40, 30+d);
+  chassis.right_swing_to_angle(30+d);
+  chassis.drive_distance(34, 30+d);
   chassis.right_swing_to_angle(0+d);
-
 }
 
 void mirrored(){
-  //Pre-auton
-  int d = matchloadangle;
-  
-  //Auton goes here
-   
+  int d = -150;
+  chassis.drive_distance(-18, 150+d);
+  chassis.set_drive_constants(11, 1, 0, 10, 0);
+  chassis.drive_distance(-2.5, 150+d);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  wait(0.1, seconds);
+  MogoPneu.set(true);
+  wait(0.2, seconds);
+  Intake.spin(forward);
+  wait(0.6, seconds);
+  chassis.right_swing_to_angle(41+d);
+  chassis.drive_distance(26, 41+d);
+  //chassis.right_swing_to_angle(120+d);
+  //chassis.set_drive_constants(11, 15, 0, 10, 0);
+  //chassis.drive_distance(5, 120+d);
+  //chassis.right_swing_to_angle(98+d);
+  wait(0.5, seconds);
+  //chassis.set_drive_constants(11, 20, 0, 10, 0);
+  chassis.drive_distance(-10, 41+d);
+  chassis.right_swing_to_angle(60+d);
+  chassis.drive_distance(14, 60+d);
+  wait(0.4, seconds);
+  //Intake.stop();
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  chassis.drive_distance(-15.6, 60+d);
+  //chassis.right_swing_to_angle(115+d);
+  //chassis.drive_distance(-15, 115+d);
+  //chassis.right_swing_to_angle(180+d);
+  chassis.set_drive_constants(11, 15, 0, 10, 0);
+  chassis.left_swing_to_angle(110+d);
+  //Intake.spin(forward);
+  chassis.drive_distance(19, 110+d);
+  wait(1.6, seconds);
+  chassis.set_drive_constants(11, 3, 0, 10, 0);
+  chassis.drive_distance(-30, 110+d);
+  chassis.right_swing_to_angle(150+d);
+  chassis.drive_distance(34, 150+d);
+  chassis.right_swing_to_angle(180+d);
 }
 
 
