@@ -55,8 +55,8 @@ void regular(){
   wait(0.2, seconds);
   chassis.turn_to_angle(140);
   wait(0.3, seconds);
-  chassis.drive_distance(10);  
-  wait(0.2, seconds);
+  chassis.drive_distance(12);  
+  wait(0.5, seconds);
   chassis.turn_to_angle(-30);
   wait(0.2, seconds);
   chassis.drive_distance(-15);
@@ -65,7 +65,7 @@ void regular(){
   Intake.stop();
   MogoPneu.set(false);
   wait(0.2, seconds);
-  chassis.drive_distance(6);
+  chassis.drive_distance(10);
   wait(0.2, seconds);
   chassis.turn_to_angle(-90);
   wait(0.2, seconds);
@@ -86,21 +86,41 @@ void regular(){
   wait(0.2, seconds);
   chassis.drive_distance(30);
   wait(0.2, seconds);
-  chassis.turn_to_angle(-55);
+  chassis.turn_to_angle(-52);
   wait(0.2, seconds);
   chassis.drive_distance(20);
   chassis.drive_distance(20);
   wait(0.2, seconds);
-  chassis.drive_distance(-10);
+  chassis.drive_distance(-12);
   wait(0.2, seconds);
   chassis.turn_to_angle(180);
   wait(0.2, seconds);
-  chassis.drive_distance(25);
-  chassis.drive_distance(25);
   chassis.drive_distance(20);
+  wait(0.3, seconds);
+  chassis.drive_distance(15);
+  wait(0.3, seconds);
+  chassis.drive_distance(15);
+  wait(1, seconds);
+  chassis.drive_distance(-15);
+  chassis.drive_distance(-10);
   wait(0.2, seconds);
-
+  chassis.turn_to_angle(-145);
+  wait(0.2, seconds);
+  chassis.drive_distance(20);
+  wait(0.5, seconds);
+  chassis.drive_distance(-5);
+  wait(0.5, seconds);
+  chassis.turn_to_angle(-90);
+  wait(0.2, seconds);
+  chassis.turn_to_angle(30);
+  wait(0.2, seconds);
+  chassis.drive_distance(-10);
+  wait(0.5, seconds);
+  Intake.spinFor(reverse, 2, turns, false);
+  wait(0.2, seconds);
   Intake.stop();
+  MogoPneu.set(false);
+  wait(0.2, seconds);
 }
 
 //The following codes are test codes, avoid editing!
