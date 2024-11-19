@@ -154,10 +154,13 @@ void pre_auton(void) {
     RightBack.setVelocity(100, percent);
     Right6th.setVelocity(100, percent);
     Intake.setVelocity(100.0, percent);
+
+    ArmRotation.resetPosition();    
   }
 
 void autonomous(void) {
-  regular();  
+  Regular();
+  //Auton26Points(); 
 }
 
 /*---------------------------------------------------------------------------*/
@@ -251,7 +254,8 @@ int DisplayToController() {
 
   while (true) {
     //controller(primary).Screen.print(Intake.velocity(rpm));
-    controller(primary).Screen.print(chassis.get_absolute_heading());
+    //controller(primary).Screen.print(chassis.get_absolute_heading());
+    controller(primary).Screen.print(ArmRotation.angle(degrees));
     vex::this_thread::sleep_for(1000);
   }
 
