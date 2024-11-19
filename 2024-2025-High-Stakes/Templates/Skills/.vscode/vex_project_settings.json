@@ -4,9 +4,9 @@
 		"slot": 1,
 		"description": "Skills V5 C++ Project",
 		"platform": "V5",
-		"creationDate": "Sun, 20 Oct 2024 22:37:53 GMT",
+		"creationDate": "Tue, 19 Nov 2024 04:24:26 GMT",
 		"language": "cpp",
-		"sdkVersion": "V5_20240223_11_00_00",
+		"sdkVersion": "V5_20240802_15_00_00",
 		"cpp": {
 			"includePath": []
 		}
