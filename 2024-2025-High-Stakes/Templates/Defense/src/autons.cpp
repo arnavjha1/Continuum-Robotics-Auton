@@ -2,6 +2,18 @@
 int matchloadangle = 45;
 int m = 1;
 
+void alter(){
+  m = 0 - m;
+  if(m < 0){
+    controller(primary).Screen.setCursor(0, 0);
+    controller(primary).Screen.print("Blue - Mirrored");
+  }
+  else{
+    controller(primary).Screen.setCursor(0, 0);
+    controller(primary).Screen.print("Red - Regulated");
+  }
+}
+
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
@@ -40,15 +52,14 @@ void ArmDown(){
   Arm.spin(forward);
 }
 void ArmUp(){
-  Arm.spinFor(reverse, 400, degrees);  
-  Intake.spin(forward);
+  Arm.spinFor(reverse, 150, degrees);  
 }
 void regular(){
   //Pre-auton
   int d = matchloadangle;
   int firstRingAngle = -108;
-  double secondRingBite = 36+13.75+1.25;
-  double secondRingResist = 7;
+  double secondRingBite = 50.375+7.5;
+  double secondRingResist = 9;
 
   /*Auton goes here
   ArmPickup();
@@ -59,18 +70,25 @@ void regular(){
   chassis.turn_to_angle(-30*m);
   chassis.drive_distance(-14.5);
 
-  MogoPneu.set(true);
+  MogoPneu.set(true);/*
+  Intake.spin(forward);
   wait(0.2, seconds);
   chassis.turn_to_angle(firstRingAngle*m);
+
   chassis.drive_distance(16.25);
-
   wait(1, seconds);
-  chassis.turn_to_angle(63.5*m);
+  chassis.turn_to_angle(66*m);
   IntakePneu.set(true);
-  thread(macroArm).detach();
-
+  
+  Intake.spin(forward);
   chassis.drive_distance(secondRingBite - secondRingResist);
-  thread(ArmDown).detach();
+  wait(1, seconds);
+  chassis.drive_distance(secondRingResist - secondRingBite + 13);
+
+  thread(ArmUp).detach();
+  chassis.turn_to_angle(135*m);
+  chassis.drive_distance(15);
+  /*thread(ArmDown).detach();
   wait(1, seconds);
   chassis.right_swing_to_angle(0);
 
@@ -111,7 +129,7 @@ void regular(){
 }
 
 void mirrored(){
-  //Pre-auton
+  /*Pre-auton
   int d = matchloadangle;
   
   //Auton goes here

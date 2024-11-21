@@ -5,6 +5,7 @@ class Drive;
 
 extern Drive chassis;
 
+void alter();
 void default_constants();
 
 void ArmPickup();
