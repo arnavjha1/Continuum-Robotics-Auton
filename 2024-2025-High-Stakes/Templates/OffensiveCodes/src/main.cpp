@@ -131,7 +131,7 @@ int exit_condition=0;
 bool auto_started = false;
 void alter(){
   current_auton_selection = 1 - current_auton_selection;
-  if(current_auton_selection == 0){
+  if(current_auton_selection == 1){
     controller(primary).Screen.setCursor(0, 0);
     controller(primary).Screen.print("Blue - Mirrored");
   }
