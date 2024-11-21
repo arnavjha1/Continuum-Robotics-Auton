@@ -1,17 +1,6 @@
 #include "vex.h"
 int matchloadangle = -30;
-int m=1;
-void alter(){
-  m = 0 - m;
-  if(m < 0){
-    controller(primary).Screen.setCursor(0, 0);
-    controller(primary).Screen.print("Blue - Mirrored");
-  }
-  else{
-    controller(primary).Screen.setCursor(0, 0);
-    controller(primary).Screen.print("Red - Regulated");
-  }
-}
+
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);

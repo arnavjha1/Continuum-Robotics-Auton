@@ -129,6 +129,17 @@ motor_group Drivetrain = motor_group(LeftBack, LeftFront, RightFront, RightBack,
 int current_auton_selection = 0;
 int exit_condition=0;
 bool auto_started = false;
+void alter(){
+  current_auton_selection = 1 - current_auton_selection;
+  if(current_auton_selection == 0){
+    controller(primary).Screen.setCursor(0, 0);
+    controller(primary).Screen.print("Blue - Mirrored");
+  }
+  else{
+    controller(primary).Screen.setCursor(0, 0);
+    controller(primary).Screen.print("Red - Regulated");
+  }
+}
 
 void pre_auton(void) {
     //DO NOT REMOVE THE FOLLOWING TWO FUNCTIONS! The entire code will break!
