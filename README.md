@@ -17,7 +17,7 @@ User contributions:
 - Developed a reliable PID that would be used for the next 2 years, inspiration taken from 2775V's online youtube tutorials, and equipping it to match the new standards of the robot that would be used for competition, for both Over Under and High Stakes, this PID served as an extremely reliable method for driving and turning, proving to be both durable and precise
 
 ### Anshul Raghav:
-- Made defensive code, reliably collecting AWPs every single run, putting our team at an advantage during matches with both consistency, effectivity, and preciseness
+- Made defensive code, reliably collecting AWPs every single run, putting our team at an advantage during matches with both consistency, effectivity, and preciseness, code did not use PID
 
 ### Driving
 Files will be uploaded here in python inside `tank.py` and `splitArcade.py`

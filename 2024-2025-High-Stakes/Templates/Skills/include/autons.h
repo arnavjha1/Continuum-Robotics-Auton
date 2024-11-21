@@ -7,7 +7,8 @@ extern Drive chassis;
 
 void default_constants();
 
-void regular();
+void Regular();
+void Auton26Points();
 void mirrored();
 void macro();
 void subMacro();
