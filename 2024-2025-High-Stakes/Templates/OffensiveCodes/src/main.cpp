@@ -134,15 +134,15 @@ void pre_auton(void) {
     //DO NOT REMOVE THE FOLLOWING TWO FUNCTIONS! The entire code will break!
     vexcodeInit();
     default_constants();
-    if(LimitSwitchC.pressing()){
-      current_auton_selection = 1-current_auton_selection;
-    }
-    if(current_auton_selection==0){
-      controller(primary).Screen.print("Red Side");
-    }
-    else if(current_auton_selection==1){
-      controller(primary).Screen.print("Blue Side");
-    }
+      // if(LimitSwitchC.pressing()){
+      //   current_auton_selection = 1-current_auton_selection;
+      // }
+      // if(current_auton_selection==0){
+      //   controller(primary).Screen.print("Red Side");
+      // }
+      // else if(current_auton_selection==1){
+      //   controller(primary).Screen.print("Blue Side");
+      // }
 
     Drivetrain.setStopping(coast);
     Inertial13.calibrate();
