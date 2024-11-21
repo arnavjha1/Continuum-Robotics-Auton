@@ -1,6 +1,17 @@
 #include "vex.h"
 int matchloadangle = -30;
-
+int m=1;
+void alter(){
+  m = 0 - m;
+  if(m < 0){
+    controller(primary).Screen.setCursor(0, 0);
+    controller(primary).Screen.print("Blue - Mirrored");
+  }
+  else{
+    controller(primary).Screen.setCursor(0, 0);
+    controller(primary).Screen.print("Red - Regulated");
+  }
+}
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
@@ -17,7 +28,7 @@ void odom_constants(){
   chassis.drive_settle_error = 3;
 }
 
-void mirrored(){
+void regular(){
   int d = matchloadangle;
   chassis.drive_distance(-19, 30+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
@@ -55,7 +66,7 @@ void mirrored(){
   chassis.drive_distance(-40, 70+d);
 }
 
-void regular(){
+void mirrored(){
   int d = -150;
   chassis.drive_distance(-19, 150+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
