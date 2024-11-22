@@ -125,7 +125,6 @@ PORT3,     -PORT4,
 //Automatic Drivetrain Selector
 motor_group Drivetrain = motor_group(LeftBack, LeftFront, RightFront, RightBack, Right6th, Left6th);
 
-int current_auton_selection = 0;
 int exit_condition=0;
 bool auto_started = false;
 
@@ -133,15 +132,15 @@ void pre_auton(void) {
     //DO NOT REMOVE THE FOLLOWING TWO FUNCTIONS! The entire code will break!
     vexcodeInit();
     default_constants();
-    if(LimitSwitchC.pressing()){
-      current_auton_selection = 1-current_auton_selection;
-    }
-    if(current_auton_selection==0){
-      controller(primary).Screen.print("Red Side");
-    }
-    else if(current_auton_selection==1){
-      controller(primary).Screen.print("Blue Side");
-    }
+      // if(LimitSwitchC.pressing()){
+      //   current_auton_selection = 1-current_auton_selection;
+      // }
+      // if(current_auton_selection==0){
+      //   controller(primary).Screen.print("Red Side");
+      // }
+      // else if(current_auton_selection==1){
+      //   controller(primary).Screen.print("Blue Side");
+      // }
 
     Drivetrain.setStopping(coast);
     Inertial13.calibrate();
@@ -174,12 +173,7 @@ void pre_auton(void) {
   }
 
 void autonomous(void) {
-  if(current_auton_selection == 0){
-    regular();
-  }
-  else if(current_auton_selection == 1){
-    mirrored();
-  }  
+  regular();
 }
 
 /*---------------------------------------------------------------------------*/
