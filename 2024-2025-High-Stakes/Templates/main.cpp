@@ -1,6 +1,5 @@
 #include "vex.h"
 bool runningSkills = false;
-bool allowLimitSwitch = true;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -155,10 +154,13 @@ void pre_auton(void) {
     RightBack.setVelocity(100, percent);
     Right6th.setVelocity(100, percent);
     Intake.setVelocity(100.0, percent);
+
+    ArmRotation.resetPosition();    
   }
 
 void autonomous(void) {
-  regular();  
+  Regular();
+  //Auton26Points(); 
 }
 
 /*---------------------------------------------------------------------------*/
@@ -251,7 +253,9 @@ void stopArm() {
 int DisplayToController() {
 
   while (true) {
-    controller(primary).Screen.print(Intake.velocity(rpm));
+    //controller(primary).Screen.print(Intake.velocity(rpm));
+    //controller(primary).Screen.print(chassis.get_absolute_heading());
+    controller(primary).Screen.print(ArmRotation.angle(degrees));
     vex::this_thread::sleep_for(1000);
   }
 
@@ -278,8 +282,6 @@ void usercontrol(void) {
 
     controller(primary).ButtonB.pressed(triggerIntakeMech);
 
-   // vex::task t(DisplayToController);
-
   // User control code here, inside the loop
   while (1) {
     // This is the main execution loop for the user control program.
@@ -304,6 +306,9 @@ void usercontrol(void) {
 // Main will set up the competition functions and callbacks.
 //
 int main() {
+
+  vex::task t(DisplayToController);
+
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);

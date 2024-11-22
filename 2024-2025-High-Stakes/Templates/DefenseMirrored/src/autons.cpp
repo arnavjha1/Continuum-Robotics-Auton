@@ -1,6 +1,6 @@
 #include "vex.h"
 int matchloadangle = 45;
-int m = 1;
+int m = -1;
 
 void alter(){
   m = 0 - m;
