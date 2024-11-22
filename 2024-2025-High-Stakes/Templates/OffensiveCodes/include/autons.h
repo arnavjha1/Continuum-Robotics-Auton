@@ -7,7 +7,6 @@ extern Drive chassis;
 
 void default_constants();
 
-void alter();
 void regular();
 void mirrored();
 void swing_test();

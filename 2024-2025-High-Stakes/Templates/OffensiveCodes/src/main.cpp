@@ -1,6 +1,5 @@
 #include "vex.h"
 bool runningSkills = false;
-bool allowLimitSwitch=true;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -126,20 +125,8 @@ PORT3,     -PORT4,
 //Automatic Drivetrain Selector
 motor_group Drivetrain = motor_group(LeftBack, LeftFront, RightFront, RightBack, Right6th, Left6th);
 
-int current_auton_selection = 0;
 int exit_condition=0;
 bool auto_started = false;
-void alter(){
-  current_auton_selection = 1 - current_auton_selection;
-  if(current_auton_selection == 1){
-    controller(primary).Screen.setCursor(0, 0);
-    controller(primary).Screen.print("Blue - Mirrored");
-  }
-  else{
-    controller(primary).Screen.setCursor(0, 0);
-    controller(primary).Screen.print("Red - Regulated");
-  }
-}
 
 void pre_auton(void) {
     //DO NOT REMOVE THE FOLLOWING TWO FUNCTIONS! The entire code will break!
@@ -183,18 +170,10 @@ void pre_auton(void) {
     RightBack.setVelocity(100, percent);
     Right6th.setVelocity(100, percent);
     Intake.setVelocity(100.0, percent);
-    while(allowLimitSwitch){
-      LimitSwitchC.pressed(alter);
-    }
   }
 
 void autonomous(void) {
-  if(current_auton_selection == 0){
-    regular();
-  }
-  else if(current_auton_selection == 1){
-    mirrored();
-  }  
+  regular();
 }
 
 /*---------------------------------------------------------------------------*/

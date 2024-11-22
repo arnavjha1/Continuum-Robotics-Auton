@@ -17,7 +17,7 @@ void odom_constants(){
   chassis.drive_settle_error = 3;
 }
 
-void regular(){
+void mirrored(){
   int d = matchloadangle;
   chassis.drive_distance(-19, 30+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
@@ -55,7 +55,7 @@ void regular(){
   chassis.drive_distance(-40, 70+d);
 }
 
-void mirrored(){
+void regular(){
   int d = -150;
   chassis.drive_distance(-19, 150+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
