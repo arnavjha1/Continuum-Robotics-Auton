@@ -155,7 +155,7 @@ void Auton26Points(){
   wait(0.3, seconds);
   chassis.drive_distance(12);  
   wait(0.5, seconds);
-  chassis.turn_to_angle(-30);
+  chassis.turn_to_angle(-10);
   wait(0.2, seconds);
   chassis.drive_distance(-15);
   Intake.spinFor(reverse, 2, turns, false);
@@ -163,18 +163,18 @@ void Auton26Points(){
   Intake.stop();
   MogoPneu.set(false);
   wait(0.2, seconds);
-  chassis.drive_distance(10);
+  chassis.drive_distance(7.5);
   wait(0.2, seconds);
   chassis.turn_to_angle(-90);
   wait(0.2, seconds);
   chassis.set_drive_constants(4, 1.5, 0, 15, 0);
   chassis.drive_distance(20);
   chassis.drive_distance(20);
-  chassis.drive_distance(23);
+  chassis.drive_distance(21);
   chassis.turn_to_angle(90);
   wait(0.2, seconds);
   chassis.set_drive_constants(2, 1.5, 0, 15, 0);
-  chassis.drive_distance(-42);
+  chassis.drive_distance(-44);
   wait(0.2, seconds);
   MogoPneu.set(true);
   wait(0.3, seconds);
@@ -256,13 +256,4 @@ void tank_odom_test(){
   chassis.drive_to_point(24,24);
   chassis.drive_to_point(0,0);
   chassis.turn_to_angle(0);
-}
-
-void holonomic_odom_test(){
-  odom_constants();
-  chassis.set_coordinates(0, 0, 0);
-  chassis.holonomic_drive_to_point(0, 18, 90);
-  chassis.holonomic_drive_to_point(18, 0, 180);
-  chassis.holonomic_drive_to_point(0, 18, 270);
-  chassis.holonomic_drive_to_point(0, 0, 0);
 }

@@ -263,6 +263,8 @@ int DisplayToController() {
 
 void usercontrol(void) {
 
+    MogoPneu.set(true);
+
     Arm.setStopping(brake);
     Drivetrain.setStopping(coast);
 
