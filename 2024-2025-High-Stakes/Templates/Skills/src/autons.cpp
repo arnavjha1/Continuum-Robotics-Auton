@@ -3,7 +3,7 @@ int matchloadangle = 0;
 int m = 1;
 
 void default_constants(){
-  chassis.set_drive_constants(5, 1.5, 0, 15, 0);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
   chassis.set_turn_constants(12, .4, .03, 3, 15);
   chassis.set_swing_constants(12, .3, .001, 2, 15);
@@ -24,9 +24,8 @@ int LiftArm() {
 }
 
 void SpedUp(){
-  chassis.set_turn_constants(12, 0.4, 0.03, 3, 15);
-  chassis.set_turn_exit_conditions(1.5, 0.5, 1.5);
-  chassis.turn_to_angle(90);
+  default_constants();
+  chassis.drive_distance(2);
 }
 
 void Auton26Points(){
