@@ -27,7 +27,7 @@ void default_constants(){
 void odom_constants(){
   default_constants();
   chassis.drive_max_voltage = 8;
-  chassis.drive_settle_error = 3;
+  chassis.drive_settle_error = 0;
 }
 
 void ArmPickup(){
@@ -55,7 +55,49 @@ void ArmUp(){
   Arm.spinFor(reverse, 225, degrees);  
 }
 void regular(){
-  //Pre-auton
+  //
+
+  chassis.arm_to_angle(200);
+  chassis.arm_to_angle(200);
+  /*
+  Arm.spinFor(reverse, 325, degrees);
+  chassis.drive_distance(10.5);
+  Arm.spinFor(forward, 175, degrees);
+  chassis.drive_distance(-12.5-7.5);
+  
+  chassis.left_swing_to_angle(-30);
+  chassis.right_swing_to_angle(0);
+  chassis.set_drive_constants(6, 1.5, 0, 10, 0);
+  chassis.drive_distance(-8);
+  /*chassis.drive_distance(-8.75);
+  chassis.turn_to_angle(0);
+  chassis.drive_distance(-7-1.5);
+
+  MogoPneu.set(true);
+  wait(0.4, seconds);
+  chassis.turn_to_angle(-131);
+  Intake.spin(forward);
+
+  double resist = 4.0;
+  chassis.drive_distance(27 - resist);
+  wait(0.6, seconds);
+  chassis.drive_distance(11 - 27 + resist);
+
+  chassis.turn_to_angle(105);
+  chassis.drive_distance(20);
+
+  
+  /*wait(0.3, seconds);
+  chassis.turn_to_angle(-190);
+  Intake.spin(forward);
+
+  double firstRingDist = 21.75 - 4;
+  chassis.drive_distance(firstRingDist);
+  chassis.drive_distance(11 - firstRingDist);
+  chassis.turn_to_angle(105);
+
+  chassis.drive_distance(24 - 7.5);
+  /*Pre-auton
   int d = matchloadangle;
   double firstMogoError = 0.0825;
   int firstRingAngle = -112;
@@ -65,7 +107,7 @@ void regular(){
   /*Auton goes here
   ArmPickup();
   
-  /*Add arm placement of preload here*/
+  /*Add arm placement of preload here
   chassis.set_drive_constants(7, 1.5, 0, 10, 0);
   thread(ArmUp).detach();
   chassis.drive_distance(-10+firstMogoError*1.73205081);
@@ -211,7 +253,7 @@ void odom_test(){
   }
 }
 
-void tank_odom_test(){
+void reglar/*tank_odom_test*/(){
   odom_constants();
   chassis.set_coordinates(0, 0, 0);
   chassis.turn_to_point(24, 24);

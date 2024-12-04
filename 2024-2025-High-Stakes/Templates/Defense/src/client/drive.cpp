@@ -448,6 +448,26 @@ void Drive::turn_left(int desiredValue, double timeOut = 1.0) {
   DriveR.stop();
 }
 
+void Drive::arm_to_angle(double desiredValue){
+  double kP = 2.0;
+  double settleError = 1.0;
+
+  Arm.spin(forward);
+  if(desiredValue > Rotation.angle()){
+    while(desiredValue > Rotation.angle() + settleError){
+      double error = desiredValue - Rotation.angle();
+      Arm.setVelocity(-1 * error * kP, percent);
+    }
+  }
+  else{
+    while(Rotation.angle() > desiredValue + settleError){
+      double error = desiredValue - Rotation.angle();
+      Arm.setVelocity(error * kP, percent);
+    }
+  }
+  Arm.stop();
+}
+
 void Drive::control_arcade(){
   float throttle = deadband(controller(primary).Axis3.value(), 5);
   float turn = deadband(controller(primary).Axis1.value(), 5);
