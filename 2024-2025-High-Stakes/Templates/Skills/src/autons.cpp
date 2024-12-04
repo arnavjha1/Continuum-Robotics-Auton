@@ -25,7 +25,16 @@ int LiftArm() {
 
 void SpedUp(){
   default_constants();
-  chassis.drive_distance(2);
+  while (ArmRotation.angle(degrees) < 60) {
+    Arm.spin(reverse);
+  }
+  Arm.stop();
+  chassis.drive_distance(6);
+  while (ArmRotation.angle(degrees) > 20) {
+    Arm.spin(forward);
+  }
+  Arm.stop();
+  chassis.drive_distance(-15);
 }
 
 void Auton26Points(){
