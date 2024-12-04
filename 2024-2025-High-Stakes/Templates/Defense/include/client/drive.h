@@ -102,6 +102,7 @@ public:
 
   void turn_right(int desiredValue, double timeout);
   void turn_left(int desiredValue, double timeout);
+  void arm_to_angle(double desiredAngle);
   void left_swing_to_angle(float angle);
   void left_swing_to_angle(float angle, float swing_max_voltage, float swing_settle_error, float swing_settle_time, float swing_timeout, float swing_kp, float swing_ki, float swing_kd, float swing_starti);
   void right_swing_to_angle(float angle);

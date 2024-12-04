@@ -55,6 +55,11 @@ void ArmUp(){
   Arm.spinFor(reverse, 225, degrees);  
 }
 void regular(){
+  //
+
+  chassis.arm_to_angle(200);
+  chassis.arm_to_angle(200);
+  /*
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
   Arm.spinFor(forward, 175, degrees);
