@@ -155,11 +155,13 @@ void pre_auton(void) {
     Right6th.setVelocity(100, percent);
     Intake.setVelocity(100.0, percent);
 
-    ArmRotation.resetPosition();    
+    ArmRotation.setReversed(true);
+    ArmRotation.resetPosition();
+
   }
 
 void autonomous(void) {
-  Regular();
+  SpedUp();
   //Auton26Points(); 
 }
 
@@ -179,10 +181,12 @@ void loadArm() {
 
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
+      Intake.setVelocity(50, percent);
       Intake.spinFor(reverse, 12, turns);
       break;
     }
     else  {
+      Intake.setVelocity(100, percent);
       Intake.spin(forward);
     }
 
@@ -191,10 +195,12 @@ void loadArm() {
 }
 
 void spinIntakeForward() {
+  Intake.setVelocity(100, percent);
   Intake.spin(forward);
 }
 
 void spinIntakeReverse() {
+  Intake.setVelocity(100, percent);
   Intake.spin(reverse);
 }
 
@@ -263,6 +269,8 @@ int DisplayToController() {
 
 void usercontrol(void) {
 
+    MogoPneu.set(true);
+
     Arm.setStopping(brake);
     Drivetrain.setStopping(coast);
 
@@ -280,7 +288,7 @@ void usercontrol(void) {
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
-    controller(primary).ButtonB.pressed(triggerIntakeMech);
+    controller(primary).ButtonB.pressed(triggerIntakeMech);    
 
   // User control code here, inside the loop
   while (1) {
