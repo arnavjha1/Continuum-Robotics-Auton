@@ -7,7 +7,7 @@ void default_constants(){
   chassis.set_heading_constants(6, .4, 0, 1, 0);
   chassis.set_turn_constants(12, .4, .03, 3, 15);
   chassis.set_swing_constants(12, .3, .001, 2, 15);
-  chassis.set_drive_exit_conditions(0.3, 300, 1000);
+  chassis.set_drive_exit_conditions(1, 300, 5000);
   chassis.set_turn_exit_conditions(1, 300, 1800);
   chassis.set_swing_exit_conditions(1, 300, 1000);
 }
@@ -25,16 +25,16 @@ int LiftArm() {
 
 void SpedUp(){
   default_constants();
-  while (ArmRotation.angle(degrees) < 60) {
-    Arm.spin(reverse);
-  }
+  chassis.set_heading(180);
+  chassis.arm_to_angle(60);
+  chassis.drive_distance(6.5);
+  chassis.arm_to_angle(20);
   Arm.stop();
-  chassis.drive_distance(6);
-  while (ArmRotation.angle(degrees) > 20) {
-    Arm.spin(forward);
-  }
-  Arm.stop();
-  chassis.drive_distance(-15);
+  chassis.drive_distance(-11.5);
+  chassis.turn_to_angle(270);
+  chassis.set_drive_constants(3, 1.5, 0, 10, 0);
+  chassis.drive_distance(-25);
+  MogoPneu.set(true);
 }
 
 void Auton26Points(){
