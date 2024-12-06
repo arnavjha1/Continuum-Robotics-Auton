@@ -449,23 +449,16 @@ void Drive::turn_left(int desiredValue, double timeOut = 1.0) {
 }
 
 void Drive::arm_to_angle(double desiredValue){
-  double kP = 2.0;
-  double settleError = 1.0;
-
-  Arm.spin(forward);
-  if(desiredValue > Rotation.angle()){
-    while(desiredValue > Rotation.angle() + settleError){
-      double error = desiredValue - Rotation.angle();
-      Arm.setVelocity(-1 * error * kP, percent);
-    }
+  if(desiredValue < Rotation.angle()){
+    Arm.spin(reverse);
+    waitUntil(desiredValue > Rotation.angle());
+    Arm.stop();
   }
-  else{
-    while(Rotation.angle() > desiredValue + settleError){
-      double error = desiredValue - Rotation.angle();
-      Arm.setVelocity(error * kP, percent);
-    }
+  else{  
+    Arm.spin(forward);
+    waitUntil(desiredValue < Rotation.angle());
+    Arm.stop();
   }
-  Arm.stop();
 }
 
 void Drive::control_arcade(){

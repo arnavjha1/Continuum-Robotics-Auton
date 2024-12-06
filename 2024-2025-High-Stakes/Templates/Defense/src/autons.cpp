@@ -48,21 +48,36 @@ void ArmPickup(){
   Intake.stop();
 }
 void ArmDown(){
-  //wait(0.5, seconds);
-  Arm.spin(forward);
+  MogoPneu.set(true);
 }
 void ArmUp(){
-  Arm.spinFor(reverse, 225, degrees);  
+  chassis.left_swing_to_angle(3.5);
 }
 void regular(){
-  //
-
-  chassis.arm_to_angle(200);
-  chassis.arm_to_angle(200);
-  /*
+  thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
   Arm.spinFor(forward, 175, degrees);
+
+  chassis.left_swing_to_angle(-4.5);
+  chassis.set_drive_constants(11, 0.5, 0, 10, 0);
+  chassis.drive_distance(-36);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+
+  thread(ArmDown).detach();
+  chassis.drive_distance(-2);
+  chassis.turn_to_angle(-136);
+  Intake.spin(forward);
+
+  chassis.drive_distance(24);
+  wait(0.4, seconds);
+
+  /*
+  Arm.spinFor(reverse, 100, degrees);
+  chassis.left_swing_to_angle(105);
+  chassis.drive_distance(25);
+
+  /*
   chassis.drive_distance(-12.5-7.5);
   
   chassis.left_swing_to_angle(-30);
