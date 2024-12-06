@@ -63,6 +63,25 @@ int SidewaysTracker_port, float SidewaysTracker_diameter, float SidewaysTracker_
     }
 }
 
+void Drive::arm_to_angle(double desiredValue){
+  double kP = 2.0;
+  double settleError = 1.0;
+  Arm.spin(forward);
+  if(desiredValue > ArmRotation.angle()){
+    while(desiredValue > ArmRotation.angle() + settleError){
+      double error = desiredValue - ArmRotation.angle();
+      Arm.setVelocity(-1 * error * kP, percent);
+    }
+  }
+  else{
+    while(ArmRotation.angle() > desiredValue + settleError){
+      double error = ArmRotation.angle()-desiredValue;
+      Arm.setVelocity(error * kP, percent);
+    }
+  }
+  Arm.stop();
+}
+
 /**
  * Drives each side of the chassis at the specified voltage.
  * 
