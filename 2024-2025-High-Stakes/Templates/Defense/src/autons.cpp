@@ -78,13 +78,13 @@ void regular(){
   //Doinker down
   chassis.turn_to_angle(76.75);
   //Doinker up
-  chassis.turn_to_angle(60);
+  chassis.turn_to_angle(65);
 
   Intake.spin(forward);
   chassis.drive_distance(11.5);
-  chassis.right_swing_to_angle(165);
+  chassis.right_swing_to_angle(150);
   Arm.spinFor(reverse, 100, degrees);
-  chassis.drive_distance(25);
+  chassis.drive_distance(30);
   /*
   Arm.spinFor(reverse, 100, degrees);
   chassis.left_swing_to_angle(105);
