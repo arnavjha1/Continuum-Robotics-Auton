@@ -66,12 +66,25 @@ void regular(){
 
   thread(ArmDown).detach();
   chassis.drive_distance(-2);
+  chassis.set_drive_exit_conditions(0.3, 0, 1000);
   chassis.turn_to_angle(-136);
   Intake.spin(forward);
 
   chassis.drive_distance(24);
   wait(0.4, seconds);
+  chassis.turn_to_angle(30);
+  chassis.drive_distance(31.5);
 
+  //Doinker down
+  chassis.turn_to_angle(76.75);
+  //Doinker up
+  chassis.turn_to_angle(60);
+
+  Intake.spin(forward);
+  chassis.drive_distance(11.5);
+  chassis.right_swing_to_angle(165);
+  Arm.spinFor(reverse, 100, degrees);
+  chassis.drive_distance(25);
   /*
   Arm.spinFor(reverse, 100, degrees);
   chassis.left_swing_to_angle(105);
