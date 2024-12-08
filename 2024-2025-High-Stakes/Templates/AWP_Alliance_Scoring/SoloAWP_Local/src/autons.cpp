@@ -65,15 +65,15 @@ void regular(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
 
   thread(ArmDown).detach();
-  chassis.drive_distance(-2);/*
+  chassis.drive_distance(-2);
   chassis.set_drive_exit_conditions(0.3, 0, 1000);
-  chassis.turn_to_angle(-136);
+  chassis.turn_to_angle(-134);
   Intake.spin(forward);
 
   chassis.drive_distance(24);
   wait(0.4, seconds);
-  chassis.turn_to_angle(30);
-  chassis.drive_distance(31.5);
+  chassis.turn_to_angle(34);
+  chassis.drive_distance(31.125);
 
   //Doinker down
   chassis.turn_to_angle(76.75);
