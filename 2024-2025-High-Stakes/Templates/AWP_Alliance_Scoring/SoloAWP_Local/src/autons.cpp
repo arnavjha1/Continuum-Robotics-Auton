@@ -84,7 +84,7 @@ void regular(){
   chassis.drive_distance(11.5);
   chassis.right_swing_to_angle(150);
   Arm.spinFor(reverse, 100, degrees);
-  chassis.drive_distance(30);
+  chassis.drive_distance(18);
   /*
   Arm.spinFor(reverse, 100, degrees);
   chassis.left_swing_to_angle(105);
