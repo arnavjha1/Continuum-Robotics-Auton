@@ -30,7 +30,7 @@ void odom_constants(){
   chassis.drive_settle_error = 0;
 }
 
-void ArmPickup(){
+void ArmPickup(){/*
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
   wait(0.7, seconds);
@@ -40,12 +40,13 @@ void ArmPickup(){
   }
   else{
     waitUntil(DiscSensor.hue() > 180 || DiscSensor.hue() < 250);
-  }*/
+  }*//*
   wait(0.188, seconds);
   Intake.setVelocity(100, percent);
   Intake.spin(reverse);
   wait(1, seconds);
-  Intake.stop();
+  Intake.stop();*/
+  Arm.spinFor(reverse, 100, degrees);
 }
 void ArmDown(){
   MogoPneu.set(true);
@@ -67,13 +68,13 @@ void regular(){
   thread(ArmDown).detach();
   chassis.drive_distance(-2);
   chassis.set_drive_exit_conditions(0.3, 0, 1000);
-  chassis.turn_to_angle(-136);
+  chassis.turn_to_angle(-136 + 4);
   Intake.spin(forward);
 
   chassis.drive_distance(24);
   wait(0.4, seconds);
   chassis.turn_to_angle(30);
-  chassis.drive_distance(31.5);
+  chassis.drive_distance(33);
 
   //Doinker down
   chassis.turn_to_angle(76.75);
@@ -81,9 +82,24 @@ void regular(){
   chassis.turn_to_angle(65);
 
   Intake.spin(forward);
-  chassis.drive_distance(11.5);
-  chassis.right_swing_to_angle(150);
-  Arm.spinFor(reverse, 100, degrees);
+  chassis.drive_distance(11.5 + 24, 60);
+  Intake.stop();
+  MogoPneu.set(false);
+
+  chassis.turn_to_angle(-30);
+  chassis.set_drive_constants(11, 0.4, 0, 10, 0);
+  chassis.drive_distance(-13.75);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+
+  thread(ArmDown).detach();
+  chassis.drive_distance(-2);
+  MogoPneu.set(true);
+  chassis.turn_to_angle(60);
+  
+  Intake.spin(forward);
+  chassis.drive_distance(19);
+  thread(ArmPickup).detach();
+  chassis.turn_to_angle(205);
   chassis.drive_distance(18);
   /*
   Arm.spinFor(reverse, 100, degrees);
