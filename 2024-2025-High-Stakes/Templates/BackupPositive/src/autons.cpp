@@ -18,8 +18,9 @@ void odom_constants(){
 }
 
 void regular(){
+  wait(2, seconds);
   int d = matchloadangle;
-  chassis.drive_distance(-8, 30+d);
+  chassis.drive_distance(-19, 30+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
   chassis.drive_distance(-2.5, 30+d);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -46,7 +47,7 @@ void regular(){
   //chassis.right_swing_to_angle(115+d);
   //chassis.drive_distance(-15, 115+d);
   //chassis.right_swing_to_angle(180+d);
-  chassis.set_drive_constants(11, 0.1, 0, 10, 0);
+  chassis.set_drive_constants(11, 15, 0, 10, 0);
   chassis.left_swing_to_angle(70+d);
   //Intake.spin(forward);
   chassis.drive_distance(19, 70+d);
@@ -56,7 +57,6 @@ void regular(){
 }
 
 void mirrored(){
-  //wait(2, seconds);
   int d = -150;
   chassis.drive_distance(-19, 150+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
