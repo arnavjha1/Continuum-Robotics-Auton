@@ -183,6 +183,7 @@ void loadArm() {
     if (DistSensor.objectDistance(inches) < 1) {
       Intake.setVelocity(50, percent);
       Intake.spinFor(reverse, 12, turns);
+      Intake.setVelocity(100, percent);
       break;
     }
     else  {
