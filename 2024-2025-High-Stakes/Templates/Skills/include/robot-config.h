@@ -10,7 +10,7 @@ extern motor RightBack;
 extern motor Left6th;
 extern motor Right6th;
 extern inertial Inertial13;
-extern digital_out IntakePneu;
+extern digital_out DoinkerPneu;
 extern digital_out MogoPneu;
 extern digital_out HangPneu;
 extern motor Arm;

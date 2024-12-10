@@ -16,7 +16,7 @@ bool runningSkills = false;
 // Right6th             motor         18              
 // Inertial13           inertial      13              
 // WingPneu             digital_out   D               
-// IntakePneu           digital_out   E               
+// DoinkerPneu           digital_out   E               
 // LimitSwitchC         limit         C               
 // Catapult             motor         9               
 // Intake               motor         11              
@@ -133,7 +133,7 @@ void pre_auton(void) {
     Arm.setMaxTorque(100, percent);
     Arm.setVelocity(50, percent);
 
-    IntakePneu.set(false);
+    DoinkerPneu.set(false);
     HangPneu.set(false);
 
     Intake.setStopping(coast);
@@ -161,6 +161,7 @@ void pre_auton(void) {
   }
 
 void autonomous(void) {
+  //DriveStraight();
   SpedUp();
   //Auton26Points(); 
 }
@@ -175,7 +176,6 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
-bool intakePneu = false;
 
 void loadArm() {
 
@@ -209,14 +209,14 @@ void stopIntake() {
   Intake.stop();
 }
 
-void toggleIntakePneuPos() {
-  if (intakePneu) {
-    IntakePneu.set(false);
-    intakePneu = false;
+void toggleDoinkerPneuPos() {
+  if (DoinkerPneu) {
+    DoinkerPneu.set(false);
+    DoinkerPneu = false;
   }
   else {
-    IntakePneu.set(true);
-    intakePneu = true;
+    DoinkerPneu.set(true);
+    DoinkerPneu = true;
   }  
 }
 
@@ -238,11 +238,11 @@ void triggerHangMech() {
   HangPneu.set(hangPneuPos);
 }
 
-bool intakePneuPos = false;
+bool DoinkerPneuPos = false;
 
-void triggerIntakeMech() {
-  intakePneuPos = !intakePneuPos;
-  IntakePneu.set(intakePneuPos);
+void triggerDoinkerMech() {
+  DoinkerPneuPos = !DoinkerPneuPos;
+  DoinkerPneu.set(DoinkerPneuPos);
 }
 
 void moveArmUp() {
@@ -289,7 +289,7 @@ void usercontrol(void) {
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
-    controller(primary).ButtonB.pressed(triggerIntakeMech);    
+    controller(primary).ButtonB.pressed(triggerDoinkerMech);    
 
   // User control code here, inside the loop
   while (1) {
