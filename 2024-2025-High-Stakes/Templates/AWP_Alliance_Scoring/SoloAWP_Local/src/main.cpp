@@ -1,6 +1,5 @@
 #include "vex.h"
 bool runningSkills = false;
-bool allowLimitSwitch = true;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -17,7 +16,7 @@ bool allowLimitSwitch = true;
 // Right6th             motor         18              
 // Inertial13           inertial      13              
 // WingPneu             digital_out   D               
-// IntakePneu           digital_out   E               
+// DoinkerPneu           digital_out   E               
 // LimitSwitchC         limit         C               
 // Catapult             motor         9               
 // Intake               motor         11              
@@ -134,7 +133,7 @@ void pre_auton(void) {
     Arm.setMaxTorque(100, percent);
     Arm.setVelocity(50, percent);
 
-    IntakePneu.set(false);
+    DoinkerPneu.set(false);
     HangPneu.set(false);
 
     Intake.setStopping(coast);
@@ -155,10 +154,14 @@ void pre_auton(void) {
     RightBack.setVelocity(100, percent);
     Right6th.setVelocity(100, percent);
     Intake.setVelocity(100.0, percent);
+
+    ArmRotation.setReversed(true);
+    ArmRotation.resetPosition();
+
   }
 
 void autonomous(void) {
-  regular();  
+  regular();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -171,16 +174,18 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
-bool intakePneu = false;
 
 void loadArm() {
 
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
+      Intake.setVelocity(50, percent);
       Intake.spinFor(reverse, 12, turns);
+      Intake.setVelocity(100, percent);
       break;
     }
     else  {
+      Intake.setVelocity(100, percent);
       Intake.spin(forward);
     }
 
@@ -189,10 +194,12 @@ void loadArm() {
 }
 
 void spinIntakeForward() {
+  Intake.setVelocity(100, percent);
   Intake.spin(forward);
 }
 
 void spinIntakeReverse() {
+  Intake.setVelocity(100, percent);
   Intake.spin(reverse);
 }
 
@@ -200,14 +207,14 @@ void stopIntake() {
   Intake.stop();
 }
 
-void toggleIntakePneuPos() {
-  if (intakePneu) {
-    IntakePneu.set(false);
-    intakePneu = false;
+void toggleDoinkerPneuPos() {
+  if (DoinkerPneu) {
+    DoinkerPneu.set(false);
+    DoinkerPneu = false;
   }
   else {
-    IntakePneu.set(true);
-    intakePneu = true;
+    DoinkerPneu.set(true);
+    DoinkerPneu = true;
   }  
 }
 
@@ -229,11 +236,11 @@ void triggerHangMech() {
   HangPneu.set(hangPneuPos);
 }
 
-bool intakePneuPos = false;
+bool DoinkerPneuPos = false;
 
-void triggerIntakeMech() {
-  intakePneuPos = !intakePneuPos;
-  IntakePneu.set(intakePneuPos);
+void triggerDoinkerMech() {
+  DoinkerPneuPos = !DoinkerPneuPos;
+  DoinkerPneu.set(DoinkerPneuPos);
 }
 
 void moveArmUp() {
@@ -251,13 +258,17 @@ void stopArm() {
 int DisplayToController() {
 
   while (true) {
-    controller(primary).Screen.print(Intake.velocity(rpm));
+    //controller(primary).Screen.print(Intake.velocity(rpm));
+    //controller(primary).Screen.print(chassis.get_absolute_heading());
+    controller(primary).Screen.print(ArmRotation.angle(degrees));
     vex::this_thread::sleep_for(1000);
   }
 
 }
 
 void usercontrol(void) {
+
+    MogoPneu.set(true);
 
     Arm.setStopping(brake);
     Drivetrain.setStopping(coast);
@@ -276,9 +287,7 @@ void usercontrol(void) {
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
-    controller(primary).ButtonB.pressed(triggerIntakeMech);
-
-   // vex::task t(DisplayToController);
+    controller(primary).ButtonB.pressed(triggerDoinkerMech);    
 
   // User control code here, inside the loop
   while (1) {
@@ -304,6 +313,9 @@ void usercontrol(void) {
 // Main will set up the competition functions and callbacks.
 //
 int main() {
+
+  vex::task t(DisplayToController);
+
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
