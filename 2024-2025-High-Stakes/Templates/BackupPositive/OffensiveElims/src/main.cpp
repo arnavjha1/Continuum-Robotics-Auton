@@ -16,7 +16,7 @@ bool runningSkills = false;
 // Right6th             motor         18              
 // Inertial13           inertial      13              
 // WingPneu             digital_out   D               
-// DoinkerPneu           digital_out   E               
+// IntakePneu           digital_out   E               
 // LimitSwitchC         limit         C               
 // Catapult             motor         9               
 // Intake               motor         11              
@@ -133,7 +133,7 @@ void pre_auton(void) {
     Arm.setMaxTorque(100, percent);
     Arm.setVelocity(50, percent);
 
-    DoinkerPneu.set(false);
+    IntakePneu.set(false);
     HangPneu.set(false);
 
     Intake.setStopping(coast);
@@ -154,16 +154,10 @@ void pre_auton(void) {
     RightBack.setVelocity(100, percent);
     Right6th.setVelocity(100, percent);
     Intake.setVelocity(100.0, percent);
-
-    ArmRotation.setReversed(true);
-    ArmRotation.resetPosition();
-
   }
 
 void autonomous(void) {
-  //DriveStraight();
-  SpedUp();
-  //Auton26Points(); 
+  regular();  
 }
 
 /*---------------------------------------------------------------------------*/
@@ -176,18 +170,16 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
+bool intakePneu = false;
 
 void loadArm() {
 
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      Intake.setVelocity(50, percent);
       Intake.spinFor(reverse, 12, turns);
-      Intake.setVelocity(100, percent);
       break;
     }
     else  {
-      Intake.setVelocity(100, percent);
       Intake.spin(forward);
     }
 
@@ -196,12 +188,10 @@ void loadArm() {
 }
 
 void spinIntakeForward() {
-  Intake.setVelocity(100, percent);
   Intake.spin(forward);
 }
 
 void spinIntakeReverse() {
-  Intake.setVelocity(100, percent);
   Intake.spin(reverse);
 }
 
@@ -209,14 +199,14 @@ void stopIntake() {
   Intake.stop();
 }
 
-void toggleDoinkerPneuPos() {
-  if (DoinkerPneu) {
-    DoinkerPneu.set(false);
-    DoinkerPneu = false;
+void toggleIntakePneuPos() {
+  if (intakePneu) {
+    IntakePneu.set(false);
+    intakePneu = false;
   }
   else {
-    DoinkerPneu.set(true);
-    DoinkerPneu = true;
+    IntakePneu.set(true);
+    intakePneu = true;
   }  
 }
 
@@ -238,11 +228,11 @@ void triggerHangMech() {
   HangPneu.set(hangPneuPos);
 }
 
-bool DoinkerPneuPos = false;
+bool intakePneuPos = false;
 
-void triggerDoinkerMech() {
-  DoinkerPneuPos = !DoinkerPneuPos;
-  DoinkerPneu.set(DoinkerPneuPos);
+void triggerIntakeMech() {
+  intakePneuPos = !intakePneuPos;
+  IntakePneu.set(intakePneuPos);
 }
 
 void moveArmUp() {
@@ -260,17 +250,13 @@ void stopArm() {
 int DisplayToController() {
 
   while (true) {
-    //controller(primary).Screen.print(Intake.velocity(rpm));
-    //controller(primary).Screen.print(chassis.get_absolute_heading());
-    controller(primary).Screen.print(ArmRotation.angle(degrees));
+    controller(primary).Screen.print(Intake.velocity(rpm));
     vex::this_thread::sleep_for(1000);
   }
 
 }
 
 void usercontrol(void) {
-
-    MogoPneu.set(true);
 
     Arm.setStopping(brake);
     Drivetrain.setStopping(coast);
@@ -289,7 +275,9 @@ void usercontrol(void) {
     controller(primary).ButtonRight.pressed(moveArmDown);
     controller(primary).ButtonRight.released(stopArm);
 
-    controller(primary).ButtonB.pressed(triggerDoinkerMech);    
+    controller(primary).ButtonB.pressed(triggerIntakeMech);
+
+   // vex::task t(DisplayToController);
 
   // User control code here, inside the loop
   while (1) {
@@ -315,9 +303,6 @@ void usercontrol(void) {
 // Main will set up the competition functions and callbacks.
 //
 int main() {
-
-  vex::task t(DisplayToController);
-
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);

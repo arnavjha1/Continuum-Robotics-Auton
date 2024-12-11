@@ -7,12 +7,8 @@ extern Drive chassis;
 
 void default_constants();
 
-void DriveStraight();
-void SpedUp();
-void Auton26Points();
+void regular();
 void mirrored();
-void macro();
-void subMacro();
 void swing_test();
 void full_test();
 void odom_test();

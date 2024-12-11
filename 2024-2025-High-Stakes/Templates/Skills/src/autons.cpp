@@ -55,8 +55,14 @@ void SpedUp(){
   Intake.stop();
   chassis.drive_distance(6);
   chassis.set_drive_constants(3, 1.5, 0, 10, 0);
-  chassis.set_turn_exit_conditions(1, 300, 3000);
+  chassis.set_turn_exit_conditions(0.5, 300, 5000);
   chassis.turn_to_angle(90);
+  chassis.drive_distance(-75, 90);
+}
+
+void DriveStraight() {
+  default_constants();
+  chassis.set_drive_constants(3, 1.5, 0, 10, 0);
   chassis.drive_distance(-75);
 }
 
