@@ -261,8 +261,8 @@ int DisplayToController() {
 
   while (true) {
     //controller(primary).Screen.print(Intake.velocity(rpm));
-    //controller(primary).Screen.print(chassis.get_absolute_heading());
-    controller(primary).Screen.print(ArmRotation.angle(degrees));
+    controller(primary).Screen.print(chassis.get_absolute_heading());
+    //controller(primary).Screen.print(ArmRotation.angle(degrees));
     vex::this_thread::sleep_for(1000);
   }
 
