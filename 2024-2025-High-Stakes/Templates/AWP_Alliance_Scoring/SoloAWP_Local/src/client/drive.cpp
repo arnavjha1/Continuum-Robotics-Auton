@@ -449,14 +449,14 @@ void Drive::turn_left(int desiredValue, double timeOut = 1.0) {
 }
 
 void Drive::arm_to_angle(double desiredValue){
-  if(desiredValue < Rotation.angle()){
+  if(desiredValue < ArmRotation.angle()){
     Arm.spin(reverse);
-    waitUntil(desiredValue > Rotation.angle());
+    waitUntil(desiredValue > ArmRotation.angle());
     Arm.stop();
   }
   else{  
     Arm.spin(forward);
-    waitUntil(desiredValue < Rotation.angle());
+    waitUntil(desiredValue < ArmRotation.angle());
     Arm.stop();
   }
 }
