@@ -9,15 +9,15 @@ extern motor RightFront;
 extern motor RightBack;
 extern motor Left6th;
 extern motor Right6th;
-extern rotation Rotation;
 extern inertial Inertial13;
-extern digital_out IntakePneu;
+extern digital_out DoinkerPneu;
 extern digital_out MogoPneu;
 extern digital_out HangPneu;
 extern motor Arm;
 extern motor Intake;
 extern limit LimitSwitchC;
 extern distance DistSensor;
+extern rotation ArmRotation;
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  * 

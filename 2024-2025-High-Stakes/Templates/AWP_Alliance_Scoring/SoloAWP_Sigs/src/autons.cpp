@@ -30,6 +30,10 @@ void odom_constants(){
   chassis.drive_settle_error = 0;
 }
 
+void RedStake(){
+  Arm.spinFor(forward, 175, degrees);
+}
+
 void ArmPickup(){/*
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
@@ -58,15 +62,18 @@ void regular(){
   thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
-  Arm.spinFor(forward, 175, degrees);
+  thread(RedStake).detach();
 
+  chassis.set_swing_exit_conditions(1, 300, 300);
   chassis.left_swing_to_angle(-4.5);
+  chassis.set_swing_exit_conditions(1, 300, 1000);
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
+
   chassis.drive_distance(-36);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-
   thread(ArmDown).detach();
   chassis.drive_distance(-2);
+  
   chassis.set_drive_exit_conditions(0.3, 0, 1000);
   chassis.turn_to_angle(-136 + 4);
   Intake.spin(forward);
