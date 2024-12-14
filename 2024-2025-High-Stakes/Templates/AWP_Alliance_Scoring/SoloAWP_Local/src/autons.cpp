@@ -54,7 +54,7 @@ void ArmUp(){
   chassis.left_swing_to_angle(3.5);
 }
 void regular(){
-/*  thread(ArmUp).detach();
+  thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
   Arm.spinFor(forward, 175, degrees);
@@ -78,7 +78,7 @@ void regular(){
   DoinkerPneu.set(true);
   chassis.turn_to_angle(76.75);
   DoinkerPneu.set(false);
-  chassis.turn_to_angle(65);*/
+  chassis.turn_to_angle(65);
 
   Intake.spin(forward);
   chassis.drive_distance(14);
