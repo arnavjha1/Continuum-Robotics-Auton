@@ -177,24 +177,6 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
 
-void loadArm() {
-
-  while (true) {
-    if (DistSensor.objectDistance(inches) < 1) {
-      Intake.setVelocity(50, percent);
-      Intake.spinFor(reverse, 12, turns);
-      Intake.setVelocity(100, percent);
-      break;
-    }
-    else  {
-      Intake.setVelocity(100, percent);
-      Intake.spin(forward);
-    }
-
-    wait(0.02, seconds);
-  }
-}
-
 void spinIntakeForward() {
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
@@ -261,8 +243,8 @@ int DisplayToController() {
 
   while (true) {
     //controller(primary).Screen.print(Intake.velocity(rpm));
-    controller(primary).Screen.print(chassis.get_absolute_heading());
-    //controller(primary).Screen.print(ArmRotation.angle(degrees));
+    //controller(primary).Screen.print(chassis.get_absolute_heading());
+    controller(primary).Screen.print(ArmRotation.angle(degrees));
     vex::this_thread::sleep_for(1000);
   }
 
@@ -282,7 +264,7 @@ void usercontrol(void) {
     controller(primary).ButtonL1.released(stopIntake); 
 
     controller(primary).ButtonR1.pressed(triggerMogoMech);
-    controller(primary).ButtonR2.pressed(loadArm);
+    controller(primary).ButtonR2.pressed(loadArmController);
 
     controller(primary).ButtonY.pressed(moveArmUp);
     controller(primary).ButtonY.released(stopArm);

@@ -7,6 +7,48 @@
  * @return Reduced angle.
  */
 
+void loadArmController() {
+  loadArm();
+}
+/*
+int setArmToZero() {
+  int currentPos = ArmRotation.angle(degrees);
+  int prevPos = 0;
+  while (currentPos-prevPos > 1) {
+    prevPos = currentPos;
+    currentPos = ArmRotation.angle(degrees);;
+    wait(0.1, seconds);
+  }
+}
+*/
+int loadArm() {
+  Arm.setVelocity(100, percent);
+  chassis.arm_to_angle(2);
+  Arm.setVelocity(50, percent);
+  int numDiscsSeen = 0;
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      //numDiscsSeen++;
+      //if (numDiscsSeen == 2) {
+        Intake.setVelocity(50, percent);
+        Intake.spinFor(reverse, 12, turns);
+        Intake.setVelocity(100, percent);
+        break;
+      //}
+      //else {
+      //  wait(2, seconds);
+     // }
+    }
+    else  {
+      Intake.setVelocity(100, percent);
+      Intake.spin(forward);
+    }
+
+    //wait(0.02, seconds);
+  }
+  return 0;
+}
+
 float reduce_0_to_360(float angle) {
   while(!(angle >= 0 && angle < 360)) {
     if( angle < 0 ) { angle += 360; }

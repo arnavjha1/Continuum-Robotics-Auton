@@ -40,8 +40,20 @@ void SpedUp(){
   chassis.turn_to_angle(0);
   default_constants();
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
+  vex::task t(loadArm);
   chassis.drive_distance(25);
   chassis.turn_to_angle(90);
+  chassis.drive_distance(25);
+  chassis.turn_to_angle(25);
+  wait(1, seconds);
+  t.stop();
+  Intake.setVelocity(100, percent);
+  Intake.spin(forward);
+  chassis.arm_to_angle(110);
+  chassis.drive_distance(22);
+  chassis.turn_to_angle(75);
+  chassis.drive_distance(1);
+  /*
   chassis.drive_distance(25);
   chassis.turn_to_angle(180);
   chassis.set_drive_constants(4, 1.5, 0, 10, 0);
@@ -60,7 +72,7 @@ void SpedUp(){
   chassis.set_turn_exit_conditions(0.5, 300, 5000);
   chassis.turn_to_angle(88);
   chassis.set_heading(90);
-  chassis.drive_distance(-80, 90);
+  chassis.drive_distance(-79, 90);
   MogoPneu.set(true);
   Intake.spin(forward);
   wait(0.3, seconds);
@@ -83,12 +95,7 @@ void SpedUp(){
   MogoPneu.set(false);
   Intake.stop();
   chassis.drive_distance(6);
-}
-
-void DriveStraight() {
-  default_constants();
-  chassis.set_drive_constants(3, 1.5, 0, 10, 0);
-  chassis.drive_distance(-75);
+  */
 }
 
 void Auton26Points(){
