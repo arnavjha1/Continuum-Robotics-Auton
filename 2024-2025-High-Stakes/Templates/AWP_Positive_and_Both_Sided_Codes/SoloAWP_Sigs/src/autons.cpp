@@ -17,11 +17,11 @@ void alter(){
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(12, .4, .03, 3, 15);
+  chassis.set_turn_constants(12, .4, 0/*.03*/, 3, 0/*15*/);
   chassis.set_swing_constants(12, .3, .001, 2, 15);
   chassis.set_drive_exit_conditions(0.3, 300, 1000);
-  chassis.set_turn_exit_conditions(1, 0, 1800);
-  chassis.set_swing_exit_conditions(1, 0, 1000);
+  chassis.set_turn_exit_conditions(1, 100, 750);
+  chassis.set_swing_exit_conditions(1, 300, 1000);
 }
 
 void odom_constants(){
@@ -62,30 +62,48 @@ void ArmUp(){
 void regular(){
   double d = matchloadangle;
   thread(ArmUp).detach();
+
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
   Arm.spinFor(forward, 175, degrees);
-
   chassis.left_swing_to_angle(-4.5);
+
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
   chassis.drive_distance(-36);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-
   thread(ArmDown).detach();
+
   chassis.drive_distance(-2);
   chassis.set_drive_exit_conditions(0.3, 0, 1000);
-  chassis.turn_to_angle(-134);
+  chassis.turn_to_angle(-134.5);
   Intake.spin(forward);
 
-  chassis.drive_distance(24);
+  chassis.drive_distance(28.75 - 7.5);
   wait(0.4, seconds);
-  chassis.turn_to_angle(34);
-  chassis.drive_distance(31.125 + 3.5);
+  chassis.turn_to_angle(151.5 - 120);
+  chassis.drive_distance(45.875 - 12);
 
   DoinkerPneu.set(true);
-  chassis.turn_to_angle(76.75);
+  chassis.turn_to_angle(60);
   DoinkerPneu.set(false);
-  chassis.turn_to_angle(65);/**//*
+
+  chassis.drive_distance(24 + 9.25 + 11);
+  MogoPneu.set(false);
+  chassis.turn_to_angle(0);
+  chassis.drive_distance(10.5);
+  
+  chassis.set_drive_constants(11, 0.5, 0, 10, 0);
+  chassis.drive_distance(-22.25);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  thread(ArmDown).detach();
+
+  chassis.drive_distance(-2);
+  thread(ArmPickup).detach();
+  wait(0.3, seconds);
+  chassis.turn_to_angle(180);
+
+  chassis.drive_distance(15);
+  /**//*
   d = 65;
   MogoPneu.set(true);
   wait(1, seconds);
