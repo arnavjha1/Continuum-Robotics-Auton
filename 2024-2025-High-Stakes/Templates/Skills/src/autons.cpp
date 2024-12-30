@@ -42,17 +42,36 @@ void SpedUp(){
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   vex::task t(loadArm);
   chassis.drive_distance(25);
-  chassis.turn_to_angle(90);
-  chassis.drive_distance(25);
-  chassis.turn_to_angle(25);
-  wait(1, seconds);
+  wait(0.3, seconds);
+  chassis.turn_to_angle(35);
+  chassis.drive_distance(27.5);
+  chassis.turn_to_angle(88);
+  chassis.arm_to_angle(110);
   t.stop();
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
+  chassis.drive_distance(18);
+  wait(0.3, seconds);
+  chassis.arm_to_angle(40);
+  /*
+  chassis.turn_to_angle(90);
+  t.stop();
+  Intake.setVelocity(100, percent);
+  Intake.spin(forward);
+  chassis.drive_distance(25);
+  chassis.turn_to_angle(20);
+  chassis.arm_to_angle(110);
+  chassis.drive_distance(22);
+  chassis.turn_to_angle(80);
+  chassis.drive_distance(1);
+  chassis.arm_to_angle(40);
+  */
+  /*
   chassis.arm_to_angle(110);
   chassis.drive_distance(22);
   chassis.turn_to_angle(75);
   chassis.drive_distance(1);
+  */
   /*
   chassis.drive_distance(25);
   chassis.turn_to_angle(180);

@@ -25,26 +25,17 @@ int loadArm() {
   Arm.setVelocity(100, percent);
   chassis.arm_to_angle(2);
   Arm.setVelocity(50, percent);
-  int numDiscsSeen = 0;
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      //numDiscsSeen++;
-      //if (numDiscsSeen == 2) {
-        Intake.setVelocity(50, percent);
-        Intake.spinFor(reverse, 12, turns);
-        Intake.setVelocity(100, percent);
-        break;
-      //}
-      //else {
-      //  wait(2, seconds);
-     // }
+      Intake.setVelocity(50, percent);
+      Intake.spinFor(reverse, 12, turns);
+      Intake.setVelocity(100, percent);
+      break;
     }
     else  {
       Intake.setVelocity(100, percent);
       Intake.spin(forward);
     }
-
-    //wait(0.02, seconds);
   }
   return 0;
 }
