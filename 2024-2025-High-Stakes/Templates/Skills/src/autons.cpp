@@ -44,7 +44,7 @@ void SpedUp(){
   chassis.drive_distance(25);
   wait(0.3, seconds);
   chassis.turn_to_angle(35);
-  chassis.drive_distance(27.5);
+  chassis.drive_distance(28);
   chassis.turn_to_angle(88);
   chassis.arm_to_angle(110);
   t.stop();
@@ -53,25 +53,12 @@ void SpedUp(){
   chassis.drive_distance(18);
   wait(0.3, seconds);
   chassis.arm_to_angle(40);
-  /*
-  chassis.turn_to_angle(90);
-  t.stop();
-  Intake.setVelocity(100, percent);
-  Intake.spin(forward);
-  chassis.drive_distance(25);
-  chassis.turn_to_angle(20);
-  chassis.arm_to_angle(110);
-  chassis.drive_distance(22);
-  chassis.turn_to_angle(80);
-  chassis.drive_distance(1);
-  chassis.arm_to_angle(40);
-  */
-  /*
-  chassis.arm_to_angle(110);
-  chassis.drive_distance(22);
-  chassis.turn_to_angle(75);
-  chassis.drive_distance(1);
-  */
+  chassis.drive_distance(-11);
+  chassis.arm_to_angle(2);
+  chassis.turn_to_angle(178);
+  chassis.set_heading(180);
+  chassis.set_drive_constants(3, 1.5, 0, 10, 0);
+  chassis.drive_distance(62);
   /*
   chassis.drive_distance(25);
   chassis.turn_to_angle(180);
@@ -79,25 +66,29 @@ void SpedUp(){
   chassis.drive_distance(35);
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   wait(0.5, seconds);
+  */
   chassis.drive_distance(-25);
   chassis.turn_to_angle(140);
+  default_constants();
+  Intake.spin(forward);
   chassis.drive_distance(15);
   chassis.turn_to_angle(335);
   chassis.drive_distance(-10);
   MogoPneu.set(false);
   Intake.stop();
-  chassis.drive_distance(5.5);
+  chassis.drive_distance(6);
   chassis.set_drive_constants(3, 1.5, 0, 10, 0);
   chassis.set_turn_exit_conditions(0.5, 300, 5000);
-  chassis.turn_to_angle(88);
+  chassis.turn_to_angle(90);
   chassis.set_heading(90);
-  chassis.drive_distance(-79, 90);
+  chassis.drive_distance(-81, 90);
   MogoPneu.set(true);
   Intake.spin(forward);
   wait(0.3, seconds);
   chassis.turn_to_angle(0);
   default_constants();
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
+  /*
   chassis.drive_distance(24);
   chassis.turn_to_angle(270);
   chassis.drive_distance(25);
