@@ -10,17 +10,7 @@
 void loadArmController() {
   loadArm();
 }
-/*
-int setArmToZero() {
-  int currentPos = ArmRotation.angle(degrees);
-  int prevPos = 0;
-  while (currentPos-prevPos > 1) {
-    prevPos = currentPos;
-    currentPos = ArmRotation.angle(degrees);;
-    wait(0.1, seconds);
-  }
-}
-*/
+
 int loadArm() {
   Arm.setVelocity(100, percent);
   chassis.arm_to_angle(2);
