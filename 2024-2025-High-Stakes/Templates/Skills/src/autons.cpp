@@ -81,14 +81,13 @@ void SpedUp(){
   chassis.set_turn_exit_conditions(0.5, 300, 5000);
   chassis.turn_to_angle(90);
   chassis.set_heading(90);
-  chassis.drive_distance(-81, 90);
+  chassis.drive_distance(-78, 90);
   MogoPneu.set(true);
   Intake.spin(forward);
   wait(0.3, seconds);
   chassis.turn_to_angle(0);
   default_constants();
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
-  /*
   chassis.drive_distance(24);
   chassis.turn_to_angle(270);
   chassis.drive_distance(25);
@@ -105,7 +104,6 @@ void SpedUp(){
   MogoPneu.set(false);
   Intake.stop();
   chassis.drive_distance(6);
-  */
 }
 
 void Auton26Points(){
