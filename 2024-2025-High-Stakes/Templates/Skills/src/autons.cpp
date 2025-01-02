@@ -58,7 +58,7 @@ void SpedUp(){
   chassis.turn_to_angle(178);
   chassis.set_heading(180);
   chassis.set_drive_constants(4, 1.5, 0, 10, 0);
-  chassis.drive_distance(62);
+  chassis.drive_distance(57);
   /*
   chassis.drive_distance(25);
   chassis.turn_to_angle(180);
@@ -67,16 +67,16 @@ void SpedUp(){
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   wait(0.5, seconds);
   */
-  chassis.drive_distance(-25);
+  chassis.drive_distance(-23);
   chassis.turn_to_angle(140);
   default_constants();
   Intake.spin(forward);
   chassis.drive_distance(15);
   chassis.turn_to_angle(335);
-  chassis.drive_distance(-10);
+  chassis.drive_distance(-11);
   MogoPneu.set(false);
   Intake.stop();
-  chassis.drive_distance(6.5);
+  chassis.drive_distance(5.5);
   chassis.set_drive_constants(3, 1.5, 0, 10, 0);
   chassis.set_turn_exit_conditions(0.5, 300, 5000);
   chassis.turn_to_angle(90);
@@ -115,6 +115,7 @@ void SpedUp(){
   default_constants();
   chassis.turn_to_angle(245);
   MogoPneu.set(false);
+  wait(0.5, seconds);
   chassis.drive_distance(-30);
   chassis.drive_distance(20);
 
