@@ -31,21 +31,31 @@ void odom_constants(){
 }
 
 void ArmPickup(){
-  Intake.setVelocity(100, percent);
-  Intake.spin(forward);
-  wait(0.7, seconds);
-  Intake.setVelocity(45, percent);/*
-  if(m == 1){
-    waitUntil(DiscSensor.hue() < 28 || DiscSensor.hue() > 330);
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      wait(0.5, seconds);
+      while (true) {
+        if (DistSensor.objectDistance(inches) < 1) {
+          Intake.setVelocity(0, percent);
+          Intake.spinFor(reverse, 1, turns);
+          Intake.setVelocity(100, percent);
+          break;
+        }
+        else {
+          Intake.setVelocity(100, percent);
+          Intake.spin(forward);
+        }
+      wait(0.02, seconds);
+      }
+      break;
+    }
+    else  {
+      Intake.setVelocity(100, percent);
+      Intake.spin(forward);
+    }
+
+    wait(0.02, seconds);
   }
-  else{
-    waitUntil(DiscSensor.hue() > 180 || DiscSensor.hue() < 250);
-  }*/
-  wait(0.188, seconds);
-  Intake.setVelocity(100, percent);
-  Intake.spin(reverse);
-  wait(1, seconds);
-  Intake.stop();
 }
 void ArmDown(){
   MogoPneu.set(true);
@@ -53,7 +63,7 @@ void ArmDown(){
 void ArmUp(){
   chassis.left_swing_to_angle(3.5);
 }
-void regular(){
+void auton_task(){
   thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
@@ -71,7 +81,21 @@ void regular(){
   Intake.spin(forward);
 
   chassis.drive_distance(24);
-  wait(0.4, seconds);
+  /*
+  thread(ArmPickup).detach();
+  chassis.set_drive_exit_conditions(1.5, 300, 5000);
+  chassis.drive_distance(45);
+  chassis.drive_distance(-7.625 - 4.5);
+
+  chassis.turn_to_angle(-91);
+  chassis.set_drive_constants(11, 0.5, 0, 10, 0);
+  chassis.drive_distance(-27);
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+
+  thread(ArmDown).detach();
+  chassis.drive_distance(-2);
+
+  /*wait(0.4, seconds);
   chassis.turn_to_angle(34);
   chassis.drive_distance(31.125 + 3.5);
 
@@ -201,43 +225,13 @@ void regular(){
   chassis.set_drive_constants(11, 0.7, 0, 10, 0);  
   chassis.drive_distance(-22);/**/
 }
-
+void regular(){
+  chassis.regulate();
+  auton_task();
+}
 void mirrored(){
-  /*Pre-auton
-  int d = matchloadangle;
-  
-  //Auton goes here
-  m = -1;
-  regular();
-
-  /*chassis.set_heading_constants(6, .21, 0, 1, 0);
-  chassis.set_drive_exit_conditions(2, 300, 1000);
-  chassis.drive_distance(-44, -30);
-
-  MogoPneu.set(true);
-  wait(0.3, seconds);
-  chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_drive_exit_conditions(1.5, 300, 800);
-
-  Intake.spin(forward);
-  chassis.turn_to_angle(26.5);
-  chassis.drive_distance(16.35);
-  MogoPneu.set(false);
-
-  chassis.turn_to_angle(-90);
-  Intake.stop();
-  chassis.drive_distance(-15.75);
-  MogoPneu.set(true);
-
-  wait(0.3, seconds);
-  chassis.turn_to_angle(47);
-  Claw.set(true);
-  Intake.spin(forward);
-
-  chassis.drive_distance(40, 47);
-  chassis.drive_distance(-5, 47);
-  MogoPneu.set(false);
-  */ 
+  chassis.mirror();
+  auton_task(); 
 }
 
 void macroArm(){

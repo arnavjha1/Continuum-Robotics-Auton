@@ -59,7 +59,7 @@ void ArmDown(){
 void ArmUp(){
   chassis.left_swing_to_angle(3.5);
 }
-void regular(){
+void auton_task(){
   double d = matchloadangle;
   float shift = 1.25;
   /*
@@ -192,42 +192,13 @@ void regular(){
   Intake.stop();/**/
 }
 
+void regular(){
+  chassis.regulate();
+  auton_task();
+}
 void mirrored(){
-  /*Pre-auton
-  int d = matchloadangle;
-  
-  //Auton goes here
-  m = -1;
-  regular();
-
-  /*chassis.set_heading_constants(6, .21, 0, 1, 0);
-  chassis.set_drive_exit_conditions(2, 300, 1000);
-  chassis.drive_distance(-44, -30);
-
-  MogoPneu.set(true);
-  wait(0.3, seconds);
-  chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_drive_exit_conditions(1.5, 300, 800);
-
-  Intake.spin(forward);
-  chassis.turn_to_angle(26.5);
-  chassis.drive_distance(16.35);
-  MogoPneu.set(false);
-
-  chassis.turn_to_angle(-90);
-  Intake.stop();
-  chassis.drive_distance(-15.75);
-  MogoPneu.set(true);
-
-  wait(0.3, seconds);
-  chassis.turn_to_angle(47);
-  Claw.set(true);
-  Intake.spin(forward);
-
-  chassis.drive_distance(40, 47);
-  chassis.drive_distance(-5, 47);
-  MogoPneu.set(false);
-  */ 
+  chassis.mirror();
+  auton_task();
 }
 
 void macroArm(){

@@ -157,11 +157,34 @@ void pre_auton(void) {
 
     ArmRotation.setReversed(true);
     ArmRotation.resetPosition();
-
+while(auto_started == false){            
+    controller(primary).Screen.setCursor(0, 0);
+    switch(current_auton_selection){
+      case 0:
+        controller(primary).Screen.print("Red / Right Side");
+        break;
+      case 1:
+        controller(primary).Screen.print("Blue / Left Side");
+        break;
+    }
+    if(LimitSwitchC.pressing()){
+      while(LimitSwitchC.pressing()) {}
+      current_auton_selection = 1 - current_auton_selection;
+    }
+    task::sleep(10);
   }
+}
 
 void autonomous(void) {
-  regular();
+  auto_started = true;
+  switch(current_auton_selection){  
+    case 0:
+      regular();
+      break;        
+    case 1:        
+      mirrored();
+      break;
+  }
 }
 
 /*---------------------------------------------------------------------------*/

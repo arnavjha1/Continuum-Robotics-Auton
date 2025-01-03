@@ -11,6 +11,7 @@ void default_constants();
 void ArmPickup();
 void ArmUp();
 void macroArm();
+void auton_task();
 void regular();
 void mirrored();
 void swing_test();
