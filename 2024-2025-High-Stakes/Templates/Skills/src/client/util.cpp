@@ -11,6 +11,20 @@ void loadArmController() {
   loadArm();
 }
 
+int loadIntake() {
+  bool done = false;
+  while (true) {
+    if (done || DistSensor.objectDistance(inches) < 2) {
+      Intake.stop();
+      done = true;
+    }
+    else  {
+      Intake.setVelocity(100, percent);
+      Intake.spin(forward);
+    }
+  }
+}
+
 int loadArm() {
   Arm.setVelocity(100, percent);
   chassis.arm_to_angle(2);
