@@ -23,6 +23,11 @@ int LiftArm() {
   return 0;
 }
 
+int moveArmFullyDown() {
+  chassis.arm_to_angle(2);
+  return 0;
+}
+
 void SpedUp(){
   default_constants();
   chassis.set_heading(180);
@@ -42,37 +47,43 @@ void SpedUp(){
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   vex::task t(loadArm);
   chassis.drive_distance(25);
+  wait(0.3, seconds);
+  chassis.turn_to_angle(38);
+  chassis.drive_distance(30);
   chassis.turn_to_angle(90);
-  chassis.drive_distance(25);
-  chassis.turn_to_angle(25);
-  wait(1, seconds);
+  chassis.arm_to_angle(110);
   t.stop();
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
-  chassis.arm_to_angle(110);
-  chassis.drive_distance(22);
-  chassis.turn_to_angle(75);
-  chassis.drive_distance(1);
-  /*
-  chassis.drive_distance(25);
-  chassis.turn_to_angle(180);
+  chassis.drive_distance(16);
+  wait(0.3, seconds);
+  chassis.arm_to_angle(40);
+  chassis.drive_distance(-11, 88);
+  vex::task t2(moveArmFullyDown);
+  chassis.turn_to_angle(178);
+  chassis.set_heading(180);
   chassis.set_drive_constants(4, 1.5, 0, 10, 0);
-  chassis.drive_distance(35);
-  chassis.set_drive_constants(6, 1.5, 0, 10, 0);
+  //chassis.drive_distance(57);
+  chassis.drive_distance(47);
+  t2.stop();
   wait(0.5, seconds);
-  chassis.drive_distance(-25);
+  chassis.drive_distance(10);
+  chassis.drive_distance(-23);
   chassis.turn_to_angle(140);
-  chassis.drive_distance(15);
+  default_constants();
+  Intake.spin(forward);
+  chassis.drive_distance(15.5);
+  wait(0.3, seconds);
   chassis.turn_to_angle(335);
-  chassis.drive_distance(-10);
+  chassis.drive_distance(-9);
   MogoPneu.set(false);
   Intake.stop();
   chassis.drive_distance(5.5);
   chassis.set_drive_constants(3, 1.5, 0, 10, 0);
   chassis.set_turn_exit_conditions(0.5, 300, 5000);
-  chassis.turn_to_angle(88);
+  chassis.turn_to_angle(89);
   chassis.set_heading(90);
-  chassis.drive_distance(-79, 90);
+  chassis.drive_distance(-78, 90);
   MogoPneu.set(true);
   Intake.spin(forward);
   wait(0.3, seconds);
@@ -89,13 +100,35 @@ void SpedUp(){
   wait(0.5, seconds);
   chassis.drive_distance(-25);
   chassis.turn_to_angle(220);
-  chassis.drive_distance(15);
+  chassis.drive_distance(14);
+  wait(0.3, seconds);
   chassis.turn_to_angle(25);
-  chassis.drive_distance(-10);
+  chassis.drive_distance(-8);
   MogoPneu.set(false);
   Intake.stop();
-  chassis.drive_distance(6);
-  */
+  chassis.drive_distance(30);
+  vex::task t3(loadIntake);
+  chassis.turn_to_angle(0);
+  chassis.drive_distance(72);
+  //chassis.turn_to_angle(270);
+  DoinkerPneu.set(true);
+  wait(0.3, seconds);
+  chassis.turn_to_angle(135);
+  chassis.turn_to_angle(270);
+  chassis.set_drive_constants(6, 1.5, 0, 15, 0);
+  chassis.drive_distance(-60);
+  MogoPneu.set(true);
+  t3.stop();
+  Intake.spin(forward);
+  chassis.drive_distance(-15);
+  default_constants();
+  chassis.turn_to_angle(255);
+  MogoPneu.set(false);
+  wait(0.5, seconds);
+  chassis.drive_distance(-32);
+  chassis.drive_distance(37);
+  chassis.turn_to_angle(295);
+  chassis.drive_distance(50);
 }
 
 void Auton26Points(){

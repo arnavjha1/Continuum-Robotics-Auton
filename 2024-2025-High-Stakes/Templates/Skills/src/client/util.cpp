@@ -10,41 +10,36 @@
 void loadArmController() {
   loadArm();
 }
-/*
-int setArmToZero() {
-  int currentPos = ArmRotation.angle(degrees);
-  int prevPos = 0;
-  while (currentPos-prevPos > 1) {
-    prevPos = currentPos;
-    currentPos = ArmRotation.angle(degrees);;
-    wait(0.1, seconds);
-  }
-}
-*/
-int loadArm() {
-  Arm.setVelocity(100, percent);
-  chassis.arm_to_angle(2);
-  Arm.setVelocity(50, percent);
-  int numDiscsSeen = 0;
+
+int loadIntake() {
+  bool done = false;
   while (true) {
-    if (DistSensor.objectDistance(inches) < 1) {
-      //numDiscsSeen++;
-      //if (numDiscsSeen == 2) {
-        Intake.setVelocity(50, percent);
-        Intake.spinFor(reverse, 12, turns);
-        Intake.setVelocity(100, percent);
-        break;
-      //}
-      //else {
-      //  wait(2, seconds);
-     // }
+    if (done || DistSensor.objectDistance(inches) < 2) {
+      Intake.stop();
+      done = true;
     }
     else  {
       Intake.setVelocity(100, percent);
       Intake.spin(forward);
     }
+  }
+}
 
-    //wait(0.02, seconds);
+int loadArm() {
+  Arm.setVelocity(100, percent);
+  chassis.arm_to_angle(2);
+  Arm.setVelocity(50, percent);
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      Intake.setVelocity(50, percent);
+      Intake.spinFor(reverse, 12, turns);
+      Intake.setVelocity(100, percent);
+      break;
+    }
+    else  {
+      Intake.setVelocity(100, percent);
+      Intake.spin(forward);
+    }
   }
   return 0;
 }
