@@ -31,14 +31,18 @@ void odom_constants(){
 }
 
 void ArmPickup(){
+  Intake.spin(forward);
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      wait(0.5, seconds);
+      wait(0.075, seconds);
+      Intake.stop();
+      wait(0.3, seconds);
+      Intake.spin(forward);
       while (true) {
         if (DistSensor.objectDistance(inches) < 1) {
-          Intake.setVelocity(0, percent);
+         /* Intake.setVelocity(0, percent);
           Intake.spinFor(reverse, 1, turns);
-          Intake.setVelocity(100, percent);
+          Intake.setVelocity(100, percent);*/
           break;
         }
         else {
@@ -64,6 +68,11 @@ void ArmUp(){
   chassis.left_swing_to_angle(3.5);
 }
 void auton_task(){
+  MogoPneu.set(true);
+  wait(0.5, seconds);
+  thread(ArmPickup).detach();
+  chassis.drive_distance(30);
+  /*
   thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
@@ -94,12 +103,14 @@ void auton_task(){
 
   thread(ArmDown).detach();
   chassis.drive_distance(-2);
-
+*/
   /*wait(0.4, seconds);
   chassis.turn_to_angle(34);
-  chassis.drive_distance(31.125 + 3.5);
+  thread(ArmPickup).detach();
+  chassis.drive_distance(31.125 + 3.5 + 30);
 
-  DoinkerPneu.set(true);
+
+  /*DoinkerPneu.set(true);
   chassis.turn_to_angle(76.75);
   DoinkerPneu.set(false);
   chassis.turn_to_angle(65);
