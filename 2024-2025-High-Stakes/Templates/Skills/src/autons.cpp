@@ -110,6 +110,10 @@ void SpedUp(){
   vex::task t3(loadIntake);
   chassis.turn_to_angle(0);
   chassis.drive_distance(72);
+  //chassis.turn_to_angle(270);
+  DoinkerPneu.set(true);
+  wait(0.3, seconds);
+  chassis.turn_to_angle(135);
   chassis.turn_to_angle(270);
   chassis.set_drive_constants(6, 1.5, 0, 15, 0);
   chassis.drive_distance(-60);
