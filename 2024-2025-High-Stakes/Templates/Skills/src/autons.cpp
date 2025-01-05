@@ -87,7 +87,7 @@ void Auton43Points(){
   chassis.drive_distance(-9);
   MogoPneu.set(false);
   Intake.stop();
-  chassis.drive_distance(5);
+  chassis.drive_distance(5.25);
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   chassis.set_turn_exit_conditions(0.5, 300, 5000);
   chassis.turn_to_angle(89);
@@ -108,11 +108,11 @@ void Auton43Points(){
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   chassis.drive_distance(33);
   chassis.drive_distance(-23);
-  chassis.turn_to_angle(220);
-  chassis.drive_distance(14);
+  chassis.turn_to_angle(225);
+  chassis.drive_distance(14.5);
   wait(0.3, seconds);
   chassis.turn_to_angle(25);
-  chassis.drive_distance(-8);
+  chassis.drive_distance(-8.5);
   MogoPneu.set(false);
   Intake.stop();
   chassis.drive_distance(30);
@@ -120,7 +120,7 @@ void Auton43Points(){
   chassis.turn_to_angle(0);
   chassis.drive_distance(48);
   chassis.turn_to_angle(45);
-  chassis.drive_distance(36.5);
+  chassis.drive_distance(36);
   chassis.turn_to_angle(270);
   // DoinkerPneu.set(true);
   // wait(0.3, seconds);
