@@ -8,7 +8,8 @@ extern Drive chassis;
 void default_constants();
 
 void DriveStraight();
-void SpedUp();
+void Auton43Points();
+void Auton38Points();
 void Auton26Points();
 void mirrored();
 void macro();

@@ -161,8 +161,8 @@ void pre_auton(void) {
   }
 
 void autonomous(void) {
-  //DriveStraight();
-  SpedUp();
+  Auton43Points();
+  //Auton38Points();
   //Auton26Points(); 
 }
 
