@@ -55,7 +55,8 @@ void SpedUp(){
   t.stop();
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
-  chassis.drive_distance(16);
+  chassis.turn_to_angle(90);
+  chassis.drive_distance(16, 90);
   wait(0.3, seconds);
   chassis.arm_to_angle(40);
   chassis.drive_distance(-11, 88);
@@ -78,7 +79,7 @@ void SpedUp(){
   chassis.drive_distance(-9);
   MogoPneu.set(false);
   Intake.stop();
-  chassis.drive_distance(5.5);
+  chassis.drive_distance(6);
   chassis.set_drive_constants(3, 1.5, 0, 10, 0);
   chassis.set_turn_exit_conditions(0.5, 300, 5000);
   chassis.turn_to_angle(89);
@@ -95,10 +96,10 @@ void SpedUp(){
   chassis.drive_distance(25);
   chassis.turn_to_angle(180);
   chassis.set_drive_constants(4, 1.5, 0, 10, 0);
-  chassis.drive_distance(35);
+  chassis.drive_distance(33);
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   wait(0.5, seconds);
-  chassis.drive_distance(-25);
+  chassis.drive_distance(-23);
   chassis.turn_to_angle(220);
   chassis.drive_distance(14);
   wait(0.3, seconds);
@@ -109,25 +110,27 @@ void SpedUp(){
   chassis.drive_distance(30);
   vex::task t3(loadIntake);
   chassis.turn_to_angle(0);
-  chassis.drive_distance(72);
+  chassis.drive_distance(48);
+  chassis.turn_to_angle(45);
+  chassis.drive_distance(36.5);
   chassis.turn_to_angle(270);
   // DoinkerPneu.set(true);
   // wait(0.3, seconds);
   // chassis.turn_to_angle(135);
   // chassis.turn_to_angle(270);
   chassis.set_drive_constants(6, 1.5, 0, 15, 0);
-  chassis.drive_distance(-60);
+  chassis.drive_distance(-36);
   MogoPneu.set(true);
   t3.stop();
   Intake.spin(forward);
   chassis.drive_distance(-15);
   default_constants();
-  chassis.turn_to_angle(255);
+  chassis.turn_to_angle(258);
   MogoPneu.set(false);
   wait(0.5, seconds);
   chassis.drive_distance(-32);
   chassis.drive_distance(37);
-  chassis.turn_to_angle(295);
+  chassis.turn_to_angle(290);
   chassis.drive_distance(50);
 }
 
