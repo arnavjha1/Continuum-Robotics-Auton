@@ -56,7 +56,7 @@ void Auton43Points(){
   chassis.drive_distance(25);
   wait(0.3, seconds);
   chassis.turn_to_angle(38);
-  chassis.drive_distance(30);
+  chassis.drive_distance(30.5);
   chassis.turn_to_angle(90);
   vex::task t4(moveArmFullyUp);
   t.stop();
@@ -73,7 +73,7 @@ void Auton43Points(){
   chassis.set_heading(180);
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   //chassis.drive_distance(57);
-  chassis.drive_distance(47);
+  chassis.drive_distance(47.5);
   t2.stop();
   wait(0.5, seconds);
   chassis.drive_distance(10);
