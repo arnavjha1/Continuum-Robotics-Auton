@@ -4,6 +4,8 @@ void loadArmController();
 
 int loadArm();
 
+int loadIntake();
+
 float reduce_0_to_360(float angle);
 
 float reduce_negative_180_to_180(float angle);

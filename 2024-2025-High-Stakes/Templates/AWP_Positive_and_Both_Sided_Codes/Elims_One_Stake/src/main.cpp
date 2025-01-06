@@ -63,16 +63,16 @@ motor_group(RightFront, RightBack, Right6th),
 PORT13,
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
-3.25,
+3.125,
 
 //External ratio, must be in decimal, in the format of input teeth/output teeth.
 //If your motor has an 84-tooth gear and your wheel has a 60-tooth gear, this value will be 1.4.
 //If the motor drives the wheel directly, this value is 1:
-0.75,
+0.75,//*24.875/24,
 
 //Gyro scale, this is what your gyro reads when you spin the robot 360 degrees.
 //For most cases 360 will do fine here, but this scale factor can be very helpful when precision is necessary.
-360,
+357.55*362/360,
 
 /*---------------------------------------------------------------------------*/
 /*                                  PAUSE!                                   */
@@ -157,13 +157,34 @@ void pre_auton(void) {
 
     ArmRotation.setReversed(true);
     ArmRotation.resetPosition();
-
+while(auto_started == false){            
+    controller(primary).Screen.setCursor(0, 0);
+    switch(current_auton_selection){
+      case 0:
+        controller(primary).Screen.print("Red / Right Side");
+        break;
+      case 1:
+        controller(primary).Screen.print("Blue / Left Side");
+        break;
+    }
+    if(LimitSwitchC.pressing()){
+      while(LimitSwitchC.pressing()) {}
+      current_auton_selection = 1 - current_auton_selection;
+    }
+    task::sleep(10);
   }
+}
 
 void autonomous(void) {
-  Auton43Points();
-  //Auton38Points();
-  //Auton26Points(); 
+  auto_started = true;
+  switch(current_auton_selection){  
+    case 0:
+      regular();
+      break;        
+    case 1:        
+      mirrored();
+      break;
+  }
 }
 
 /*---------------------------------------------------------------------------*/
@@ -176,6 +197,24 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
+
+void loadArm() {
+
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      Intake.setVelocity(50, percent);
+      Intake.spinFor(reverse, 12, turns);
+      Intake.setVelocity(100, percent);
+      break;
+    }
+    else  {
+      Intake.setVelocity(100, percent);
+      Intake.spin(forward);
+    }
+
+    wait(0.02, seconds);
+  }
+}
 
 void spinIntakeForward() {
   Intake.setVelocity(100, percent);
@@ -264,7 +303,7 @@ void usercontrol(void) {
     controller(primary).ButtonL1.released(stopIntake); 
 
     controller(primary).ButtonR1.pressed(triggerMogoMech);
-    controller(primary).ButtonR2.pressed(loadArmController);
+    controller(primary).ButtonR2.pressed(loadArm);
 
     controller(primary).ButtonY.pressed(moveArmUp);
     controller(primary).ButtonY.released(stopArm);
