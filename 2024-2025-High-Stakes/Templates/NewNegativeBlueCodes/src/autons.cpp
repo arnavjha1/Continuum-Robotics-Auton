@@ -4,7 +4,7 @@ int matchloadangle = 167;
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(12, .4, .03, 3, 15);
+  chassis.set_turn_constants(12, 2.5, .03, 3, 15);
   chassis.set_swing_constants(12, .3, .001, 2, 15);
   chassis.set_drive_exit_conditions(1.5, 300, 800);
   chassis.set_turn_exit_conditions(1, 300, 1800);
@@ -18,41 +18,29 @@ void odom_constants(){
 }
 
 void regular(){
-  int d = matchloadangle;
-  chassis.drive_distance(-19, 30+d);
-  chassis.set_drive_constants(11, 1, 0, 10, 0);
-  chassis.drive_distance(-2.5, 30+d);
+  chassis.set_turn_exit_conditions(1, 300, 800);
+  chassis.set_drive_constants(11, 2, 0, 10, 0);
+  chassis.drive_distance(12, 0);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  wait(0.1, seconds);
-  MogoPneu.set(true);
-  wait(0.2, seconds);
   Intake.spin(forward);
-  wait(0.6, seconds);
-  chassis.right_swing_to_angle(134.5+d);
-  chassis.drive_distance(26.8, 134.5+d);
-  //chassis.right_swing_to_angle(120+d);
-  //chassis.set_drive_constants(11, 15, 0, 10, 0);
-  //chassis.drive_distance(5, 120+d);
-  //chassis.right_swing_to_angle(98+d);
-  wait(0.5, seconds);
-  //chassis.set_drive_constants(11, 20, 0, 10, 0);
-  chassis.drive_distance(-10, 134.5+d);
-  chassis.right_swing_to_angle(118+d);
-  chassis.drive_distance(14.2, 118+d);
-  wait(0.4, seconds);
-  //Intake.stop();
-  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  chassis.drive_distance(-14.6, 120+d);
-  //chassis.right_swing_to_angle(115+d);
-  //chassis.drive_distance(-15, 115+d);
-  //chassis.right_swing_to_angle(180+d);
-  chassis.set_drive_constants(11, 0.1, 0, 10, 0);
-  chassis.left_swing_to_angle(70+d);
-  //Intake.spin(forward);
-  chassis.drive_distance(19, 70+d);
-  wait(1.6, seconds);
-  chassis.set_drive_constants(11, 0.6, 0, 10, 0);
-  chassis.drive_distance(-42, 70+d);
+  chassis.drive_distance(-14, 0);
+  chassis.turn_to_angle(-15);
+  chassis.drive_distance(7, -15);
+  chassis.set_turn_exit_conditions(1, 300, 2800);
+  chassis.turn_to_angle(15);
+  Intake.stop();
+  chassis.set_turn_exit_conditions(1, 300, 800);
+  chassis.drive_distance(10, 15);
+  DoinkerPneu.set(true);
+  chassis.set_turn_constants(12, 0.7, .03, 3, 15);
+  chassis.turn_to_angle(120);
+  DoinkerPneu.set(false);
+  chassis.set_turn_constants(12, 2.5, .03, 3, 15);
+  chassis.set_turn_exit_conditions(1, 300, 1500);
+  chassis.turn_to_angle(-10);
+  Intake.spin(forward);
+  chassis.drive_distance(10, 0);
+
 }
 
 void mirrored(){
@@ -76,20 +64,35 @@ void mirrored(){
   MogoPneu.set(true);
   wait(0.2, seconds);
   Intake.spin(forward);
-  chassis.right_swing_to_angle(-140+d);
+  chassis.right_swing_to_angle(-135+d);
   chassis.set_drive_constants(11, 1.2, 0, 10, 0);
-  chassis.drive_distance(17);
-  chassis.right_swing_to_angle(-45+d);
-  chassis.drive_distance(14);
-  chassis.set_turn_exit_conditions(1, 100, 150);
-  chassis.left_swing_to_angle(-30+d);
-  chassis.set_drive_constants(11, 2.3, 0, 10, 0);
-  chassis.set_drive_exit_conditions(1.5, 300, 950);
-  chassis.drive_distance(64);
-  wait(0.1, seconds);
-  chassis.set_drive_constants(11, 0.4, 0, 10, 0);
+  chassis.drive_distance(18);
+  chassis.right_swing_to_angle(-52+d);
+  chassis.drive_distance(15);
+  chassis.set_turn_exit_conditions(1, 100, 500);
+  chassis.set_swing_exit_conditions(1, 100, 200);
+  chassis.left_swing_to_angle(-23+d);
+  chassis.set_drive_constants(11, 3.5, 0, 10, 0);
+  chassis.set_drive_exit_conditions(1.5, 300, 1050);
+  chassis.drive_distance(38);
+  Intake.stop();
+  chassis.set_drive_exit_conditions(1.5, 300, 600);
+  chassis.drive_distance(30);
+  wait(0.2, seconds);
+  chassis.set_drive_constants(11, 2, 0, 10, 0);
+  Intake.spin(forward);
   chassis.drive_distance(-10);
-  chassis.drive_distance(4); 
+  DoinkerPneu.set(true);
+  wait(0.2, seconds);
+  chassis.drive_distance(6.5);
+  Intake.stop();
+  chassis.turn_to_angle(30+d);
+  DoinkerPneu.set(false);
+  chassis.turn_to_angle(-18+d);
+  wait(0.1, seconds);
+  Intake.spin(forward);
+  chassis.drive_distance(15, -20+d);
+
 }
 
 
