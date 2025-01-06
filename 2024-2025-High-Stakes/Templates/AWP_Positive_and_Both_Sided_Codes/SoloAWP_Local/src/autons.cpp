@@ -30,19 +30,25 @@ void odom_constants(){
   chassis.drive_settle_error = 0;
 }
 
+void TouchBar(){
+  chassis.turn_to_angle(175);
+  chassis.drive_distance(40);
+}
+
 void ArmPickup(){
   Intake.spin(forward);
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      wait(0.075, seconds);
-      Intake.stop();
-      wait(0.3, seconds);
-      Intake.spin(forward);
-      while (true) {
+      MogoPneu.set(false);
+      chassis.drive_distance(-4);
+      MogoPneu.set(true);
+      wait(0.5, seconds);
+      TouchBar();
+      /*while (true) {
         if (DistSensor.objectDistance(inches) < 1) {
          /* Intake.setVelocity(0, percent);
           Intake.spinFor(reverse, 1, turns);
-          Intake.setVelocity(100, percent);*/
+          Intake.setVelocity(100, percent);
           break;
         }
         else {
@@ -50,7 +56,7 @@ void ArmPickup(){
           Intake.spin(forward);
         }
       wait(0.02, seconds);
-      }
+      }*/
       break;
     }
     else  {
@@ -90,17 +96,17 @@ void auton_task(){/*
   thread(ArmDown).detach();
   chassis.drive_distance(-2);
   chassis.set_drive_exit_conditions(0.3, 0, 1000);
-  chassis.turn_to_angle(-134);
+  chassis.turn_to_angle(-135 + 2.5);
   Intake.spin(forward);
 
-  chassis.drive_distance(24);
-  chassis.turn_to_angle(34);
+  chassis.drive_distance(28.75);
+  chassis.turn_to_angle(60 - 26.7915155 + 3);
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
-  chassis.drive_distance(48);
+  chassis.drive_distance(56.5729617 - 5);
   
   thread(ArmPickup).detach();
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  chassis.drive_distance(18);
+  chassis.drive_distance(18 + 5 + 18);/*
   wait(0.6, seconds);
   chassis.drive_distance(-30);
 
