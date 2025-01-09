@@ -39,24 +39,21 @@ void ArmPickup(){
   Intake.spin(forward);
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      MogoPneu.set(false);
-      chassis.drive_distance(-4);
-      MogoPneu.set(true);
-      wait(0.5, seconds);
-      TouchBar();
-      /*while (true) {
-        if (DistSensor.objectDistance(inches) < 1) {
-         /* Intake.setVelocity(0, percent);
-          Intake.spinFor(reverse, 1, turns);
-          Intake.setVelocity(100, percent);
-          break;
-        }
-        else {
-          Intake.setVelocity(100, percent);
-          Intake.spin(forward);
-        }
-      wait(0.02, seconds);
-      }*/
+     
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      Intake.setVelocity(50, percent);
+      Intake.spinFor(reverse, 12, turns);
+      Intake.setVelocity(100, percent);
+      break;
+    }
+    else  {
+      Intake.setVelocity(100, percent);
+      Intake.spin(forward);
+    }
+
+    wait(0.02, seconds);
+  }
       break;
     }
     else  {

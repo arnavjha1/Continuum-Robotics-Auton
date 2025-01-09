@@ -111,7 +111,7 @@ Discarded input sections
  .ARM.exidx.text._Z8TouchBarv
                 0x00000000        0x8 build/src/autons.o
  .text._Z9ArmPickupv
-                0x00000000      0x180 build/src/autons.o
+                0x00000000      0x200 build/src/autons.o
  .ARM.exidx.text._Z9ArmPickupv
                 0x00000000        0x8 build/src/autons.o
  .text._Z7ArmDownv
