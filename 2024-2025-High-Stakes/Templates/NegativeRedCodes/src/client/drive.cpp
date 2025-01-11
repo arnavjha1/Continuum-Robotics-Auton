@@ -33,6 +33,28 @@ Drive::Drive(enum::drive_setup drive_setup, motor_group DriveL, motor_group Driv
   }
 }
 
+float currentX = 0;
+float currentY = 0;
+
+void Drive::arm_to_angle(double desiredValue){
+  double kP = 2.0;
+  double settleError = 1.0;
+  Arm.spin(forward);
+  if(desiredValue > ArmRotation.angle()){
+    while(desiredValue > ArmRotation.angle() + settleError){
+      double error = desiredValue - ArmRotation.angle();
+      Arm.setVelocity(-1 * error * kP, percent);
+    }
+  }
+  else{
+    while(ArmRotation.angle() > desiredValue + settleError){
+      double error = ArmRotation.angle()-desiredValue;
+      Arm.setVelocity(error * kP, percent);
+    }
+  }
+  Arm.stop();
+}
+
 void Drive::drive_with_voltage(float leftVoltage, float rightVoltage){
   DriveL.spin(fwd, leftVoltage, volt);
   DriveR.spin(fwd, rightVoltage,volt);
@@ -100,6 +122,16 @@ float Drive::get_right_position_in(){
   return( DriveR.position(deg)*drive_in_to_deg_ratio );
 }
 
+int cdm = 1;
+
+void Drive::regulate(){
+  cdm = 1;
+}
+
+void Drive::mirror(){
+  cdm = -1;
+}
+
 void Drive::turn_to_angle(float angle){
   turn_to_angle(angle, turn_max_voltage, turn_settle_error, turn_settle_time, turn_timeout, turn_kp, turn_ki, turn_kd, turn_starti);
 }
@@ -112,7 +144,9 @@ void Drive::turn_to_angle(float angle, float turn_max_voltage, float turn_settle
   turn_to_angle(angle, turn_max_voltage, turn_settle_error, turn_settle_time, turn_timeout, turn_kp, turn_ki, turn_kd, turn_starti);
 }
 
-void Drive::turn_to_angle(float angle, float turn_max_voltage, float turn_settle_error, float turn_settle_time, float turn_timeout, float turn_kp, float turn_ki, float turn_kd, float turn_starti){
+void Drive::turn_to_angle(float cor_angle, float turn_max_voltage, float turn_settle_error, float turn_settle_time, float turn_timeout, float turn_kp, float turn_ki, float turn_kd, float turn_starti){
+  //this->turn_timeout = std::abs((angle - Gyro.rotation()*1.4/gyro_scale)) - 0.25;
+  float angle = cdm*cor_angle;
   desired_heading = angle;
   PID turnPID(reduce_negative_180_to_180(angle - get_absolute_heading()), turn_kp, turn_ki, turn_kd, turn_starti, turn_settle_error, turn_settle_time, turn_timeout);
   while(turnPID.is_settled() == false){
@@ -163,6 +197,8 @@ void Drive::drive_distance(float distance, float heading, float drive_max_voltag
   }
   DriveL.stop(hold);
   DriveR.stop(hold);
+  currentX += distance * cos(Inertial13.rotation());
+  currentY += distance * sin(Inertial13.rotation());
 }
 
 void Drive::left_swing_to_angle(float angle){
@@ -170,18 +206,23 @@ void Drive::left_swing_to_angle(float angle){
 }
 
 void Drive::left_swing_to_angle(float angle, float swing_max_voltage, float swing_settle_error, float swing_settle_time, float swing_timeout, float swing_kp, float swing_ki, float swing_kd, float swing_starti){
-  desired_heading = angle;
-  PID swingPID(reduce_negative_180_to_180(angle - get_absolute_heading()), swing_kp, swing_ki, swing_kd, swing_starti, swing_settle_error, swing_settle_time, swing_timeout);
-  while(swingPID.is_settled() == false){
-    float error = reduce_negative_180_to_180(angle - get_absolute_heading());
-    float output = swingPID.compute(error);
-    output = clamp(output, -turn_max_voltage, turn_max_voltage);
-    DriveL.spin(fwd, output, volt);
-    DriveR.stop(hold);
-    task::sleep(10);
+  if(cdm == -1){
+    right_swing_to_angle(cdm*angle, swing_max_voltage, swing_settle_error, swing_settle_time, swing_timeout, swing_kp, swing_ki, swing_kd, swing_starti);
   }
-  DriveL.stop(hold);
-  DriveR.stop(hold);
+  else{
+    desired_heading = angle;
+    PID swingPID(reduce_negative_180_to_180(angle - get_absolute_heading()), swing_kp, swing_ki, swing_kd, swing_starti, swing_settle_error, swing_settle_time, swing_timeout);
+    while(swingPID.is_settled() == false){
+      float error = reduce_negative_180_to_180(angle - get_absolute_heading());
+      float output = swingPID.compute(error);
+      output = clamp(output, -turn_max_voltage, turn_max_voltage);
+      DriveL.spin(fwd, output, volt);
+      DriveR.stop(hold);
+      task::sleep(10);
+    }
+    DriveL.stop(hold);
+    DriveR.stop(hold);
+  }
 }
 
 void Drive::right_swing_to_angle(float angle){
@@ -189,18 +230,23 @@ void Drive::right_swing_to_angle(float angle){
 }
 
 void Drive::right_swing_to_angle(float angle, float swing_max_voltage, float swing_settle_error, float swing_settle_time, float swing_timeout, float swing_kp, float swing_ki, float swing_kd, float swing_starti){
-  desired_heading = angle;
-  PID swingPID(reduce_negative_180_to_180(angle - get_absolute_heading()), swing_kp, swing_ki, swing_kd, swing_starti, swing_settle_error, swing_settle_time, swing_timeout);
-  while(swingPID.is_settled() == false){
-    float error = reduce_negative_180_to_180(angle - get_absolute_heading());
-    float output = swingPID.compute(error);
-    output = clamp(output, -turn_max_voltage, turn_max_voltage);
-    DriveR.spin(reverse, output, volt);
-    DriveL.stop(hold);
-    task::sleep(10);
+  if(cdm == -1){
+    left_swing_to_angle(cdm*angle, swing_max_voltage, swing_settle_error, swing_settle_time, swing_timeout, swing_kp, swing_ki, swing_kd, swing_starti);
   }
-  DriveL.stop(hold);
-  DriveR.stop(hold);
+  else{
+    desired_heading = angle;
+    PID swingPID(reduce_negative_180_to_180(angle - get_absolute_heading()), swing_kp, swing_ki, swing_kd, swing_starti, swing_settle_error, swing_settle_time, swing_timeout);
+    while(swingPID.is_settled() == false){
+      float error = reduce_negative_180_to_180(angle - get_absolute_heading());
+      float output = swingPID.compute(error);
+      output = clamp(output, -turn_max_voltage, turn_max_voltage);
+      DriveR.spin(reverse, output, volt);
+      DriveL.stop(hold);
+      task::sleep(10);
+    }
+    DriveL.stop(hold);
+    DriveR.stop(hold);
+  }
 }
 
 float Drive::get_ForwardTracker_position(){
@@ -286,6 +332,29 @@ void Drive::drive_to_point(float X_position, float Y_position, float drive_max_v
   DriveL.stop(hold);
   DriveR.stop(hold);
 }
+
+void Drive::point(float X_pos, float Y_pos){
+  point(X_pos, Y_pos, true);
+}
+
+void Drive::point(float X_pos, float Y_pos, bool allowTurn){
+  float deltaX = X_pos - currentX;
+  float deltaY = Y_pos - currentY;
+  if(allowTurn){
+    turn_to_angle(atan2(12, -12) * 57.2957795);
+  }
+  drive_distance(sqrt(deltaX*deltaX + deltaY*deltaY));
+}
+
+/*void Drive::approach(float X_pos, float Y_pos, float angle){
+  float currentAngle = Inertial13.rotation();
+  float m1 = 0;
+  float b1 = 0;
+  float m2 = 0;
+  float b2 = 0;
+  
+
+}*/
 
 void Drive::turn_to_point(float X_position, float Y_position){
   turn_to_point(X_position, Y_position, 0, turn_max_voltage, turn_settle_error, turn_settle_time, turn_timeout, turn_kp, turn_ki, turn_kd, turn_starti);
@@ -447,6 +516,7 @@ void Drive::turn_left(int desiredValue, double timeOut = 1.0) {
   DriveL.stop();
   DriveR.stop();
 }
+
 
 void Drive::control_arcade(){
   float throttle = deadband(controller(primary).Axis3.value(), 5);

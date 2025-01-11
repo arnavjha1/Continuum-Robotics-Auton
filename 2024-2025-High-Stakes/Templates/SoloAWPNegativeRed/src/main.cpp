@@ -175,23 +175,6 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 bool mobilePneu = false;
 
-void loadArm() {
-
-  while (true) {
-    if (DistSensor.objectDistance(inches) < 1) {
-      Intake.setVelocity(50, percent);
-      Intake.spinFor(reverse, 12, turns);
-      Intake.setVelocity(100, percent);
-      break;
-    }
-    else  {
-      Intake.setVelocity(100, percent);
-      Intake.spin(forward);
-    }
-
-    wait(0.02, seconds);
-  }
-}
 
 void spinIntakeForward() {
   Intake.setVelocity(100, percent);
@@ -266,6 +249,31 @@ int DisplayToController() {
 
 }
 
+int loadArm() {
+  Arm.setVelocity(100, percent);
+  chassis.arm_to_angle(2);
+  Arm.setVelocity(50, percent);
+  while (true) {
+    if (DistSensor.objectDistance(inches) < 1) {
+      Intake.setVelocity(50, percent);
+      Intake.spinFor(reverse, 12, turns);
+      Intake.setVelocity(100, percent);
+      break;
+    }
+    else  {
+      Intake.setVelocity(100, percent);
+      Intake.spin(forward);
+    }
+  }
+  return 0;
+}
+
+
+void loadArmController() {
+  loadArm();
+}
+
+
 void usercontrol(void) {
 
     MogoPneu.set(true);
@@ -280,7 +288,7 @@ void usercontrol(void) {
     controller(primary).ButtonL1.released(stopIntake); 
 
     controller(primary).ButtonR1.pressed(triggerMogoMech);
-    controller(primary).ButtonR2.pressed(loadArm);
+    controller(primary).ButtonR2.pressed(loadArmController);
 
     controller(primary).ButtonY.pressed(moveArmUp);
     controller(primary).ButtonY.released(stopArm);

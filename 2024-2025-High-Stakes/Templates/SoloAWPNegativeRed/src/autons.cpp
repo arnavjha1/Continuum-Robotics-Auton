@@ -21,17 +21,17 @@ void ArmDown(){
   MogoPneu.set(true);
 }
 void ArmUp(){
-  chassis.right_swing_to_angle(3.5);
+  chassis.right_swing_to_angle(-3.5);
 }
 
 void regular(){
   int d = matchloadangle;
   thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
-  chassis.drive_distance(10.5);
+  chassis.drive_distance(11.5);
   Arm.spinFor(forward, 175, degrees);
 
-  chassis.right_swing_to_angle(-4.5);
+  chassis.right_swing_to_angle(4.5);
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
   chassis.drive_distance(-36);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -41,33 +41,37 @@ void regular(){
 
   Intake.spin(forward);
   chassis.right_swing_to_angle(50.5+d);
-  chassis.left_swing_to_angle(134.5+d);
+  chassis.left_swing_to_angle(146+d);
   chassis.set_swing_exit_conditions(1, 300, 800);
-  chassis.drive_distance(34.5, 134.5+d);
+  chassis.drive_distance(16.8, 146.5+d);
   //chassis.right_swing_to_angle(120+d);
   //chassis.set_drive_constants(11, 15, 0, 10, 0);
   //chassis.drive_distance(5, 120+d);
   //chassis.right_swing_to_angle(98+d);
   wait(0.5, seconds);
   //chassis.set_drive_constants(11, 20, 0, 10, 0);
-  chassis.drive_distance(-10, 134.5+d);
-  chassis.right_swing_to_angle(121+d);
-  chassis.drive_distance(14.8, 121+d);
+  chassis.drive_distance(-10.2, 140.5+d);
+  chassis.right_swing_to_angle(117+d);
+  chassis.drive_distance(14, 121+d);
   wait(0.4, seconds);
   //Intake.stop();
   chassis.set_drive_constants(11, 5, 0, 10, 0);
-  chassis.drive_distance(-14.6, 120+d);
+  chassis.drive_distance(-14.2, 120+d);
   //chassis.right_swing_to_angle(115+d);
   //chassis.drive_distance(-15, 115+d);
   //chassis.right_swing_to_angle(180+d);
   chassis.set_drive_constants(11, 3, 0, 10, 0);
   chassis.left_swing_to_angle(70+d);
   //Intake.spin(forward);
-  chassis.drive_distance(19.3, 70+d);
+  chassis.drive_distance(14.3, 70+d);
+  wait(0.1, seconds);
+  chassis.drive_distance(5, 70+d);
   wait(1.6, seconds);
   chassis.set_drive_constants(11, 0.6, 0, 10, 0);
-  chassis.drive_distance(-42, 70+d);
+  Intake.stop();
+  chassis.drive_distance(-35, 70+d);
 }
+
 
 void mirrored(){
   //wait(2, seconds);
