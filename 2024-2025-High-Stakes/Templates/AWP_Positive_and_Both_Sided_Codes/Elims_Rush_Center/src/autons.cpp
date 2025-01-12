@@ -42,9 +42,7 @@ void ArmPickup(){
      
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      Intake.setVelocity(50, percent);
-      Intake.spinFor(reverse, 12, turns);
-      Intake.setVelocity(100, percent);
+      Intake.stop();
       break;
     }
     else  {
@@ -73,6 +71,9 @@ void ArmUp(){
 void Reg(){
   Arm.spinFor(forward, 325, degrees);
 }
+void task1(){
+  Arm.spinFor(reverse, 225, degrees);
+}
 void auton_task(){/*
   MogoPneu.set(true);
   wait(0.5, seconds);
@@ -83,18 +84,23 @@ void auton_task(){/*
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.drive_distance(18);
   */
-  chassis.set_drive_constants(11, 0.9, 0, 10, 0);
+  chassis.set_drive_constants(11, 0.55, 0, 10, 0);
   thread(ArmUp).detach();
 
-  chassis.drive_distance(45.5 + 6);
+  chassis.drive_distance(45.5 + 15);
   thread(Reg).detach();
-  wait(0.6, seconds);
-  chassis.drive_distance(-18 - 17.5 - 7.5 + 2.75 - 4);
+  wait(0.3, seconds);
+ // thread(task1).detach();
+  chassis.drive_distance(-18 - 17.5 - 7.5 + 2.75 - 5);
   
-  Arm.spinFor(reverse, 225, degrees);
-  chassis.turn_to_angle(-106.5);
-  Intake.spin(forward);
-  chassis.drive_distance(42);
+  chassis.turn_to_angle(-107.5);
+  thread(ArmPickup).detach();
+  chassis.set_drive_constants(11, 0.5, 0, 10, 0);
+  chassis.drive_distance(25);
+  
+  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
+  chassis.drive_distance(25);
+  /*
 
   chassis.drive_distance(-42 + 13.8564065 + 8.08290377);
   chassis.turn_to_angle(-170);

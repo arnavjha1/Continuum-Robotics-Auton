@@ -103,10 +103,11 @@ void auton_task(){
   chassis.turn_to_angle(-66 + 71);
   Intake.spin(forward);
   chassis.drive_distance(20);
-  
   chassis.set_turn_constants(12, .4, .03, 3, 15);
+  
   chassis.left_swing_to_angle(-167.5 + 35);
-  chassis.drive_distance(18);
+  chassis.set_drive_exit_conditions(0.3, 300, 400);
+  chassis.drive_distance(24);
   Arm.spinFor(reverse, 100, degrees);
   
   /*

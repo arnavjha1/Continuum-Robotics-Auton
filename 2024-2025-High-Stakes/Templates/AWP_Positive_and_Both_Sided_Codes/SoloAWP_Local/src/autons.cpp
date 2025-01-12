@@ -104,8 +104,9 @@ void auton_task(){
   Intake.spin(forward);
   chassis.drive_distance(20);
   chassis.right_swing_to_angle(167.5 - 35);
-  Arm.spinFor(reverse, 100, degrees);
   chassis.drive_distance(18);
+  chassis.set_drive_exit_conditions(0.3, 300, 400);
+  Arm.spinFor(reverse, 100, degrees);
   
   /*
   MogoPneu.set(true);
