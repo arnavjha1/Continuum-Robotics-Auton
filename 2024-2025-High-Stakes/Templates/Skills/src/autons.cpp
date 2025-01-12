@@ -33,12 +33,27 @@ int moveArmFullyUp() {
   return 0;
 }
 
+int pickUpMogo() {
+  wait(1.5, seconds);
+  MogoPneu.set(true);
+  wait(0.5, seconds);
+  Intake.spin(forward);
+  wait(3, seconds);
+  return 0;
+}
+
+int lowerArm() {
+  chassis.arm_to_angle(40);
+  wait(5, seconds);
+  return 0;
+}
+
 void Auton43Points(){
   default_constants();
   chassis.set_heading(180);
   chassis.arm_to_angle(60);
   chassis.drive_distance(6.5);
-  chassis.arm_to_angle(20);
+  chassis.arm_to_angle(25);
   Arm.stop();
   chassis.drive_distance(-11.5);
   chassis.turn_to_angle(270);
@@ -65,7 +80,9 @@ void Auton43Points(){
   chassis.turn_to_angle(90);
   chassis.drive_distance(16, 90);
   wait(0.3, seconds);
-  chassis.arm_to_angle(40);
+  vex::task moveArmDown(lowerArm);
+  wait(1, seconds);
+  moveArmDown.stop();
   t4.stop();
   chassis.drive_distance(-11, 88);
   vex::task t2(moveArmFullyDown);
@@ -73,6 +90,7 @@ void Auton43Points(){
   chassis.set_heading(180);
   chassis.set_drive_constants(6, 1.5, 0, 10, 0);
   //chassis.drive_distance(57);
+  Intake.spin(forward);
   chassis.drive_distance(47.5);
   t2.stop();
   wait(0.5, seconds);
@@ -127,18 +145,22 @@ void Auton43Points(){
   // chassis.turn_to_angle(135);
   // chassis.turn_to_angle(270);
   chassis.set_drive_constants(6, 1.5, 0, 15, 0);
-  chassis.drive_distance(-36);
-  MogoPneu.set(true);
   t3.stop();
-  Intake.spin(forward);
-  chassis.drive_distance(-15);
+  vex::task t5(pickUpMogo);
+  chassis.drive_distance(-51);
+  //chassis.drive_distance(-36);
+  //MogoPneu.set(true);
+  //t3.stop();
+  //Intake.spin(forward);
+  //chassis.drive_distance(-15);
   default_constants();
   chassis.turn_to_angle(253);
+  t5.stop();
   MogoPneu.set(false);
   wait(0.5, seconds);
   chassis.drive_distance(-32);
   chassis.drive_distance(37);
-  chassis.turn_to_angle(290);
+  chassis.turn_to_angle(295);
   chassis.drive_distance(100);
 }
 
