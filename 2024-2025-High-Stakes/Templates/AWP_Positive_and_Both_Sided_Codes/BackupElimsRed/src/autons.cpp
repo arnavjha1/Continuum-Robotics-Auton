@@ -73,19 +73,13 @@ void ArmDown(){
 void ArmUp(){
   chassis.left_swing_to_angle(3.5);
 }
-
-void task2(){
-  Arm.spinFor(forward, 175, degrees);
-}
-
 void auton_task(){
   thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
-  thread(task2).detach();
+  Arm.spinFor(forward, 175, degrees);
 
-  wait(0.7, seconds);
-  chassis.left_swing_to_angle(-4.75);
+  chassis.left_swing_to_angle(-4.5);
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
   chassis.drive_distance(-36);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -108,12 +102,9 @@ void auton_task(){
   chassis.turn_to_angle(65);
 
   Intake.spin(forward);
-  chassis.drive_distance(20);
-  chassis.right_swing_to_angle(167.5 - 35);
-  chassis.drive_distance(18);
-  chassis.set_drive_exit_conditions(0.3, 300, 400);
-  Arm.spinFor(reverse, 100, degrees);
-  
+  chassis.drive_distance(24);
+  wait(0.6, seconds);
+  chassis.drive_distance(-40);
   /*
   MogoPneu.set(true);
   wait(0.5, seconds);

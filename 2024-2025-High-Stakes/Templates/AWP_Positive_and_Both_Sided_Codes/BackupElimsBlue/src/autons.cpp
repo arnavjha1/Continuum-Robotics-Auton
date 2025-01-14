@@ -71,21 +71,15 @@ void ArmDown(){
   MogoPneu.set(true);
 }
 void ArmUp(){
-  chassis.left_swing_to_angle(3.5);
+  chassis.right_swing_to_angle(-3.5);
 }
-
-void task2(){
-  Arm.spinFor(forward, 175, degrees);
-}
-
 void auton_task(){
   thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
-  thread(task2).detach();
+  Arm.spinFor(forward, 175, degrees);
 
-  wait(0.7, seconds);
-  chassis.left_swing_to_angle(-4.75);
+  chassis.right_swing_to_angle(4.5);
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
   chassis.drive_distance(-36);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -93,26 +87,24 @@ void auton_task(){
   thread(ArmDown).detach();
   chassis.drive_distance(-2);
   chassis.set_drive_exit_conditions(0.3, 0, 1000);
-  chassis.turn_to_angle(-134);
+  chassis.turn_to_angle(134);
   Intake.spin(forward);
 
   chassis.drive_distance(24);
   wait(0.4, seconds);
-  chassis.turn_to_angle(34 - 1); //34 from earlier
-  chassis.drive_distance(31.125 + 3.5);
+  chassis.turn_to_angle(-33 - 2.5650512); //33 from earlier
+  chassis.drive_distance(31.125 + 3.5 - 4);
 
   chassis.set_turn_constants(5, .4, .03, 3, 15);
   DoinkerPneu.set(true);
-  chassis.turn_to_angle(76.75);
+  chassis.turn_to_angle(-66/* 2 * 33 degrees = 66 degrees*/ + 76.75);
   DoinkerPneu.set(false);
-  chassis.turn_to_angle(65);
 
+  chassis.turn_to_angle(-66 + 71);
   Intake.spin(forward);
-  chassis.drive_distance(20);
-  chassis.right_swing_to_angle(167.5 - 35);
-  chassis.drive_distance(18);
-  chassis.set_drive_exit_conditions(0.3, 300, 400);
-  Arm.spinFor(reverse, 100, degrees);
+  chassis.drive_distance(24);
+  wait(0.6, seconds);
+  chassis.drive_distance(-40);
   
   /*
   MogoPneu.set(true);
