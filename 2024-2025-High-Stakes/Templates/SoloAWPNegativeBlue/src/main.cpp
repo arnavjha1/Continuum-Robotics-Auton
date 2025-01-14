@@ -189,6 +189,33 @@ void stopIntake() {
   Intake.stop();
 }
 
+void arm_to_angle(double desiredValue){
+  double kP = 2.0;
+  double settleError = 1.0;
+  Arm.spin(forward);
+  if(ArmRotation.angle()>300){
+    Arm.stop();
+    Arm.spin(reverse);
+    wait(0.06, seconds);
+    Arm.stop();
+    return;
+  }
+  else if(desiredValue > ArmRotation.angle()){
+    while(desiredValue > ArmRotation.angle() + settleError){
+      double error = desiredValue - ArmRotation.angle();
+      Arm.setVelocity(-1 * error * kP, percent);
+    }
+  }
+  else{
+    while(ArmRotation.angle() > desiredValue + settleError){
+      double error = ArmRotation.angle()-desiredValue;
+      Arm.setVelocity(error * kP, percent);
+    }
+  }
+  Arm.stop();
+}
+
+
 void toggleDoinkerPneuPos() {
   if (DoinkerPneu) {
     DoinkerPneu.set(false);
@@ -248,13 +275,13 @@ int DisplayToController() {
 
 }
 int loadArm() {
-  Arm.setVelocity(100, percent);
-  chassis.arm_to_angle(2);
-  Arm.setVelocity(50, percent);
+  // Arm.setVelocity(100, percent);
+  // chassis.arm_to_angle(2);
+  // Arm.setVelocity(50, percent);
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
       Intake.setVelocity(50, percent);
-      Intake.spinFor(reverse, 12, turns);
+      Intake.spinFor(reverse, 13, turns);
       Intake.setVelocity(100, percent);
       break;
     }

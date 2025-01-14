@@ -46,7 +46,7 @@ void regular(){
   //chassis.right_swing_to_angle(115+d);
   //chassis.drive_distance(-15, 115+d);
   //chassis.right_swing_to_angle(180+d);
-  chassis.set_drive_constants(11, 0.1, 0, 10, 0);
+  chassis.set_drive_constants(11, 2, 0, 10, 0);
   chassis.left_swing_to_angle(70+d);
   //Intake.spin(forward);
   chassis.drive_distance(19, 70+d);

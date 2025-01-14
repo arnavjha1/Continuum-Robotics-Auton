@@ -73,13 +73,18 @@ void ArmDown(){
 void ArmUp(){
   chassis.right_swing_to_angle(-3.5);
 }
+void task2(){
+  Arm.spinFor(forward, 175, degrees);
+}
+
 void auton_task(){
   thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
-  Arm.spinFor(forward, 175, degrees);
-
-  chassis.right_swing_to_angle(4.5);
+  thread(task2).detach();
+  
+  wait(0.7, seconds);
+  chassis.right_swing_to_angle(4.75);
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
   chassis.drive_distance(-36);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
@@ -101,12 +106,13 @@ void auton_task(){
   DoinkerPneu.set(false);
 
   chassis.turn_to_angle(-66 + 71);
+  Arm.spinFor(forward, 150, degrees);
   Intake.spin(forward);
-  chassis.drive_distance(20);
+  chassis.drive_distance(24);
   
   chassis.set_turn_constants(12, .4, .03, 3, 15);
   chassis.left_swing_to_angle(-167.5 + 35);
-  chassis.drive_distance(18);
+  chassis.drive_distance(25);
   Arm.spinFor(reverse, 100, degrees);
   
   /*
