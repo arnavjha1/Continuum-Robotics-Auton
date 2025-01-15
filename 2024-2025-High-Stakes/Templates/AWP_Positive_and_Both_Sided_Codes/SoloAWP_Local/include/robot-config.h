@@ -15,6 +15,7 @@ extern digital_out MogoPneu;
 extern digital_out HangPneu;
 extern motor Arm;
 extern motor Intake;
+extern motor FrontIntake;
 extern limit LimitSwitchC;
 extern distance DistSensor;
 extern rotation ArmRotation;

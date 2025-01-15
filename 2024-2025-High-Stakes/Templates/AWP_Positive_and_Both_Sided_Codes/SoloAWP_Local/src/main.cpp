@@ -131,14 +131,18 @@ void pre_auton(void) {
     
     Arm.setStopping(brake);
     Arm.setMaxTorque(100, percent);
-    Arm.setVelocity(50, percent);
+    Arm.setVelocity(100, percent);
 
     DoinkerPneu.set(false);
     HangPneu.set(false);
 
     Intake.setStopping(coast);
     Intake.setMaxTorque(100, percent);
-    Intake.setVelocity(100, percent);
+    Intake.setVelocity(70, percent);
+    
+    FrontIntake.setStopping(coast);
+    FrontIntake.setMaxTorque(100, percent);
+    FrontIntake.setVelocity(100, percent);
 
     LeftFront.setMaxTorque(100, percent);
     LeftBack.setMaxTorque(100, percent);
@@ -196,15 +200,20 @@ void loadArm() {
 void spinIntakeForward() {
   Intake.setVelocity(100, percent);
   Intake.spin(forward);
+  FrontIntake.setVelocity(100, percent);
+  FrontIntake.spin(forward);
 }
 
 void spinIntakeReverse() {
   Intake.setVelocity(100, percent);
   Intake.spin(reverse);
+  FrontIntake.setVelocity(100, percent);
+  FrontIntake.spin(reverse);
 }
 
 void stopIntake() {
   Intake.stop();
+  FrontIntake.stop();
 }
 
 void toggleDoinkerPneuPos() {

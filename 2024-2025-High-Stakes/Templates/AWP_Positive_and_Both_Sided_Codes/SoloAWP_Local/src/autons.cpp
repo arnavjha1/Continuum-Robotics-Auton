@@ -15,9 +15,9 @@ void alter(){
 }
 
 void default_constants(){
-  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(12, .4, .03, 3, 15);
+  chassis.set_drive_constants(11, 10, 0, 3, 0);
+  chassis.set_heading_constants(6, 2, 0, 10, 0);
+  chassis.set_turn_constants(12, 2, 0, 10, 0);
   chassis.set_swing_constants(12, .3, .001, 2, 15);
   chassis.set_drive_exit_conditions(0.3, 300, 1000);
   chassis.set_turn_exit_conditions(1, 300, 1800);
@@ -74,7 +74,8 @@ void ArmUp(){
   chassis.left_swing_to_angle(3.5);
 }
 void auton_task(){
-  thread(ArmUp).detach();
+  chassis.turn_to_angle(90);
+ /* thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
   Arm.spinFor(forward, 175, degrees);
