@@ -9,12 +9,13 @@ extern motor RightFront;
 extern motor RightBack;
 extern motor Left6th;
 extern motor Right6th;
-extern inertial Inertial13;
+extern inertial Inertial21;
 extern digital_out DoinkerPneu;
 extern digital_out MogoPneu;
 extern digital_out HangPneu;
 extern motor Arm;
-extern motor Intake;
+extern motor IntakeFront;
+extern motor IntakeBack;
 extern limit LimitSwitchC;
 extern distance DistSensor;
 /**

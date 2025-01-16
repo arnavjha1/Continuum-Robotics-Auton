@@ -67,7 +67,7 @@ motor_group(LeftFront, LeftBack, Left6th),
 motor_group(RightFront, RightBack, Right6th),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
-PORT13,
+PORT21,
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
 3.25,
@@ -143,7 +143,7 @@ void pre_auton(void) {
       // }
 
     Drivetrain.setStopping(coast);
-    Inertial13.calibrate();
+    Inertial21.calibrate();
     
     Arm.setStopping(brake);
     Arm.setMaxTorque(100, percent);
@@ -152,9 +152,12 @@ void pre_auton(void) {
     DoinkerPneu.set(false);
     HangPneu.set(false);
 
-    Intake.setStopping(coast);
-    Intake.setMaxTorque(100, percent);
-    Intake.setVelocity(100, percent);
+    IntakeFront.setStopping(coast);
+    IntakeFront.setMaxTorque(100, percent);
+    IntakeFront.setVelocity(75, percent);
+    IntakeBack.setStopping(coast);
+    IntakeBack.setMaxTorque(100, percent);
+    IntakeBack.setVelocity(75, percent);
 
     LeftFront.setMaxTorque(100, percent);
     LeftBack.setMaxTorque(100, percent);
@@ -169,7 +172,6 @@ void pre_auton(void) {
     RightFront.setVelocity(100, percent);
     RightBack.setVelocity(100, percent);
     Right6th.setVelocity(100, percent);
-    Intake.setVelocity(100.0, percent);
   }
 
 void autonomous(void) {
@@ -192,11 +194,12 @@ void loadArm() {
 
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
-      Intake.spinFor(reverse, 12, turns);
+      IntakeBack.spinFor(reverse, 8, turns);
       break;
     }
     else  {
-      Intake.spin(forward);
+      IntakeBack.spin(forward);
+      IntakeFront.spin(forward);
     }
 
     wait(0.02, seconds);
@@ -204,15 +207,18 @@ void loadArm() {
 }
 
 void spinIntakeForward() {
-  Intake.spin(forward);
+  IntakeFront.spin(forward);
+  IntakeBack.spin(forward);
 }
 
 void spinIntakeReverse() {
-  Intake.spin(reverse);
+  IntakeFront.spin(reverse);
+  IntakeBack.spin(reverse);
 }
 
 void stopIntake() {
-  Intake.stop();
+  IntakeFront.stop();
+  IntakeBack.stop();
 }
 
 void toggleIntakePneuPos() {
@@ -266,7 +272,7 @@ void stopArm() {
 int DisplayToController() {
 
   while (true) {
-    controller(primary).Screen.print(Intake.velocity(rpm));
+    controller(primary).Screen.print(IntakeBack.velocity(rpm));
     vex::this_thread::sleep_for(1000);
   }
 
