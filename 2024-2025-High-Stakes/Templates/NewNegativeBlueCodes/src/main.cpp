@@ -21,7 +21,7 @@ bool runningSkills = false;
 // RightBack            motor         20              
 // Left6th              motor         14              
 // Right6th             motor         18              
-// Inertial13           inertial      13              
+// Inertial21           inertial      21              
 // WingPneu             digital_out   D               
 // IntakePneu           digital_out   E               
 // LimitSwitchC         limit         C               

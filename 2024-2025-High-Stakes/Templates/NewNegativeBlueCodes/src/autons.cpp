@@ -18,19 +18,24 @@ void odom_constants(){
 }
 
 void regular(){
-  
+  IntakeFront.spin(forward);
+  IntakeBack.spin(forward);
+  chassis.drive_distance(40);
+  wait(2, seconds);
+  chassis.drive_distance(-10);
+  chassis.drive_distance(10);
 }
 
 void mirrored(){
   //wait(2, seconds);
   int d = matchloadangle;
-  chassis.drive_distance(46, -167+d);
+  chassis.drive_distance(49, -167+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
   IntakeFront.spin(forward);
   //IntakeBack.spin(forward);
   wait(0.1, seconds);
   //IntakeFront.stop();
-  chassis.drive_distance(3, -167+d);
+  chassis.drive_distance(8, -167+d);
   //IntakeBack.spin(forward);
   //wait(0.4, seconds);
   //IntakeBack.stop();
@@ -39,20 +44,31 @@ void mirrored(){
   //DoinkerPneu.set(true);
   //chassis.drive_distance(3);
   //DoinkerPneu.set(false);
-  chassis.drive_distance(-8, -160+d); //-10
-  chassis.set_turn_constants(12, 1, .03, 3, 15);
-  chassis.right_swing_to_angle(-92+d);
-  chassis.set_drive_constants(11, 0.6, 0, 10, 0);
-  chassis.drive_distance(-6, -100+d);
-  MogoPneu.set(true);
-  wait(0.2, seconds);
+  //this is for weird pickup
+  //chassis.drive_distance(-6, -160+d); //-10
+  //chassis.set_turn_constants(12, 1, .03, 3, 15);
+  //chassis.right_swing_to_angle(-97+d);
+  //chassis.set_drive_constants(11, 0.6, 0, 10, 0);
+  //chassis.drive_distance(-6, -103+d);
+  //this is normal pickup on far side
+  //chassis.drive_distance(-8, -160+d); //-10
+  chassis.set_turn_constants(12, 2, .03, 1, 15);
+  chassis.drive_distance(-10, -167+d);
+  chassis.left_swing_to_angle(-110+d);
+  //thi sis for pickup on closer side to middle
+  chassis.set_drive_constants(11, 1, 0, 10, 0);
+  chassis.drive_distance(12);
   IntakeBack.spin(forward);
-  chassis.right_swing_to_angle(-135+d);
+  wait(0.3, seconds);
+  IntakeBack.stop();
+  chassis.left_swing_to_angle(-135+d); //-135
   chassis.set_drive_constants(11, 1.2, 0, 10, 0);
-  IntakeFront.spin(forward);
-  chassis.drive_distance(18);
-  chassis.right_swing_to_angle(-52+d);
-  chassis.drive_distance(15);
+  chassis.drive_distance(-12);
+  chassis.right_swing_to_angle(-90+d);
+  MogoPneu.set(true);
+  IntakeBack.spin(forward);
+  chassis.drive_distance(25);
+  wait(0.5, seconds);
   chassis.set_turn_exit_conditions(1, 100, 500);
   chassis.set_swing_exit_conditions(1, 100, 500);
   //below is for going to corner
@@ -77,8 +93,13 @@ void mirrored(){
   // wait(0.1, seconds);
   // Intake.spin(forward);
   // chassis.drive_distance(15, -20+d);
-  chassis.turn_to_angle(20+d);
-  chassis.drive_distance(38);
+  chassis.turn_to_angle(0+d);
+  chassis.drive_distance(24);
+  chassis.turn_to_angle(-45+d);
+  chassis.drive_distance(40);
+  wait(0.5, seconds);
+  chassis.drive_distance(-10);
+  chassis.drive_distance(10);
 
 }
 
