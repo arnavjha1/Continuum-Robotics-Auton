@@ -4,7 +4,8 @@ int matchloadangle = 167;
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(12, 2.5, .03, 3, 15);
+  chassis.set_turn_constants(12, .3, .03, 2, 15); 
+  //previous values for TURN CONSTANTS (not swing) were 2.5 instead of 0.3 and 3 instead of the 2
   chassis.set_swing_constants(12, .3, .001, 2, 15);
   chassis.set_drive_exit_conditions(1.5, 300, 800);
   chassis.set_turn_exit_conditions(1, 300, 1800);
@@ -93,7 +94,7 @@ void mirrored(){
   // wait(0.1, seconds);
   // Intake.spin(forward);
   // chassis.drive_distance(15, -20+d);
-  chassis.turn_to_angle(0+d);
+  chassis.turn_to_angle(5+d);
   chassis.drive_distance(24);
   chassis.turn_to_angle(-45+d);
   chassis.drive_distance(40);
