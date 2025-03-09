@@ -4,7 +4,8 @@ int matchloadangle = 167;
 void default_constants(){
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
   chassis.set_heading_constants(6, .4, 0, 1, 0);
-  chassis.set_turn_constants(12, 2.5, .03, 3, 15);
+  chassis.set_turn_constants(12, .3, .03, 2, 15); 
+  //previous values for TURN CONSTANTS (not swing) were 2.5 instead of 0.3 and 3 instead of the 2
   chassis.set_swing_constants(12, .3, .001, 2, 15);
   chassis.set_drive_exit_conditions(1.5, 300, 800);
   chassis.set_turn_exit_conditions(1, 300, 1800);
@@ -18,63 +19,60 @@ void odom_constants(){
 }
 
 void regular(){
-  chassis.set_turn_exit_conditions(1, 300, 800);
-  chassis.set_drive_constants(11, 2, 0, 10, 0);
-  chassis.drive_distance(12, 0);
-  chassis.set_drive_constants(11, 1.5, 0, 10, 0);
-  Intake.spin(forward);
-  chassis.drive_distance(-14, 0);
-  chassis.turn_to_angle(-15);
-  chassis.drive_distance(7, -15);
-  chassis.set_turn_exit_conditions(1, 300, 2800);
-  chassis.turn_to_angle(15);
-  Intake.stop();
-  chassis.set_turn_exit_conditions(1, 300, 800);
-  chassis.drive_distance(10, 15);
-  DoinkerPneu.set(true);
-  chassis.set_turn_constants(12, 0.7, .03, 3, 15);
-  chassis.turn_to_angle(120);
-  DoinkerPneu.set(false);
-  chassis.set_turn_constants(12, 2.5, .03, 3, 15);
-  chassis.set_turn_exit_conditions(1, 300, 1500);
-  chassis.turn_to_angle(-10);
-  Intake.spin(forward);
-  chassis.drive_distance(10, 0);
-
+  IntakeFront.spin(forward);
+  IntakeBack.spin(forward);
+  chassis.drive_distance(40);
+  wait(2, seconds);
+  chassis.drive_distance(-10);
+  chassis.drive_distance(10);
 }
 
 void mirrored(){
   //wait(2, seconds);
   int d = matchloadangle;
-  chassis.drive_distance(36, -167+d);
+  chassis.drive_distance(49, -167+d);
   chassis.set_drive_constants(11, 1, 0, 10, 0);
-  chassis.drive_distance(7, -167+d);
-  Intake.spin(forward);
-  wait(0.2, seconds);
-  Intake.stop();
-  chassis.drive_distance(3, -167+d);
-  Intake.spin(forward);
-  wait(0.7, seconds);
-  Intake.stop();
-  chassis.left_swing_to_angle(-160+d);
-  DoinkerPneu.set(true);
-  chassis.drive_distance(3);
-  DoinkerPneu.set(false);
-  chassis.drive_distance(-10, -160+d);
-  chassis.set_turn_constants(12, 1, .03, 3, 15);
-  chassis.right_swing_to_angle(-92+d);
-  chassis.set_drive_constants(11, 0.6, 0, 10, 0);
-  chassis.drive_distance(-6, -100+d);
-  MogoPneu.set(true);
-  wait(0.2, seconds);
-  Intake.spin(forward);
-  chassis.right_swing_to_angle(-135+d);
+  IntakeFront.spin(forward);
+  //IntakeBack.spin(forward);
+  wait(0.1, seconds);
+  //IntakeFront.stop();
+  chassis.drive_distance(8, -167+d);
+  //IntakeBack.spin(forward);
+  //wait(0.4, seconds);
+  //IntakeBack.stop();
+  //Below is when doinker is added
+  //chassis.left_swing_to_angle(-160+d);
+  //DoinkerPneu.set(true);
+  //chassis.drive_distance(3);
+  //DoinkerPneu.set(false);
+  //this is for weird pickup
+  //chassis.drive_distance(-6, -160+d); //-10
+  //chassis.set_turn_constants(12, 1, .03, 3, 15);
+  //chassis.right_swing_to_angle(-97+d);
+  //chassis.set_drive_constants(11, 0.6, 0, 10, 0);
+  //chassis.drive_distance(-6, -103+d);
+  //this is normal pickup on far side
+  //chassis.drive_distance(-8, -160+d); //-10
+  chassis.set_turn_constants(12, 2, .03, 1, 15);
+  chassis.drive_distance(-10, -167+d);
+  chassis.left_swing_to_angle(-110+d);
+  //thi sis for pickup on closer side to middle
+  chassis.set_drive_constants(11, 1, 0, 10, 0);
+  chassis.drive_distance(12);
+  IntakeBack.spin(forward);
+  wait(0.3, seconds);
+  IntakeBack.stop();
+  chassis.left_swing_to_angle(-135+d); //-135
   chassis.set_drive_constants(11, 1.2, 0, 10, 0);
-  chassis.drive_distance(18);
-  chassis.right_swing_to_angle(-52+d);
-  chassis.drive_distance(15);
+  chassis.drive_distance(-12);
+  chassis.right_swing_to_angle(-90+d);
+  MogoPneu.set(true);
+  IntakeBack.spin(forward);
+  chassis.drive_distance(25);
+  wait(0.5, seconds);
   chassis.set_turn_exit_conditions(1, 100, 500);
-  chassis.set_swing_exit_conditions(1, 100, 200);
+  chassis.set_swing_exit_conditions(1, 100, 500);
+  //below is for going to corner
   // chassis.left_swing_to_angle(-23+d);
   // chassis.set_drive_constants(11, 3.5, 0, 10, 0);
   // chassis.set_drive_exit_conditions(1.5, 300, 1050);
@@ -96,8 +94,13 @@ void mirrored(){
   // wait(0.1, seconds);
   // Intake.spin(forward);
   // chassis.drive_distance(15, -20+d);
-  chassis.turn_to_angle(20+d);
-  chassis.drive_distance(38);
+  chassis.turn_to_angle(5+d);
+  chassis.drive_distance(24);
+  chassis.turn_to_angle(-45+d);
+  chassis.drive_distance(40);
+  wait(0.5, seconds);
+  chassis.drive_distance(-10);
+  chassis.drive_distance(10);
 
 }
 

@@ -189,9 +189,9 @@ bool mobilePneu = false;
 bool intakePneu = false;
 
 int loadArm() {
-  Arm.setVelocity(100, percent);
-  chassis.arm_to_angle(2);
-  Arm.setVelocity(50, percent);
+  //Arm.setVelocity(100, percent);
+  //chassis.arm_to_angle(2);
+  //Arm.setVelocity(50, percent);
   while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
       Intake.setVelocity(50, percent);

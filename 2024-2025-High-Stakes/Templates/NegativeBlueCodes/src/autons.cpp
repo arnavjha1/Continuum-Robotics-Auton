@@ -91,7 +91,8 @@ void mirrored(){
   chassis.drive_distance(19.25, 110+d);
   wait(1.5, seconds);
   chassis.set_drive_constants(11, 0.6, 0, 10, 0);
-  chassis.drive_distance(-40, 110+d); 
+  chassis.right_swing_to_angle(60+d);
+  chassis.drive_distance(-40, 60+d); 
 }
 
 

@@ -73,14 +73,20 @@ void ArmDown(){
 void ArmUp(){
   chassis.left_swing_to_angle(3.5);
 }
+
+void task2(){
+  Arm.spinFor(forward, 175, degrees);
+}
+
 void auton_task(){
   chassis.turn_to_angle(90);
  /* thread(ArmUp).detach();
   Arm.spinFor(reverse, 325, degrees);
   chassis.drive_distance(10.5);
-  Arm.spinFor(forward, 175, degrees);
+  thread(task2).detach();
 
-  chassis.left_swing_to_angle(-4.5);
+  wait(0.7, seconds);
+  chassis.left_swing_to_angle(-4.75);
   chassis.set_drive_constants(11, 0.5, 0, 10, 0);
   chassis.drive_distance(-36);
   chassis.set_drive_constants(11, 1.5, 0, 10, 0);
