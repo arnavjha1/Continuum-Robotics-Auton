@@ -1,7 +1,5 @@
 #include "vex.h"
-#include <cmath>
 bool runningSkills = false;
-int armVelo = 100;
 //Part of the code below (mainly the drivetrain constrictors) is used from the LemLib drive template, which is why you will notice a unique drivetrain setup
 //This drivetrain setup is specifically made to allow the most efficient drive possible, using LemLib's battery saving technique while still providing high strength
 //The drivetrain will stay on Eco mode for most of the High Stakes challenge
@@ -62,10 +60,10 @@ motor_group(LeftFront, LeftBack, Left6th),
 motor_group(RightFront, RightBack, Right6th),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
-PORT13,
+PORT21,
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
-3.25,
+2.75,
 
 //External ratio, must be in decimal, in the format of input teeth/output teeth.
 //If your motor has an 84-tooth gear and your wheel has a 60-tooth gear, this value will be 1.4.
@@ -131,7 +129,7 @@ void pre_auton(void) {
     Drivetrain.setStopping(coast);
     Inertial13.calibrate();
     
-    Arm.setStopping(hold);
+    Arm.setStopping(brake);
     Arm.setMaxTorque(100, percent);
     Arm.setVelocity(100, percent);
 
@@ -182,7 +180,7 @@ void autonomous(void) {
 bool mobilePneu = false;
 
 void loadArm() {
-  Arm.spinTo(-166, degrees);
+  Arm.spinTo(-150, degrees);
   /*while (true) {
     if (DistSensor.objectDistance(inches) < 1) {
       Intake.setVelocity(50, percent);
@@ -204,6 +202,19 @@ void spinIntakeForward() {
   Intake.spin(forward);
   FrontIntake.setVelocity(100, percent);
   FrontIntake.spin(forward);
+  /*while(true){
+    if(Optical6.hue() > 150 && Optical6.hue() < 270){
+      Intake.setVelocity(30, percent);
+      wait(1, seconds);
+      Intake.setVelocity(100, percent);
+    }
+    else if(Optical6.hue() > 200 && Optical6.hue() < 300){
+      //Intake.setVelocity(30, percent);
+      //wait(1, seconds);
+      //Intake.setVelocity(100, percent);
+    }
+    wait(10, msec);
+  }*/
 }
 
 void spinIntakeReverse() {
@@ -255,20 +266,15 @@ void triggerDoinkerMech() {
 }
 
 void moveArmUp() {
-  armVelo = 100;
   Arm.spin(reverse);
 }
 
 void moveArmDown() {
-  armVelo = 100;
   Arm.spin(forward);
 }
 
 void stopArm() {
-  for(int i = 0; i <= 10; i++){
-    armVelo = ((10 - i)*10);
-    wait(10, msec);
-  }
+  Arm.stop();
 }
 
 int DisplayToController() {
@@ -285,8 +291,9 @@ int DisplayToController() {
 void usercontrol(void) {
 
     MogoPneu.set(true);
+
+    Arm.setStopping(brake);
     Drivetrain.setStopping(coast);
-    Arm.setVelocity(fmin((ArmRotation.position(degrees) - 0)*20, fmin((148 - ArmRotation.position(degrees))*20, armVelo)), percent);
 
     controller(primary).ButtonL2.pressed(spinIntakeReverse); 
     controller(primary).ButtonL2.released(stopIntake); 
